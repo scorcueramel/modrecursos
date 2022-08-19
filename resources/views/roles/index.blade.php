@@ -44,12 +44,12 @@
                                         </tr>
                                     @endforeach
                                 </tbody>
-                            </div>
+                            </table>
                         </div>
-                        
                     </div>
                 </div>
             </div>
+        </div>
     </section>
 @endsection
 
@@ -75,7 +75,7 @@
                         swal("El registro se elimino de la base de datos", {
                             icon: "success",
                         });
-                    } 
+                    }
                 });
         });
     </script>
