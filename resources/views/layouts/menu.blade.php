@@ -1,7 +1,7 @@
 @can('ver-registers')
 <li class="side-menus {{ Request::is('home') ? 'active' : '' }}">
     <a class="nav-link" href="{{url('/home')}}">
-        <i class="fas fa-tachometer-alt"></i><span>Resumenes</span>
+        <i class="fas fa-tachometer-alt"></i><span>General</span>
     </a>
 </li>
 @endcan
