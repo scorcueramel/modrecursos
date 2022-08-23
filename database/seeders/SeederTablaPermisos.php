@@ -17,17 +17,17 @@ class SeederTablaPermisos extends Seeder
     public function run()
     {
         $permisos = [
-            //asignando a la tabla roles
+
             'ver-rols',
             'crear-rols',
             'editar-rols',
             'borrar-rols',
-            //asignando a la tabla cuarteles
+
             'ver-registers',
             'crear-registers',
             'editar-registers',
             'borrar-registers',
-            //asignar a la tabla usuarios
+
             'ver-users',
             'crear-usuarios',
             'editar-usuarios',
