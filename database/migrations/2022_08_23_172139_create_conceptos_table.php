@@ -14,11 +14,13 @@ class CreateConceptosTable extends Migration
     public function up()
     {
         Schema::create('conceptos', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('codigo',6)->nullable(false);
-            $table->string('descripcion',40)->nullable(false);
-            $table->string('codigo_pdt',2)->nullable(false);
-            $table->boolean('estado')->default(1);
+            $table->bigIncrements('id');
+            
+            $table->unsignedBigInteger('tipo_permiso_id');
+            $table->foreign('tipo_permiso_id')->references('id')->on('tipo_permisos');
+            $table->string('codigo');
+            $table->string('descripcion');
+            $table->boolean('estado')->nullable();
             $table->timestamps();
         });
     }
