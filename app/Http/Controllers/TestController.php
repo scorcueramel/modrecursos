@@ -2,18 +2,93 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use phpDocumentor\Reflection\DocBlock\Tags\Throws;
+use Illuminate\Support\Str;
 
 class TestController extends Controller
 {
     public function index()
     {
-        // $response = Http::get('https://jsonplaceholder.typicode.com/users');
+        $res = "";
+        return view('vista_test.index', compact('res'));
+    }
 
-        $response = Http::get('http://sistemas.munisurco.gob.pe/pidemss/servicios/siam/dat?P_APEPATERNO=CORCUERA&P_APEMATERNO=&P_CODIGO=0&P_VCHTIDCODIGO=&P_NUMDOCUMENTO=&entidad=201&sistema=603&key=400');
+    public function consultar(Request $request)
+    {
+        $msn = "";
+        $cod = $request->codigo;
+        $dni = $request->dni;
+        $paterno = $request->paterno;
+        $materno = $request->materno;
 
-        $resp = json_encode($response);
 
-        return response()->json(['resp'=>$resp]);
+        try {
+            if (!is_null($cod)) {
+                $response = Http::acceptJson()->get('http://sistemas.munisurco.gob.pe/pidemss/servicios/siam/dat?P_APEPATERNO=&P_APEMATERNO=&P_CODIGO='.$cod.'&P_VCHTIDCODIGO=&P_NUMDOCUMENTO=&entidad=201&sistema=603&key=400');
+                
+                $res = $response->json();
+
+                if(count($res['contenido']) > 0){               
+                    return response()->json(['resp' => $res]);                                    
+                }else
+                {
+                    $msn = "Porfavor Revisa el CÓDIGO que ingresaste";
+                    return back()->with('error',$msn);                  
+                }
+
+            }
+            elseif (!is_null($dni)){
+                $response = Http::acceptJson()->get('http://sistemas.munisurco.gob.pe/pidemss/servicios/siam/dat?P_APEPATERNO=&P_APEMATERNO=&P_CODIGO=0&P_VCHTIDCODIGO=&P_NUMDOCUMENTO='.$dni.'&entidad=201&sistema=603&key=400');
+                
+                $res = $response->json();
+
+                if(count($res['contenido']) > 0){
+                    return response()->json(['resp' => $res]);                                        
+                }else
+                {
+                    $msn = "Porfavor Revisa el DNI que ingresaste";
+                    return response()->json(['message'=>$msn]);                    
+                }
+            }
+            elseif (!is_null($paterno)){
+                $ap_materno = Str::upper($paterno);
+
+                $response = Http::acceptJson()->get('http://sistemas.munisurco.gob.pe/pidemss/servicios/siam/dat?P_APEPATERNO='.$ap_materno.'&P_APEMATERNO=&P_CODIGO=0&P_VCHTIDCODIGO=&P_NUMDOCUMENTO=&entidad=201&sistema=603&key=400');
+                
+                $res = $response->json();
+
+                if(count($res['contenido']) > 0){
+                    return response()->json(['resp' => $res]);                                        
+                }else
+                {
+                    $msn = "Porfavor Revisa el APELLIDO que ingresaste";
+                    return response()->json(['message'=>$msn]);                    
+                }
+            }
+            elseif (!is_null($materno)){
+                $ap_materno = $materno;
+
+                $response = Http::acceptJson()->get('http://sistemas.munisurco.gob.pe/pidemss/servicios/siam/dat?P_APEPATERNO=&P_APEMATERNO='.$ap_materno.'&P_CODIGO=0&P_VCHTIDCODIGO=&P_NUMDOCUMENTO=&entidad=201&sistema=603&key=400');
+                
+                $res = $response->json();
+
+                if(count($res['contenido']) > 0){
+                    return response()->json(['resp' => $res]);                                        
+                }else
+                {
+                    $msn = "Porfavor Revisa el APELLIDO que ingresaste";
+                    return response()->json(['message'=>$msn]);                    
+                }
+            }
+            if(is_null($cod) && is_null($dni) && is_null($paterno) && is_null($materno))
+            {
+                $msn = "No ingresaste ningun PARAMETRO DE BÚSQUEDA";
+                return back()->with('error',$msn); 
+            }
+        } catch (Throws $e) {
+            return response()->json(["message" => $e]);
+        }
     }
 }

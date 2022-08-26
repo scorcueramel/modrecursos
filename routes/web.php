@@ -43,4 +43,5 @@ Route::group(['middleware'=>['auth']],function () {
 
     //TEST 
     Route::get('/general', [TestController::class, 'index'])->name('general');
+    Route::post('/general', [TestController::class, 'consultar'])->name('general.consultar');
 });

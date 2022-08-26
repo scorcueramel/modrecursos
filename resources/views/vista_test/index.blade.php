@@ -13,23 +13,28 @@
                             <div class="row">
                                 <div class="col">
                                     <h4>Campos de Búsqueda</h4>
-                                    <form>
+                                    <form class="my-4" method="POST" action="{{ route('general.consultar') }}">
+                                        @csrf
                                         <div class="form-row">
                                             <div class="col">
                                                 <label for="codigo">CÓDIGO</label>
-                                                <input type="text" class="form-control" placeholder="CÓDIGO" id="codigo">
+                                                <input type="text" class="form-control" placeholder="CÓDIGO"
+                                                    id="codigo" name="codigo">
                                             </div>
                                             <div class="col">
                                                 <label for="dni">DNI</label>
-                                                <input type="text" class="form-control" placeholder="DNI" id="dni">
+                                                <input type="text" class="form-control" placeholder="DNI" id="dni"
+                                                    name="dni">
                                             </div>
                                             <div class="col">
                                                 <label for="paterno">AP. PATERNO</label>
-                                                <input type="text" class="form-control" placeholder="APELLIDO PATERNO" id="paterno">
+                                                <input type="text" class="form-control" placeholder="APELLIDO PATERNO"
+                                                    id="paterno" name="paterno">
                                             </div>
                                             <div class="col">
                                                 <label for="materno">AP. MATERNO</label>
-                                                <input type="text" class="form-control" placeholder="APELLIDO MATERNO" id="materno">
+                                                <input type="text" class="form-control" placeholder="APELLIDO MATERNO"
+                                                    id="materno" name="materno">
                                             </div>
                                             <div class="col d-flex justify-content-end">
                                                 <button type="submit" class="btn btn-warning mb-2">Búscar</button>
@@ -38,9 +43,18 @@
                                     </form>
                                 </div>
                             </div>
+                            <h4 class="my-4">Resultados de la Búsqueda</h4>
+                            @if($notification = Session::get('error'))
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    <strong>{{ $notification }}</strong>
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                      <span aria-hidden="true">&times;</span>
+                                    </button>
+                                  </div>
+                            @endif
                             <table class="table table-striped mt-2" id="usuarios">
                                 <thead class="bg-success">
-                                    <th style="display: none">CÓDIGO</th>
+                                    <th style="color: #fff">CÓDIGO</th>
                                     <th style="color: #fff">DNI</th>
                                     <th style="color: #fff">APELLIDOS Y NOMBRES</th>
                                     <th style="color: #fff">REGIMEN LABORAL</th>
@@ -51,12 +65,18 @@
                                     <th style="color: #fff">OPCIONES</th>
                                 </thead>
                                 <tbody>
-                                    @foreach ($rpta as $r)
+                                    @if ($res != "")
+                                        foreach($res as $r)
+                                        {
+                                            <tr>
+                                                <td>{{$r->CODIGO}}</td>
+                                            </tr>
+                                        }
+                                    @else                                    
                                         <tr>
-                                            <td>{{$r["contenido"][0]["FEC_INGRESO"]}}</td>
+                                            <td class="text-center" colspan="9">Sin Resultados</td>
                                         </tr>
-                                    @endforeach
-                                        
+                                    @endif
                                 </tbody>
                             </table>
                         </div>
