@@ -18,7 +18,6 @@ class CreateConceptosTable extends Migration
             $table->unsignedBigInteger('tipo_permiso_id');
             $table->foreign('tipo_permiso_id')->references('id')->on('tipo_permisos');
             $table->string('codigo');
-            
             $table->string('descripcion');
             $table->boolean('estado')->nullable();
             $table->timestamps();

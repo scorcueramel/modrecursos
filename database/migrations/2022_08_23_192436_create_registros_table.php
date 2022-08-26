@@ -15,7 +15,6 @@ class CreateRegistrosTable extends Migration
     {
         Schema::create('registros', function (Blueprint $table) {
             $table->bigIncrements('id');
-            
             $table->string('codigo_persona',6)->nullable(false);
             $table->unsignedBigInteger('tipo_permiso_id');
             $table->foreign('tipo_permiso_id')->references('id')->on('tipo_permisos');

@@ -8,11 +8,11 @@ use App\Http\Controllers\UsuarioController;
 
 use App\Http\Controllers\CuartelesController;
 use App\Http\Controllers\MausoleosController;
-use App\Http\Controllers\TumbasController;
+use App\Http\Controllers\TumbasController; 
+use App\Http\Controllers\HomeController;
 
-use App\Exports\CuartelesExports;
-use Maatwebsite\Excel\Facades\Excel;
- 
+//TEST
+use App\Http\Controllers\TestController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,17 +29,13 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-Route::get('/register', function(){
-    return view('auth.login');
-});
+// Route::get('/register', function(){
+//     return view('auth.login');
+// });
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::group(['middleware'=>['auth']],function () {
     Route::resource('roles', RolController::class);    
@@ -47,11 +43,14 @@ Route::group(['middleware'=>['auth']],function () {
     Route::resource('cuarteles', CuartelesController::class);    
     Route::resource('mausoleos', MausoleosController::class);    
     Route::resource('tumbas', TumbasController::class); 
-    Route::get('cuarteles/{id}/delete', [App\Http\Controllers\CuartelesController::class, 'delete'])->name('del_c');
-    Route::get('mausoleos/{id}/delete', [App\Http\Controllers\MausoleosController::class, 'delete'])->name('del_m');
-    Route::get('tumbas/{id}/delete', [App\Http\Controllers\TumbasController::class, 'delete'])->name('del_t');   
-    Route::get('tabletumbas',[App\Http\Controllers\TumbasController::class,'tablaTumbas'])->name('tumbas.tabla');
-    Route::post('obtdetatumbas',[App\Http\Controllers\TumbasController::class,'detaTumba'])->name('obt.deta.tumbas');
+    Route::get('cuarteles/{id}/delete', [CuartelesController::class, 'delete'])->name('del_c');
+    Route::get('mausoleos/{id}/delete', [MausoleosController::class, 'delete'])->name('del_m');
+    Route::get('tumbas/{id}/delete', [TumbasController::class, 'delete'])->name('del_t');   
+    Route::get('tabletumbas',[TumbasController::class,'tablaTumbas'])->name('tumbas.tabla');
+    Route::post('obtdetatumbas',[TumbasController::class,'detaTumba'])->name('obt.deta.tumbas');
+
+    //TEST 
+    Route::get('/general', [TestController::class, 'index'])->name('general');
 });
 
 Route::get('/exportarCuarteles', [App\Http\Controllers\CuartelesController::class, 'export'])->name('exportarCuarteles');
