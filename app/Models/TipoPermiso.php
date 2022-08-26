@@ -8,6 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class TipoPermiso extends Model
 {
     use HasFactory;
-
-    protected $fillable = ['descripcion','estado'];
+    protected $fillable =['descripcion','estado'];
 }

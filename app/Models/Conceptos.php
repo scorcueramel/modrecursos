@@ -10,9 +10,9 @@ class Conceptos extends Model
     use HasFactory;
 
     protected $fillable = [
+        'tipo_permiso_id',
         'codigo',
         'descripcion',
-        'codigo_pdt',
         'estado'
     ];
 }
