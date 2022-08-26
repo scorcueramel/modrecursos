@@ -15,9 +15,8 @@ class CreateTipoPermisosTable extends Migration
     {
         Schema::create('tipo_permisos', function (Blueprint $table) {
             $table->bigIncrements('id');
-            
             $table->string('descripcion');
-            $table->boolean('estado')->nullable();
+            $table->boolean('estado')->nullable()->default(1);
             $table->timestamps();
         });
     }

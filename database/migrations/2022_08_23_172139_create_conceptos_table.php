@@ -15,7 +15,6 @@ class CreateConceptosTable extends Migration
     {
         Schema::create('conceptos', function (Blueprint $table) {
             $table->bigIncrements('id');
-            
             $table->unsignedBigInteger('tipo_permiso_id');
             $table->foreign('tipo_permiso_id')->references('id')->on('tipo_permisos');
             $table->string('codigo');
