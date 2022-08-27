@@ -11,8 +11,7 @@ class TestController extends Controller
 {
     public function index()
     {
-        $res = "";
-        return view('vista_test.index', compact('res'));
+        return view('vista_test.index');
     }
 
     public function consultar(Request $request)
@@ -31,7 +30,7 @@ class TestController extends Controller
                 $res = $response->json();
 
                 if(count($res['contenido']) > 0){               
-                    return response()->json(['resp' => $res]);                                    
+                    return back()->with('resp',$res['contenido']);                                    
                 }else
                 {
                     $msn = "Porfavor Revisa el CÓDIGO que ingresaste";
@@ -45,11 +44,11 @@ class TestController extends Controller
                 $res = $response->json();
 
                 if(count($res['contenido']) > 0){
-                    return response()->json(['resp' => $res]);                                        
+                    return back()->with('resp',$res['contenido']);                                       
                 }else
                 {
                     $msn = "Porfavor Revisa el DNI que ingresaste";
-                    return response()->json(['message'=>$msn]);                    
+                    return back()->with('error',$msn);                                      
                 }
             }
             elseif (!is_null($paterno)){
@@ -60,26 +59,26 @@ class TestController extends Controller
                 $res = $response->json();
 
                 if(count($res['contenido']) > 0){
-                    return response()->json(['resp' => $res]);                                        
+                    return back()->with('resp',$res['contenido']);                                       
                 }else
                 {
                     $msn = "Porfavor Revisa el APELLIDO que ingresaste";
-                    return response()->json(['message'=>$msn]);                    
+                    return back()->with('error',$msn);                  
                 }
             }
             elseif (!is_null($materno)){
-                $ap_materno = $materno;
+                $ap_materno = Str::upper($materno);
 
                 $response = Http::acceptJson()->get('http://sistemas.munisurco.gob.pe/pidemss/servicios/siam/dat?P_APEPATERNO=&P_APEMATERNO='.$ap_materno.'&P_CODIGO=0&P_VCHTIDCODIGO=&P_NUMDOCUMENTO=&entidad=201&sistema=603&key=400');
                 
                 $res = $response->json();
 
                 if(count($res['contenido']) > 0){
-                    return response()->json(['resp' => $res]);                                        
+                    return back()->with('resp',$res['contenido']);                                        
                 }else
                 {
                     $msn = "Porfavor Revisa el APELLIDO que ingresaste";
-                    return response()->json(['message'=>$msn]);                    
+                    return back()->with('error',$msn);                     
                 }
             }
             if(is_null($cod) && is_null($dni) && is_null($paterno) && is_null($materno))
@@ -88,7 +87,7 @@ class TestController extends Controller
                 return back()->with('error',$msn); 
             }
         } catch (Throws $e) {
-            return response()->json(["message" => $e]);
+            return back()->with('error',$e); 
         }
     }
 }

@@ -52,11 +52,11 @@
                                     </button>
                                   </div>
                             @endif
-                            <table class="table table-striped mt-2" id="usuarios">
+                            <table class="table table-striped table-hover mt-2" id="usuarios">
                                 <thead class="bg-success">
                                     <th style="color: #fff">CÓDIGO</th>
                                     <th style="color: #fff">DNI</th>
-                                    <th style="color: #fff">APELLIDOS Y NOMBRES</th>
+                                    <th style="color: #fff">NOMBRES Y APELLIDOS</th>
                                     <th style="color: #fff">REGIMEN LABORAL</th>
                                     <th style="color: #fff">UNIDAD ORGANICA</th>
                                     <th style="color: #fff">INICIO DE LABORES</th>
@@ -65,18 +65,50 @@
                                     <th style="color: #fff">OPCIONES</th>
                                 </thead>
                                 <tbody>
-                                    @if ($res != "")
-                                        foreach($res as $r)
-                                        {
+                                    @if ($respuesta = Session::get('resp'))
+                                        @foreach ($respuesta as $resp)
                                             <tr>
-                                                <td>{{$r->CODIGO}}</td>
+                                                <td>{{$resp['CODIGO']}}</td>
+                                                <td>{{$resp['DOC_IDENTIDAD']}}</td>
+                                                <td>{{$resp['NOMBRE_COMPLETO']}}</td>
+                                                <td>{{$resp['TIPO_TRABAJADOR']}}</td>
+                                                <td>{{$resp['CENTROCOSTO']}}</td>
+                                                <td>{{$resp['FEC_INGRESO']}}</td>
+                                                @if ($resp['FEC_CESE'] == "")
+                                                    <td>
+                                                        LABORANDO
+                                                    </td>
+                                                @else
+                                                    <td>{{$resp['FEC_CESE']}}</td>
+                                                @endif
+                                                @if ($resp['ESTADO'] == "INACTIVO")
+                                                    <td>
+                                                        <span class="badge badge-danger">
+                                                            {{$resp['ESTADO']}}
+                                                        </span>
+                                                    </td>
+                                                    <td>
+                                                        <span class="badge badge-danger">
+                                                            No modificable
+                                                        </span>
+                                                    </td>
+                                                @else
+                                                    <td>
+                                                        <span class="badge badge-success">
+                                                            {{$resp['ESTADO']}}
+                                                        </span>
+                                                    </td>
+                                                    <td>
+                                                        <a class="btn btn-primary btn-sm" href="#">Agregar</a>
+                                                    </td>
+                                                @endif                                                
                                             </tr>
-                                        }
-                                    @else                                    
+                                        @endforeach                                            
+                                    @else
                                         <tr>
                                             <td class="text-center" colspan="9">Sin Resultados</td>
                                         </tr>
-                                    @endif
+                                    @endif                                   
                                 </tbody>
                             </table>
                         </div>
@@ -85,6 +117,7 @@
             </div>
         </div>
     </section>
+    
 @endsection
 @section('scripts')
     <script>
