@@ -14,7 +14,7 @@ class CreateDiasPersonalsTable extends Migration
     public function up()
     {
         Schema::create('dias_personals', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->integer('inicial');
             $table->integer('saldo');
             $table->integer('total');
