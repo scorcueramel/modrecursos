@@ -28,10 +28,6 @@ class CreateRegistrosTable extends Migration
             $table->string('usuario_editor')->nullable();
             $table->string('ip_usuario')->nullable();
             $table->boolean('estado')->default(1);
-
-            // $table->integer('id_dias');
-            // $table->foreign('id_dias')->references('id')->on('dias_personals');
-
             $table->timestamps();
         });
     }

@@ -36,8 +36,10 @@
                                                 <input type="text" class="form-control" placeholder="APELLIDO MATERNO"
                                                     id="materno" name="materno">
                                             </div>
-                                            <div class="col d-flex justify-content-end">
-                                                <button type="submit" class="btn btn-warning mb-2">Búscar</button>
+                                        </div>
+                                        <div class="form-row my-4">
+                                            <div class="col">
+                                                <button type="submit" class="btn btn-success">Búscar</button>
                                             </div>
                                         </div>
                                     </form>
