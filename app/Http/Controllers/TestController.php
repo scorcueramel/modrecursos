@@ -22,7 +22,6 @@ class TestController extends Controller
         $paterno = $request->paterno;
         $materno = $request->materno;
 
-
         try {
             if (!is_null($cod)) {
                 $response = Http::acceptJson()->get('http://sistemas.munisurco.gob.pe/pidemss/servicios/siam/dat?P_APEPATERNO=&P_APEMATERNO=&P_CODIGO='.$cod.'&P_VCHTIDCODIGO=&P_NUMDOCUMENTO=&entidad=201&sistema=603&key=400');
@@ -38,7 +37,7 @@ class TestController extends Controller
                 }
 
             }
-            elseif (!is_null($dni)){
+            if (!is_null($dni)){
                 $response = Http::acceptJson()->get('http://sistemas.munisurco.gob.pe/pidemss/servicios/siam/dat?P_APEPATERNO=&P_APEMATERNO=&P_CODIGO=0&P_VCHTIDCODIGO=&P_NUMDOCUMENTO='.$dni.'&entidad=201&sistema=603&key=400');
                 
                 $res = $response->json();
@@ -51,7 +50,7 @@ class TestController extends Controller
                     return back()->with('error',$msn);                                      
                 }
             }
-            elseif (!is_null($paterno)){
+            if (!is_null($paterno)){
                 $ap_materno = Str::upper($paterno);
 
                 $response = Http::acceptJson()->get('http://sistemas.munisurco.gob.pe/pidemss/servicios/siam/dat?P_APEPATERNO='.$ap_materno.'&P_APEMATERNO=&P_CODIGO=0&P_VCHTIDCODIGO=&P_NUMDOCUMENTO=&entidad=201&sistema=603&key=400');
@@ -66,7 +65,7 @@ class TestController extends Controller
                     return back()->with('error',$msn);                  
                 }
             }
-            elseif (!is_null($materno)){
+            if (!is_null($materno)){
                 $ap_materno = Str::upper($materno);
 
                 $response = Http::acceptJson()->get('http://sistemas.munisurco.gob.pe/pidemss/servicios/siam/dat?P_APEPATERNO=&P_APEMATERNO='.$ap_materno.'&P_CODIGO=0&P_VCHTIDCODIGO=&P_NUMDOCUMENTO=&entidad=201&sistema=603&key=400');

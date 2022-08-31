@@ -44,23 +44,23 @@
                                 </div>
                             </div>
                             <h4 class="my-4">Resultados de la Búsqueda</h4>
-                            @if($notification = Session::get('error'))
+                            @if ($notification = Session::get('error'))
                                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
                                     <strong>{{ $notification }}</strong>
                                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                      <span aria-hidden="true">&times;</span>
+                                        <span aria-hidden="true">&times;</span>
                                     </button>
-                                  </div>
+                                </div>
                             @endif
-                            <table class="table table-striped table-hover mt-2" id="usuarios">
+                            <table class="table table-bordered table-hover mt-2" id="users">
                                 <thead class="bg-success">
-                                    <th style="color: #fff">CÓDIGO</th>
+                                    <th style="color: #fff">COD</th>
                                     <th style="color: #fff">DNI</th>
-                                    <th style="color: #fff">NOMBRES Y APELLIDOS</th>
-                                    <th style="color: #fff">REGIMEN LABORAL</th>
-                                    <th style="color: #fff">UNIDAD ORGANICA</th>
-                                    <th style="color: #fff">INICIO DE LABORES</th>
-                                    <th style="color: #fff">CESE DE LABORES</th>
+                                    <th style="color: #fff">NOMBRES</th>
+                                    <th style="color: #fff">REG. LAB.</th>
+                                    <th style="color: #fff">UNI. ORG</th>
+                                    <th style="color: #fff">I. LABORES</th>
+                                    <th style="color: #fff">C. LABORES</th>
                                     <th style="color: #fff">ESTADO</th>
                                     <th style="color: #fff">OPCIONES</th>
                                 </thead>
@@ -68,23 +68,23 @@
                                     @if ($respuesta = Session::get('resp'))
                                         @foreach ($respuesta as $resp)
                                             <tr>
-                                                <td>{{$resp['CODIGO']}}</td>
-                                                <td>{{$resp['DOC_IDENTIDAD']}}</td>
-                                                <td>{{$resp['NOMBRE_COMPLETO']}}</td>
-                                                <td>{{$resp['TIPO_TRABAJADOR']}}</td>
-                                                <td>{{$resp['CENTROCOSTO']}}</td>
-                                                <td>{{$resp['FEC_INGRESO']}}</td>
-                                                @if ($resp['FEC_CESE'] == "")
+                                                <td>{{ $resp['CODIGO'] }}</td>
+                                                <td>{{ $resp['DOC_IDENTIDAD'] }}</td>
+                                                <td>{{ $resp['NOMBRE_COMPLETO'] }}</td>
+                                                <td>{{ $resp['TIPO_TRABAJADOR'] }}</td>
+                                                <td>{{ $resp['CENTROCOSTO'] }}</td>
+                                                <td>{{ $resp['FEC_INGRESO'] }}</td>
+                                                @if ($resp['FEC_CESE'] == '')
                                                     <td>
                                                         LABORANDO
                                                     </td>
                                                 @else
-                                                    <td>{{$resp['FEC_CESE']}}</td>
+                                                    <td>{{ $resp['FEC_CESE'] }}</td>
                                                 @endif
-                                                @if ($resp['ESTADO'] == "INACTIVO")
+                                                @if ($resp['ESTADO'] == 'INACTIVO')
                                                     <td>
                                                         <span class="badge badge-danger">
-                                                            {{$resp['ESTADO']}}
+                                                            {{ $resp['ESTADO'] }}
                                                         </span>
                                                     </td>
                                                     <td>
@@ -92,23 +92,23 @@
                                                             No modificable
                                                         </span>
                                                     </td>
-                                                @else
+                                                @elseif ($resp['ESTADO'] == 'ACTIVO')
                                                     <td>
                                                         <span class="badge badge-success">
-                                                            {{$resp['ESTADO']}}
+                                                            {{ $resp['ESTADO'] }}
                                                         </span>
                                                     </td>
                                                     <td>
                                                         <a class="btn btn-primary btn-sm" href="#">Agregar</a>
                                                     </td>
-                                                @endif                                                
+                                                @endif
                                             </tr>
-                                        @endforeach                                            
+                                        @endforeach
                                     @else
                                         <tr>
                                             <td class="text-center" colspan="9">Sin Resultados</td>
                                         </tr>
-                                    @endif                                   
+                                    @endif
                                 </tbody>
                             </table>
                         </div>
@@ -117,37 +117,12 @@
             </div>
         </div>
     </section>
-    
 @endsection
+
 @section('scripts')
     <script>
-        $('.frmDelete').submit(function(e) {
-            e.preventDefault();
-            swal({
-                    title: 'Seguro de eliminar este rol?',
-                    text: "Si eliminas este registro no podrás recuperarlo",
-                    icon: "warning",
-                    showCancelButton: true,
-                    buttons: true,
-                    buttons: {
-                        cancel: 'No, eliminar',
-                        confirm: "Si, Eliminar",
-                    },
-                    dangerMode: true,
-                })
-                .then((willDelete) => {
-                    if (willDelete) {
-                        this.submit();
-                        swal("El registro de elimino de la base de datos", {
-                            icon: "success",
-                        });
-                    }
-                });
-        });
-    </script>
-    <script>
         $(document).ready(function() {
-            $('#roles').DataTable({
+            $('#users').DataTable({
                 responsive: true,
                 autoWidth: false,
                 "language": {

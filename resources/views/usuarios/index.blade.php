@@ -11,13 +11,12 @@
                 <div class="card">
                     <div class="card-body">
                         @can('crear-usuarios')
-                            <a class="btn btn-info" href="{{ route('usuarios.create') }}"><i class="fas fa-user-plus"></i>
+                            <a class="btn btn-info mb-4" href="{{ route('usuarios.create') }}"><i class="fas fa-user-plus"></i>
                                 Nuevo usuario</a>
                         @endcan
 
-                        <table class="table table-striped mt-2" id="usuarios">
+                        <table class="table table-striped my-2" id="usuarios">
                             <thead class="bg-success">
-                                <th style="display: none">ID</th>
                                 <th style="color: #fff">Nombre completo</th>
                                 <th style="color: #fff">Correo electrónico</th>
                                 <th style="color: #fff">Rol</th>
@@ -28,7 +27,6 @@
                             <tbody>
                                 @foreach ($usuarios as $item)
                                     <tr>
-                                        <td style="display: none">{{ $item->id }}</td>
                                         <td>{{ $item->name }}</td>
                                         <td>{{ $item->email }}</td>
                                         <td>
@@ -94,7 +92,7 @@
     </script>
      <script>
         $(document).ready(function() {
-            $('#roles').DataTable({
+            $('#usuarios').DataTable({
                 responsive: true,
                 autoWidth: false,
                 "language": {

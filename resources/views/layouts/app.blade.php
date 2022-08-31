@@ -48,9 +48,9 @@
             </footer> --}}
         </div>
     </div>
-    
+{{--      
     @include('profile.change_password')
-    @include('profile.edit_profile')
+    @include('profile.edit_profile')  --}}
 </body>
 <script src="https://unpkg.com/boxicons@2.1.2/dist/boxicons.js"></script>
 <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
@@ -73,10 +73,10 @@
 <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
 <script src="https://cdn.datatables.net/responsive/2.2.9/js/responsive.bootstrap4.min.js"></script>
 
-@yield('page_js')
 @yield('scripts')
+@yield('page_js')
 
-<script>
+{{--  <script>
     let loggedInUser = @json(\Illuminate\Support\Facades\Auth::user());
     let loginUrl = '{{ route('login') }}';
     // Loading button plugin (removed from BS4)
@@ -90,5 +90,5 @@
             }
         };
     }(jQuery));
-</script>
+</script>  --}}
 </html>
