@@ -19,5 +19,38 @@
         </a>
     </li>
 @endcan
-
-
+@can('ver-registers')
+<li class="side-menus {{ Request::is('vacaciones') ? 'active' : '' }}">
+    <a class="nav-link" href="{{url('/vacaciones')}}">
+        <i class="fas fa-swimmer"></i><span>Vacaciones</span>
+    </a>
+</li>
+@endcan
+@can('ver-registers')
+<li class="side-menus {{ Request::is('licencias') ? 'active' : '' }}">
+    <a class="nav-link" href="{{url('/licencias')}}">
+        <i class="fas fa-id-badge"></i><span>Licencias</span>
+    </a>
+</li>
+@endcan
+@can('ver-registers')
+<li class="side-menus {{ Request::is('') ? 'active' : '' }}">
+    <a class="nav-link" href="{{url('')}}">
+        <i class="fas fa-user-injured"></i><span>Descansos Médicos</span>
+    </a>
+</li>
+@endcan
+@can('ver-registers')
+<li class="side-menus {{ Request::is('') ? 'active' : '' }}">
+    <a class="nav-link" href="{{url('')}}">
+        <i class="fas fa-house-user"></i><span>Aislamientos</span>
+    </a>
+</li>
+@endcan
+@can('ver-registers')
+<li class="side-menus {{ Request::is('') ? 'active' : '' }}">
+    <a class="nav-link" href="{{url('')}}">
+        <i class="fas fa-user-slash"></i><span>Suspensiones</span>
+    </a>
+</li>
+@endcan

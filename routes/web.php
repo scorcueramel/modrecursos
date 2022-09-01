@@ -7,6 +7,7 @@ use App\Http\Controllers\RolController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\GeneralController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\VacasionesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,10 +24,6 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-// Route::get('/register', function(){
-//     return view('auth.login');
-// });
-
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Auth::routes();
@@ -35,7 +32,9 @@ Route::group(['middleware'=>['auth']],function () {
     Route::resource('roles', RolController::class);    
     Route::resource('usuarios', UsuarioController::class);    
 
-    //TEST 
+    //vistas general (Buscador)
     Route::get('/general', [GeneralController::class, 'index'])->name('general');
     Route::post('/general', [GeneralController::class, 'consultar'])->name('general.consultar');
+
+    Route::get('/vacaciones',[VacasionesController::class, 'index'])->name('vacaciones');
 });

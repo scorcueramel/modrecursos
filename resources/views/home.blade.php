@@ -3,7 +3,7 @@
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h3 class="page__heading">Consulta de Registros</h3>
+            <h3 class="page__heading">Vista General</h3>
         </div>
         <div class="section-body">
             <div class="row">
@@ -18,13 +18,16 @@
                                         <div class="form-row">
                                             <div class="col">
                                                 <label for="codigo">CÓDIGO</label>
-                                                <input type="text" class="form-control" placeholder="CÓDIGO"
+                                                <input type="number" class="form-control" placeholder="CÓDIGO"
                                                     id="codigo" name="codigo">
+                                                <span class="text-danger" style="display: none" id="errorcode">El codigo no
+                                                    puede ser mayor a 6 digitos</span>
                                             </div>
                                             <div class="col">
-                                                <label for="dni">DNI</label>
-                                                <input type="text" class="form-control" placeholder="DNI" id="dni"
+                                                <label for="dni">DOCUMENTO</label>
+                                                <input type="number" class="form-control" placeholder="DOCUMENTO" id="dni"
                                                     name="dni">
+                                                <span class="text-danger" style="display: none" id="errordoc">Revisa el documento de identidad ingresado</span>
                                             </div>
                                             <div class="col">
                                                 <label for="paterno">AP. PATERNO</label>
@@ -39,13 +42,15 @@
                                         </div>
                                         <div class="form-row my-4">
                                             <div class="col">
-                                                <button type="submit" class="btn btn-warning mb-2">Búscar <i class="fas fa-search"></i></button>
+                                                <button type="submit" class="btn btn-warning mb-2"
+                                                    onclick="validarNumericos();">Búscar <i
+                                                        class="fas fa-search"></i></button>
                                             </div>
                                         </div>
                                     </form>
                                 </div>
                             </div>
-                            <h4 class="my-4">Resultados de la Búsqueda</h4>
+                            <h4>Resultados de la Búsqueda</h4>
                             @if ($notification = Session::get('error'))
                                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
                                     <strong>{{ $notification }}</strong>
@@ -54,10 +59,10 @@
                                     </button>
                                 </div>
                             @endif
-                            <table class="table table-bordered table-hover mt-2" id="personal">
+                            <table class="table table-bordered table-hover" id="personal">
                                 <thead class="bg-success">
                                     <th style="color: #fff">COD</th>
-                                    <th style="color: #fff">DNI</th>
+                                    <th style="color: #fff">DOC.</th>
                                     <th style="color: #fff">NOMBRES</th>
                                     <th style="color: #fff">REG. LAB.</th>
                                     <th style="color: #fff">UNI. ORG</th>
@@ -106,10 +111,6 @@
                                                 @endif
                                             </tr>
                                         @endforeach
-                                    @else
-                                        <tr>
-                                            <td class="text-center" colspan="9">Sin Resultados</td>
-                                        </tr>
                                     @endif
                                 </tbody>
                             </table>
@@ -123,7 +124,29 @@
 
 @section('scripts')
     <script>
+        function validarNumericos() {
+            if ($('#codigo').val() > 999999) {
+                $('#errorcode').css("display", "block");
+                $('#codigo').css("border","1px solid red");
+                $('#codigo').focus();                
+                event.preventDefault();
+                return false;
+            } else if ($('#dni').val() > 99999999999999){
+                $('#errordoc').css("display", "block");
+                $('#dni').css("border","1px solid red");
+                $('#dni').focus();                
+                event.preventDefault();
+                return false;
+
+            }else{
+                $('#errorcode').css("display", "none");
+                $('#errordoc').css("display", "none");
+                return true;
+            }
+        }
+
         $(document).ready(function() {
+            $('#codigo').focus();
             $('#personal').DataTable({
                 responsive: true,
                 autoWidth: false,
@@ -138,9 +161,9 @@
                             <option value='-1'>Todos</option>
                         </select>` +
                         " registros por página",
-                    "zeroRecords": "Aún no hay registros",
+                    "zeroRecords": "Sin Resultados Actualmente",
                     "info": "Mostrando página _PAGE_ de _PAGES_",
-                    "infoEmpty": "No records available",
+                    "infoEmpty": "Sin Resultados",
                     "infoFiltered": "(filtrado de _MAX_ registros totales)",
                     "search": "Buscar: ",
                     "paginate": {
