@@ -39,7 +39,7 @@
                                         </div>
                                         <div class="form-row my-4">
                                             <div class="col">
-                                                <button type="submit" class="btn btn-success">Búscar</button>
+                                                <button type="submit" class="btn btn-warning mb-2">Búscar</button>
                                             </div>
                                         </div>
                                     </form>
@@ -54,7 +54,7 @@
                                     </button>
                                 </div>
                             @endif
-                            <table class="table table-bordered table-hover mt-2" id="users">
+                            <table class="table table-bordered table-hover mt-2" id="personal">
                                 <thead class="bg-success">
                                     <th style="color: #fff">COD</th>
                                     <th style="color: #fff">DNI</th>
@@ -124,7 +124,7 @@
 @section('scripts')
     <script>
         $(document).ready(function() {
-            $('#users').DataTable({
+            $('#personal').DataTable({
                 responsive: true,
                 autoWidth: false,
                 "language": {
