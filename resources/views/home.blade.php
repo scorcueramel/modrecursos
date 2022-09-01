@@ -20,14 +20,13 @@
                                                 <label for="codigo">CÓDIGO</label>
                                                 <input type="number" class="form-control" placeholder="CÓDIGO"
                                                     id="codigo" name="codigo">
-                                                <span class="text-danger" style="display: none" id="errorcode">El codigo no
-                                                    puede ser mayor a 6 digitos</span>
+                                                <span class="text-danger" style="display: none" id="errorcode">Revisa el codigo que ingresaste porfavor</span>
                                             </div>
                                             <div class="col">
                                                 <label for="dni">DOCUMENTO</label>
                                                 <input type="number" class="form-control" placeholder="DOCUMENTO" id="dni"
                                                     name="dni">
-                                                <span class="text-danger" style="display: none" id="errordoc">Revisa el documento de identidad ingresado</span>
+                                                <span class="text-danger" style="display: none" id="errordoc">Revisa el documento de identidad ingresado porfavor</span>
                                             </div>
                                             <div class="col">
                                                 <label for="paterno">AP. PATERNO</label>
@@ -131,7 +130,7 @@
                 $('#codigo').focus();                
                 event.preventDefault();
                 return false;
-            } else if ($('#dni').val() > 99999999999999){
+            } else if ($('#dni').val() > 9999999999999){
                 $('#errordoc').css("display", "block");
                 $('#dni').css("border","1px solid red");
                 $('#dni').focus();                
@@ -139,8 +138,15 @@
                 return false;
 
             }else{
-                $('#errorcode').css("display", "none");
-                $('#errordoc').css("display", "none");
+                if($('#codigo').val() != "" && $('#dni').val() == "")
+                {
+                    $('#errorcode').css("display", "none");
+                    $('#codigo').css("border","");
+                }else if($('#codigo').val() == "" && $('#dni').val() != "")
+                {
+                    $('#errordoc').css("display", "none");
+                    $('#dni').css("border","");
+                }                              
                 return true;
             }
         }

@@ -34,8 +34,8 @@
 </li>
 @endcan
 @can('ver-registers')
-<li class="side-menus {{ Request::is('') ? 'active' : '' }}">
-    <a class="nav-link" href="{{url('')}}">
+<li class="side-menus {{ Request::is('descansosmedicos') ? 'active' : '' }}">
+    <a class="nav-link" href="{{url('/descansosmedicos')}}">
         <i class="fas fa-user-injured"></i><span>Descansos Médicos</span>
     </a>
 </li>

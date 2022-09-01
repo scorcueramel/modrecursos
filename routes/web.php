@@ -8,6 +8,8 @@ use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\GeneralController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\VacasionesController;
+use App\Http\Controllers\DescansosMedicosController;
+use App\Http\Controllers\LicenciasController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,4 +39,6 @@ Route::group(['middleware'=>['auth']],function () {
     Route::post('/general', [GeneralController::class, 'consultar'])->name('general.consultar');
 
     Route::get('/vacaciones',[VacasionesController::class, 'index'])->name('vacaciones');
+    Route::get('/licencias',[LicenciasController::class, 'index'])->name('licencias');
+    Route::get('/descansosmedicos',[DescansosMedicosController::class, 'index'])->name('descansosmedicos');
 });
