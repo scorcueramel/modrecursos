@@ -11,7 +11,6 @@ class Conceptos extends Model
 
     protected $fillable = [
         'tipo_permiso_id',
-        'codigo',
         'descripcion',
         'estado'
     ];
