@@ -38,7 +38,10 @@ Route::group(['middleware'=>['auth']],function () {
     Route::get('/general', [GeneralController::class, 'index'])->name('general');
     Route::post('/general', [GeneralController::class, 'consultar'])->name('general.consultar');
 
+    //vacaciones
     Route::get('/vacaciones',[VacasionesController::class, 'index'])->name('vacaciones');
+    Route::get('tablavacaciones',[PendientesController::class,'tablavacaciones'])->name('tabla.vacaciones');
+
     Route::get('/licencias',[LicenciasController::class, 'index'])->name('licencias');
     Route::get('/descansosmedicos',[DescansosMedicosController::class, 'index'])->name('descansosmedicos');
 });
