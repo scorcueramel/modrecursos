@@ -4,14 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
-use phpDocumentor\Reflection\DocBlock\Tags\Throws;
 use Illuminate\Support\Str;
+use phpDocumentor\Reflection\DocBlock\Tags\Throws;
 
-class TestController extends Controller
+class GeneralController extends Controller
 {
     public function index()
     {
-        return view('vista_test.index');
+        return view('home');
     }
 
     public function consultar(Request $request)

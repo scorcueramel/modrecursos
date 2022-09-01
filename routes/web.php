@@ -5,14 +5,8 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\RolController;
 use App\Http\Controllers\UsuarioController;
-
-use App\Http\Controllers\CuartelesController;
-use App\Http\Controllers\MausoleosController;
-use App\Http\Controllers\TumbasController; 
+use App\Http\Controllers\GeneralController;
 use App\Http\Controllers\HomeController;
-
-//TEST
-use App\Http\Controllers\TestController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,6 +36,6 @@ Route::group(['middleware'=>['auth']],function () {
     Route::resource('usuarios', UsuarioController::class);    
 
     //TEST 
-    Route::get('/general', [TestController::class, 'index'])->name('general');
-    Route::post('/general', [TestController::class, 'consultar'])->name('general.consultar');
+    Route::get('/general', [GeneralController::class, 'index'])->name('general');
+    Route::post('/general', [GeneralController::class, 'consultar'])->name('general.consultar');
 });
