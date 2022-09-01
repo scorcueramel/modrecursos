@@ -6,26 +6,16 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateTipoPermisosTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('tipo_permisos', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('descripcion');
+            $table->boolean('flag_export')->nullable()->default(0);
             $table->boolean('estado')->nullable()->default(1);
             $table->timestamps();
         });
     }
-
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('tipo_permisos');

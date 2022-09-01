@@ -52,7 +52,7 @@
     @include('profile.change_password')
     @include('profile.edit_profile')  --}}
 </body>
-<script src="https://unpkg.com/boxicons@2.1.2/dist/boxicons.js"></script>
+{{--  <script src="https://unpkg.com/boxicons@2.1.2/dist/boxicons.js"></script>  --}}
 <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
 <script src="{{ asset('assets/js/popper.min.js') }}"></script>
 <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>

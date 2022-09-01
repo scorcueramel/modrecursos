@@ -17,6 +17,7 @@ class CreateDiasPersonalsTable extends Migration
             $table->bigIncrements('id');
             $table->integer('inicial');
             $table->integer('saldo');
+            $table->integer('adicional');
             $table->integer('total');
             $table->timestamps();
         });

@@ -39,7 +39,7 @@
                                         </div>
                                         <div class="form-row my-4">
                                             <div class="col">
-                                                <button type="submit" class="btn btn-warning mb-2">Búscar</button>
+                                                <button type="submit" class="btn btn-warning mb-2">Búscar <i class="fas fa-search"></i></button>
                                             </div>
                                         </div>
                                     </form>
@@ -101,7 +101,7 @@
                                                         </span>
                                                     </td>
                                                     <td>
-                                                        <a class="btn btn-primary btn-sm" href="#">Agregar</a>
+                                                        <a class="btn btn-primary btn-sm" href="#">Detalle</a>
                                                     </td>
                                                 @endif
                                             </tr>
