@@ -16,12 +16,10 @@ class VacasionesController extends Controller
     {
         $tblvacaciones = Registro::all();
         return datatables()->of($tblvacaciones)
-        ->addColumn('nombres',function ($row){
-            return $row['paterno'] .' '.$row['materno'];
-        })->addColumn('detalles',function ($row){
+        ->addColumn('detalles',function ($row){
             return '<td><button type="button" class="btn btn-primary btn-sm" data-id="'.$row['id'].'" id="modalPendiente">Detalles</button></td>';
         })
-        ->rawColumns(['nombres','detalles'])
+        ->rawColumns(['detalles'])
         ->make(true);
     }
 }

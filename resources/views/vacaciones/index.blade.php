@@ -72,8 +72,19 @@
                 "ajax":"{{route('tabla.vacaciones')}}",
                 "columns" : [
                     {data:'codigo_persona'},
-                    {data:'tipo_permiso_id'},
+                    {data:'documento_persona'},
                     {data:'nombre_persona'},
+                    {data:'reglab_persona'},
+                    {data:'uniorg_persona'},
+                    {data:'fecha_inicio_persona'},
+                    {data:'fecha_cese_persona'},
+                    {data:'estado_persona'},
+                    {data:'tipo_permiso_id'},
+                    {data:'concepto_id'},
+                    {data:'fecha_inicio'},
+                    {data:'fecha_fin'},
+                    {data:'documento'},
+                    {data:'comentario'},
                     {data:'detalles'}
                 ]
             });

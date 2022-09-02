@@ -178,7 +178,8 @@
                         "next": "Siguiente",
                         "previous": "Anterior"
                     }
-                }
+                },
+                "order": [[ 0, "DESC" ]],
             });
         });
     </script>
