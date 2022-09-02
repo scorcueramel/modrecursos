@@ -16,6 +16,13 @@ class CreateRegistrosTable extends Migration
         Schema::create('registros', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('codigo_persona',6)->nullable(false);
+            $table->string('documento_persona')->nullable(false);
+            $table->string('nombre_persona')->nullable(false);
+            $table->string('reglab_persona')->nullable(false);
+            $table->string('uniorg_persona')->nullable(false);
+            $table->date('fecha_inicio_persona')->nullable(false);
+            $table->date('fecha_cese_persona')->nullable(false);
+            $table->string('estado_persona')->nullable(false);
             $table->unsignedBigInteger('tipo_permiso_id');
             $table->foreign('tipo_permiso_id')->references('id')->on('tipo_permisos');
             $table->unsignedBigInteger('concepto_id');
