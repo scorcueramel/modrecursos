@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('title')
+    Vacaciones |
+@endsection
+
 @section('content')
     <section class="section">
         <div class="section-header">
@@ -51,7 +55,7 @@
                 "columns" : [
                     {data:'codigo_persona'},
                     {data:'tipo_permiso_id'},
-                    {data:'nombres'},
+                    {data:'nombre_persona'},
                     {data:'detalles'}
                 ]
             });

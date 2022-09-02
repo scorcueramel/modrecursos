@@ -1,5 +1,7 @@
 @extends('layouts.app')
-
+@section('title')
+    Aislamientos |
+@endsection
 @section('content')
     <section class="section">
         <div class="section-header">

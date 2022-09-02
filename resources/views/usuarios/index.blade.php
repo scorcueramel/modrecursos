@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('title')
+    Usuarios |
+@endsection
+
 @section('content')
     <section class="section">
         <div class="section-header">
