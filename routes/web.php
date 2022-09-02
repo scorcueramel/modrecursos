@@ -10,6 +10,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\VacasionesController;
 use App\Http\Controllers\DescansosMedicosController;
 use App\Http\Controllers\LicenciasController;
+use App\Http\Controllers\AislamientosController;
+use App\Http\Controllers\SuspensionesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,4 +46,7 @@ Route::group(['middleware'=>['auth']],function () {
 
     Route::get('/licencias',[LicenciasController::class, 'index'])->name('licencias');
     Route::get('/descansosmedicos',[DescansosMedicosController::class, 'index'])->name('descansosmedicos');
+    
+    Route::get('/aislamientos',[AislamientosController::class, 'index'])->name('aislamientos');
+    Route::get('/suspensiones',[SuspensionesController::class, 'index'])->name('suspensiones');
 });

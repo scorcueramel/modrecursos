@@ -20,8 +20,6 @@ class CreateRegistrosTable extends Migration
             $table->foreign('tipo_permiso_id')->references('id')->on('tipo_permisos');
             $table->unsignedBigInteger('concepto_id');
             $table->foreign('concepto_id')->references('id')->on('conceptos');
-            $table->unsignedBigInteger('id_dias');
-            $table->foreign('id_dias')->references('id')->on('dias_personals');
             $table->date('fecha_inicio')->nullable(false);
             $table->date('fecha_fin')->nullable(false);
             $table->string('documento',40)->nullable(false);

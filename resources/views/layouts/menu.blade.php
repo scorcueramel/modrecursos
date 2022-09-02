@@ -41,15 +41,15 @@
 </li>
 @endcan
 @can('ver-registers')
-<li class="side-menus {{ Request::is('') ? 'active' : '' }}">
-    <a class="nav-link" href="{{url('')}}">
+<li class="side-menus {{ Request::is('aislamientos') ? 'active' : '' }}">
+    <a class="nav-link" href="{{url('aislamientos')}}">
         <i class="fas fa-house-user"></i><span>Aislamientos</span>
     </a>
 </li>
 @endcan
 @can('ver-registers')
-<li class="side-menus {{ Request::is('') ? 'active' : '' }}">
-    <a class="nav-link" href="{{url('')}}">
+<li class="side-menus {{ Request::is('suspensiones') ? 'active' : '' }}">
+    <a class="nav-link" href="{{url('suspensiones')}}">
         <i class="fas fa-user-slash"></i><span>Suspensiones</span>
     </a>
 </li>

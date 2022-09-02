@@ -15,6 +15,8 @@ class CreateDiasPersonalsTable extends Migration
     {
         Schema::create('dias_personals', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('id_registro');
+            $table->foreign('id_registro')->references('id')->on('registros');
             $table->integer('inicial');
             $table->integer('saldo');
             $table->integer('adicional');
