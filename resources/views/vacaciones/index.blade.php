@@ -42,25 +42,7 @@
                 proccesing : true,
                 info:true,
                 "language": {
-                    "lengthMenu": "Mostrar " +
-                        `<select class="custom-select custom-select-sm form-control form-control-sm">
-                            <option value='5'>5</option>
-                            <option value='10'>10</option>
-                            <option value='15'>15</option>
-                            <option value='20'>20</option>
-                            <option value='25'>25</option>
-                            <option value='-1'>Todos</option>
-                        </select>` +
-                        " registros por página",
-                    "zeroRecords": "Sin Resultados Actualmente",
-                    "info": "Mostrando página _PAGE_ de _PAGES_",
-                    "infoEmpty": "Sin Resultados",
-                    "infoFiltered": "(filtrado de _MAX_ registros totales)",
-                    "search": "Buscar: ",
-                    "paginate": {
-                        "next": "Siguiente",
-                        "previous": "Anterior"
-                    }
+                    "url": "http://cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
                 },
                 "order": [[ 0, "DESC" ]],
                 responsive:true,
@@ -79,12 +61,15 @@
                     {data:'fecha_inicio_persona'},
                     {data:'fecha_cese_persona'},
                     {data:'estado_persona'},
+<<<<<<< HEAD
                     {data:'tipo_permiso_id'},
                     {data:'concepto_id'},
                     {data:'fecha_inicio'},
                     {data:'fecha_fin'},
                     {data:'documento'},
                     {data:'comentario'},
+=======
+>>>>>>> 590224b53e5c1d6179eceb2de544618790ebbb02
                     {data:'detalles'}
                 ]
             });
