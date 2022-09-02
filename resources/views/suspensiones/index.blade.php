@@ -12,7 +12,7 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
-                            <table class="table table-bordered table-hover mt-2" id="personal">
+                            <table class="table table-bordered table-hover mt-2" id="suspensiones">
                                 <thead class="bg-success">
                                     <th style="color: #fff">COD</th>
                                     <th style="color: #fff">DNI</th>
@@ -39,31 +39,33 @@
 @section('scripts')
     <script>
         $(document).ready(function() {
-            $('#personal').DataTable({
-                responsive: true,
-                autoWidth: false,
+            $('#suspensiones').DataTable({
+                proccesing : true,
+                info:true,
                 "language": {
-                    "lengthMenu": "Mostrar " +
-                        `<select class="custom-select custom-select-sm form-control form-control-sm">
-                            <option value='5'>5</option>
-                            <option value='10'>10</option>
-                            <option value='15'>15</option>
-                            <option value='20'>20</option>
-                            <option value='25'>25</option>
-                            <option value='-1'>Todos</option>
-                        </select>` +
-                        " registros por página",
-                    "zeroRecords": "Aún no hay registros",
-                    "info": "Mostrando página _PAGE_ de _PAGES_",
-                    "infoEmpty": "No records available",
-                    "infoFiltered": "(filtrado de _MAX_ registros totales)",
-                    "search": "Buscar: ",
-                    "paginate": {
-                        "next": "Siguiente",
-                        "previous": "Anterior"
-                    }
-                }
+                    "url": "http://cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+                },
+                "order": [[ 0, "DESC" ]],
+                responsive:true,
+                autoWidth:false,
+                processing:true,
+                info:true,
+                "pageLength":5,
+                "aLengthMenu":[[5,10,15,-1],[5,10,15,"Todos"]],
+                "ajax":"{{route('tabla.suspensiones')}}",
+                "columns" : [
+                    {data:'codigo_persona'},
+                    {data:'documento_persona'},
+                    {data:'nombre_persona'},
+                    {data:'reglab_persona'},
+                    {data:'uniorg_persona'},
+                    {data:'fecha_inicio_persona'},
+                    {data:'fecha_cese_persona'},
+                    {data:'estado_persona'},
+                    {data:'detalles'}
+                ]
             });
+     
         });
     </script>
 @endsection

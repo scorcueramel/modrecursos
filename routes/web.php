@@ -48,5 +48,8 @@ Route::group(['middleware'=>['auth']],function () {
     Route::get('/descansosmedicos',[DescansosMedicosController::class, 'index'])->name('descansosmedicos');
     
     Route::get('/aislamientos',[AislamientosController::class, 'index'])->name('aislamientos');
+    Route::get('tablaaislamientos',[AislamientosController::class,'tablaaislamientos'])->name('tabla.aislamientos');
+
     Route::get('/suspensiones',[SuspensionesController::class, 'index'])->name('suspensiones');
+    Route::get('tablasuspensiones',[SuspensionesController::class,'tablasuspensiones'])->name('tabla.suspensiones');
 });
