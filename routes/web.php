@@ -40,7 +40,7 @@ Route::group(['middleware'=>['auth']],function () {
 
     //vacaciones
     Route::get('/vacaciones',[VacasionesController::class, 'index'])->name('vacaciones');
-    Route::get('tablavacaciones',[PendientesController::class,'tablavacaciones'])->name('tabla.vacaciones');
+    Route::get('tablavacaciones',[VacasionesController::class,'tablavacaciones'])->name('tabla.vacaciones');
 
     Route::get('/licencias',[LicenciasController::class, 'index'])->name('licencias');
     Route::get('/descansosmedicos',[DescansosMedicosController::class, 'index'])->name('descansosmedicos');

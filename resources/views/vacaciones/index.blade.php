@@ -22,9 +22,6 @@
                                     <th style="color: #fff">ESTADO</th>
                                     <th style="color: #fff">OPCIONES</th>
                                 </thead>
-                                <tbody>
-                                    
-                                </tbody>
                             </table>
                         </div>
                     </div>
@@ -53,8 +50,9 @@
                 "ajax":"{{route('tabla.vacaciones')}}",
                 "columns" : [
                     {data:'codigo_persona'},
+                    {data:'tipo_permiso_id'},
                     {data:'nombres'},
-                    {data: 'detalles'}
+                    {data:'detalles'}
                 ]
             });
      
