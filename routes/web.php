@@ -7,7 +7,7 @@ use App\Http\Controllers\RolController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\GeneralController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\VacasionesController;
+use App\Http\Controllers\VacacionesController;
 use App\Http\Controllers\DescansosMedicosController;
 use App\Http\Controllers\LicenciasController;
 use App\Http\Controllers\AislamientosController;
@@ -41,11 +41,14 @@ Route::group(['middleware'=>['auth']],function () {
     Route::post('/general', [GeneralController::class, 'consultar'])->name('general.consultar');
 
     //vacaciones
-    Route::get('/vacaciones',[VacasionesController::class, 'index'])->name('vacaciones');
-    Route::get('tablavacaciones',[VacasionesController::class,'tablavacaciones'])->name('tabla.vacaciones');
+    Route::get('/vacaciones',[VacacionesController::class, 'index'])->name('vacaciones');
+    Route::get('tablavacaciones',[VacacionesController::class,'tablavacaciones'])->name('tabla.vacaciones');
 
     Route::get('/licencias',[LicenciasController::class, 'index'])->name('licencias');
+    Route::get('tablalicencias',[LicenciasController::class,'tablalicencias'])->name('tabla.licencias');
+
     Route::get('/descansosmedicos',[DescansosMedicosController::class, 'index'])->name('descansosmedicos');
+    Route::get('tabladescansosmedicos',[DescansosMedicosController::class,'tabladescansosmedicos'])->name('tabla.descansosmedicos');
     
     Route::get('/aislamientos',[AislamientosController::class, 'index'])->name('aislamientos');
     Route::get('tablaaislamientos',[AislamientosController::class,'tablaaislamientos'])->name('tabla.aislamientos');

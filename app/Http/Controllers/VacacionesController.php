@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Registro;
 
-class VacasionesController extends Controller
+class VacacionesController extends Controller
 {
     public function index()
     {
@@ -14,11 +14,10 @@ class VacasionesController extends Controller
 
     public function tablavacaciones()
     {
-        $tblvacaciones = Registro::all();
+        $tblvacaciones = Registro::where('tipo_permiso_id', 1)
+        ->get();
         return datatables()->of($tblvacaciones)
-        ->addColumn('nombres',function ($row){
-            return $row['paterno'] .' '.$row['materno'];
-        })->addColumn('detalles',function ($row){
+        ->addColumn('detalles',function ($row){
             return '<td><button type="button" class="btn btn-primary btn-sm" data-id="'.$row['id'].'" id="modalPendiente">Detalles</button></td>';
         })
         ->rawColumns(['nombres','detalles'])
