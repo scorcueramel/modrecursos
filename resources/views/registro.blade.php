@@ -13,18 +13,41 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="row">
+                                {!! Form::open(['route' => 'store', 'method' => 'POST']) !!}
                                 <div class="col">
                                     @foreach ($resp as $r)
+                                        <label for="codigo">Código Trabajador</label>
+                                        <input type="text" class="form-control" name="codigo" id="codigo" value="{{$r['CODIGO']}}" readonly>
+
+                                        <label for="numdoc">Documento Identidad</label>
+                                        <input type="text" class="form-control" name="numdoc" id="numdoc" value="{{$r['DOC_IDENTIDAD']}}" readonly>
+
                                         <label for="nombre">Nombres y Apellidos</label>
                                         <input type="text" class="form-control" name="nombre" id="nombre" value="{{$r['NOMBRE_COMPLETO']}}" readonly>
-                                        
-                                        <label for="nombre">Rég. Laboral</label>
-                                        <input type="text" class="form-control" name="reglab" id="reglab" value="{{$r['REGIMEN_LABORAL']}}" readonly> 
-                                        
-                                        
-                                        
+
+                                        <label for="reglab">Rég. Laboral</label>
+                                        <input type="text" class="form-control" name="reglab" id="reglab" value="{{$r['REGIMEN_LABORAL']}}" readonly>
+
+                                        <label for="uniorg">Unidad Orgánica</label>
+                                        <input type="text" class="form-control" name="uniorg" id="uniorg" value="{{$r['CENTROCOSTO']}}" readonly>
+
+                                        <label for="fechingreso">Fecha inicio</label>
+                                        <input type="text" class="form-control" name="fechingreso" id="fechingreso" value="{{$r['FEC_INGRESO']}}" readonly>
+
+                                        <label for="tipopermiso">Tipo Permiso</label>
+                                        <input type="text" class="form-control" name="tipopermiso" id="tipopermiso" value="1" readonly>
+{{--  
+                                        <label for="fechainicio">Fecha inicio</label>
+                                        <input type="text" class="form-control" name="fechainicio" id="fechainicio" value="{{$r['REGIMEN_LABORAL']}}" readonly>
+
+                                        <label for="fechafin">Fecha cese</label>
+                                        <input type="text" class="form-control" name="fechafin" id="fechafin" value="{{$r['REGIMEN_LABORAL']}}" readonly>  --}}
                                     @endforeach
                                 </div>
+                                <div class="col-xs-12 col-sm-12 col-md-12 d-flex justify-content-end">
+                                    <button type="submit" class="btn btn-success">Guardar</button>
+                                </div>
+                            {!! Form::close() !!}
                             </div>
                         </div>
                     </div>
