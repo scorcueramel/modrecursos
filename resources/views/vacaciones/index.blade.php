@@ -61,15 +61,12 @@
                     {data:'fecha_inicio_persona'},
                     {data:'fecha_cese_persona'},
                     {data:'estado_persona'},
-<<<<<<< HEAD
                     {data:'tipo_permiso_id'},
                     {data:'concepto_id'},
                     {data:'fecha_inicio'},
                     {data:'fecha_fin'},
                     {data:'documento'},
                     {data:'comentario'},
-=======
->>>>>>> 590224b53e5c1d6179eceb2de544618790ebbb02
                     {data:'detalles'}
                 ]
             });
