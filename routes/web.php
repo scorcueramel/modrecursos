@@ -13,6 +13,9 @@ use App\Http\Controllers\LicenciasController;
 use App\Http\Controllers\AislamientosController;
 use App\Http\Controllers\SuspensionesController;
 
+//test
+use App\Http\Controllers\TestController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -55,4 +58,8 @@ Route::group(['middleware'=>['auth']],function () {
 
     Route::get('/suspensiones',[SuspensionesController::class, 'index'])->name('suspensiones');
     Route::get('tablasuspensiones',[SuspensionesController::class,'tablasuspensiones'])->name('tabla.suspensiones');
+
+
+    //TEST
+    Route::get('detalle/{cod}/crear',[TestController::class, 'edit'])->name('registro.edit');
 });
