@@ -14,8 +14,16 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col">
-                                    <label for="nombre">Nombres y Apellidos</label>
-                                    <input type="text" class="form-control" name="nombre" id="nombre" value="{{$resp['NOMBRE_COMPLETO']}}" readonly>
+                                    @foreach ($resp as $r)
+                                        <label for="nombre">Nombres y Apellidos</label>
+                                        <input type="text" class="form-control" name="nombre" id="nombre" value="{{$r['NOMBRE_COMPLETO']}}" readonly>
+                                        
+                                        <label for="nombre">Rég. Laboral</label>
+                                        <input type="text" class="form-control" name="reglab" id="reglab" value="{{$r['REGIMEN_LABORAL']}}" readonly> 
+                                        
+                                        
+                                        
+                                    @endforeach
                                 </div>
                             </div>
                         </div>
