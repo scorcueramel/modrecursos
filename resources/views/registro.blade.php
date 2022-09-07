@@ -18,7 +18,7 @@
                                         <div class="col-md-2 mb-3">
                                             <label for="codigo">Código</label>
                                             <input type="text" class="form-control" id="codigo"
-                                                value="{{ $r['CODIGO'] }}" name="numdoc" required readonly>
+                                                value="{{ $r['CODIGO'] }}" name="codigo" required readonly>
                                             <div class="valid-feedback">
                                                 Correcto!
                                             </div>
