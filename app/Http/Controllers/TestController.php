@@ -44,6 +44,7 @@ class TestController extends Controller
         $resp->usuario_editor = null;
         $resp->estado = 1;
         $resp->save();
-        return redirect()->route('home');
+        return redirect()->route('home')->with('message', 'REGISTRO CREADO EXITOSAMENTE!');;
+        
     }
 }
