@@ -138,7 +138,7 @@
                                             </div>
                                         </div>
                                         <div class="col-md-3 mb-3">
-                                            <label for="concepto">Tipo de Permiso</label>
+                                            <label for="concepto">Concepto</label>
                                             <select class="form-control" id="concepto" name="concepto">
                                                 <option selected value="SELECCIONAR">SELECCIONAR</option>
                                                 @foreach ($concepto as $c)
