@@ -107,7 +107,7 @@
                                                         </span>
                                                     </td>
                                                     <td>
-                                                        <a class="btn btn-primary btn-sm" href="{{route('registro.edit',$resp['CODIGO'])}}">Detalle</a>
+                                                        <a class="btn btn-primary btn-sm" href="{{route('registro.edit',$resp['CODIGO'])}}">Registrar</a>
                                                     </td>
                                                 @endif
                                             </tr>

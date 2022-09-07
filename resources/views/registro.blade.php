@@ -12,47 +12,221 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
-                            <div class="row">
-                                {!! Form::open(['route' => 'store', 'method' => 'POST']) !!}
-                                <div class="col">
-                                    @foreach ($resp as $r)
-                                        <label for="codigo">Código Trabajador</label>
-                                        <input type="text" class="form-control" name="codigo" id="codigo" value="{{$r['CODIGO']}}" readonly>
-
-                                        <label for="numdoc">Documento Identidad</label>
-                                        <input type="text" class="form-control" name="numdoc" id="numdoc" value="{{$r['DOC_IDENTIDAD']}}" readonly>
-
-                                        <label for="nombre">Nombres y Apellidos</label>
-                                        <input type="text" class="form-control" name="nombre" id="nombre" value="{{$r['NOMBRE_COMPLETO']}}" readonly>
-
-                                        <label for="reglab">Rég. Laboral</label>
-                                        <input type="text" class="form-control" name="reglab" id="reglab" value="{{$r['REGIMEN_LABORAL']}}" readonly>
-
-                                        <label for="uniorg">Unidad Orgánica</label>
-                                        <input type="text" class="form-control" name="uniorg" id="uniorg" value="{{$r['CENTROCOSTO']}}" readonly>
-
-                                        <label for="fechingreso">Fecha inicio</label>
-                                        <input type="text" class="form-control" name="fechingreso" id="fechingreso" value="{{$r['FEC_INGRESO']}}" readonly>
-
-                                        <label for="tipopermiso">Tipo Permiso</label>
-                                        <input type="text" class="form-control" name="tipopermiso" id="tipopermiso" value="1" readonly>
-{{--  
-                                        <label for="fechainicio">Fecha inicio</label>
-                                        <input type="text" class="form-control" name="fechainicio" id="fechainicio" value="{{$r['REGIMEN_LABORAL']}}" readonly>
-
-                                        <label for="fechafin">Fecha cese</label>
-                                        <input type="text" class="form-control" name="fechafin" id="fechafin" value="{{$r['REGIMEN_LABORAL']}}" readonly>  --}}
-                                    @endforeach
-                                </div>
-                                <div class="col-xs-12 col-sm-12 col-md-12 d-flex justify-content-end">
-                                    <button type="submit" class="btn btn-success">Guardar</button>
-                                </div>
-                            {!! Form::close() !!}
-                            </div>
+                            <form action="{{ route('store') }}" method="POST" class="needs-validation my-4" novalidate>
+                                @foreach ($resp as $r)
+                                    <div class="form-row">
+                                        <div class="col-md-2 mb-3">
+                                            <label for="codigo">Código</label>
+                                            <input type="text" class="form-control" id="codigo"
+                                                value="{{ $r['CODIGO'] }}" required readonly>
+                                            <div class="valid-feedback">
+                                                Correcto!
+                                            </div>
+                                            <div class="invalid-feedback">
+                                                Porfavor Valide este campo!
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <label for="docident">Documento de Identidad</label>
+                                            <input type="text" class="form-control" id="docident"
+                                                value="{{ $r['DOC_IDENTIDAD'] }}" required readonly>
+                                            <div class="valid-feedback">
+                                                Correcto!
+                                            </div>
+                                            <div class="invalid-feedback">
+                                                Porfavor Valide este campo!
+                                            </div>
+                                        </div>
+                                        <div class="col-md-5 mb-3">
+                                            <label for="nombres">Nombres y Apellidos</label>
+                                            <input type="text" class="form-control" id="nombres"
+                                                value="{{ $r['NOMBRE_COMPLETO'] }}" required readonly>
+                                            <div class="valid-feedback">
+                                                Correcto!
+                                            </div>
+                                            <div class="invalid-feedback">
+                                                Porfavor Valide este campo!
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 mb-3">
+                                            <label for="reglab">Regimen Laboral</label>
+                                            <input type="text" class="form-control" id="reglab"
+                                                value="{{ $r['REGIMEN_LABORAL'] }}" required readonly>
+                                            <div class="valid-feedback">
+                                                Correcto!
+                                            </div>
+                                            <div class="invalid-feedback">
+                                                Porfavor Valide este campo!
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col-md-6 mb-6">
+                                            <label for="uniorg">Unidad Orgánica</label>
+                                            <input type="text" class="form-control" id="uniorg"
+                                                value="{{ $r['CENTROCOSTO'] }}" required readonly>
+                                            <div class="valid-feedback">
+                                                Correcto!
+                                            </div>
+                                            <div class="invalid-feedback">
+                                                Porfavor Valide este campo!
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <label for="ingreso">Ingreso Labores</label>
+                                            <input type="text" class="form-control" id="ingreso"
+                                                value="{{ $r['FEC_INGRESO'] }}" required readonly>
+                                            <div class="valid-feedback">
+                                                Correcto!
+                                            </div>
+                                            <div class="invalid-feedback">
+                                                Porfavor Valide este campo!
+                                            </div>
+                                        </div>
+                                        @if ($r['FEC_CESE'] == '')
+                                            <div class="col-md-3 mb-3">
+                                                <label for="cese">Fecha Cese</label>
+                                                <input type="text" class="form-control" id="cese" value="Laborando"
+                                                    required readonly>
+                                                <div class="valid-feedback">
+                                                    Correcto!
+                                                </div>
+                                                <div class="invalid-feedback">
+                                                    Porfavor Valide este campo!
+                                                </div>
+                                            </div>
+                                        @else
+                                            <div class="col-md-3 mb-3">
+                                                <label for="cese">Fecha Cese</label>
+                                                <input type="text" class="form-control" id="cese"
+                                                    value="{{ $r['FEC_CESE'] }}" required readonly>
+                                                <div class="valid-feedback">
+                                                    Correcto!
+                                                </div>
+                                                <div class="invalid-feedback">
+                                                    Porfavor Valide este campo!
+                                                </div>
+                                            </div>
+                                        @endif
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col-md-2 mb-3">
+                                            <label for="cese">Estado</label>
+                                            <input type="text" class="form-control" id="cese"
+                                                value="{{ $r['ESTADO'] }}" required readonly>
+                                            <div class="valid-feedback">
+                                                Correcto!
+                                            </div>
+                                            <div class="invalid-feedback">
+                                                Porfavor Valide este campo!
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <label for="tpermiso">Tipo de Permiso</label>
+                                            <select class="form-control" id="tpermiso">
+                                                <option selected value="SELECCIONAR">SELECCIONAR</option>
+                                                @foreach ($tipopermiso as $tp)
+                                                    <option value="{{ $tp->id }}">{{ $tp->descripcion }}</option>
+                                                @endforeach
+                                            </select>
+                                            <div class="valid-feedback">
+                                                Correcto!
+                                            </div>
+                                            <div class="invalid-feedback">
+                                                Porfavor Valide este campo!
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <label for="concepto">Tipo de Permiso</label>
+                                            <select class="form-control" id="concepto">
+                                                <option selected value="SELECCIONAR">SELECCIONAR</option>
+                                                @foreach ($concepto as $c)
+                                                    <option value="{{ $c->id }}">{{ $c->descripcion }}</option>
+                                                @endforeach
+                                            </select>
+                                            <div class="valid-feedback">
+                                                Correcto!
+                                            </div>
+                                            <div class="invalid-feedback">
+                                                Porfavor Valide este campo!
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 mb-3">
+                                            <label for="fecinicio">Inicio Permiso</label>
+                                            <input type="date" class="form-control" id="fecinicio" required>
+                                            <div class="valid-feedback">
+                                                Correcto!
+                                            </div>
+                                            <div class="invalid-feedback">
+                                                Porfavor Valide este campo!
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 mb-3">
+                                            <label for="fecfin">Fin Permiso</label>
+                                            <input type="date" class="form-control" id="fecfin" required>
+                                            <div class="valid-feedback">
+                                                Correcto!
+                                            </div>
+                                            <div class="invalid-feedback">
+                                                Porfavor Valide este campo!
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col-md-3 mb-3">
+                                            <label for="documento">Documento</label>
+                                            <input type="text" class="form-control" id="documento" required>
+                                            <div class="valid-feedback">
+                                                Correcto!
+                                            </div>
+                                            <div class="invalid-feedback">
+                                                Porfavor Valide este campo!
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <label for="comentario">Comentario</label>
+                                            <input type="text" class="form-control" id="comentario" required>
+                                            <div class="valid-feedback">
+                                                Correcto!
+                                            </div>
+                                            <div class="invalid-feedback">
+                                                Porfavor Valide este campo!
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 mt-4">
+                                            <button class="btn btn-primary mt-2" type="submit"><i class="fas fa-save"></i> Crear
+                                                Registro</button>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+@endsection
+@section('scripts')
+    <script>
+        $('document').ready(()=>{
+            $('#tpermiso').focus();
+        });
+
+        (function() {
+            'use strict';
+            window.addEventListener('load', function() {
+                var forms = document.getElementsByClassName('needs-validation');
+                var validation = Array.prototype.filter.call(forms, function(form) {
+                    form.addEventListener('submit', function(event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
+    </script>
 @endsection
