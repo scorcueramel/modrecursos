@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use App\Models\Conceptos;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
@@ -25,6 +26,7 @@ class TestController extends Controller
     public function store(Request $request)
     {
         $resp = new Registro();
+        $resp->usuario_creador=Auth::id();
         $resp->codigo_persona = $request->codigo;
         $resp->documento_persona = $request->docident;
         $resp->nombre_persona = $request->nombres;
@@ -38,9 +40,8 @@ class TestController extends Controller
         $resp->fecha_fin = Carbon::parse($request->fecfin);
         $resp->documento = $request->documento;
         $resp->comentario = $request->comentario;
-        $resp->usuario_creador = null;
+        $resp->ip_usuario = request()->ip();
         $resp->usuario_editor = null;
-        $resp->ip_usuario = null;
         $resp->estado = 1;
         $resp->save();
         return redirect()->route('home');
