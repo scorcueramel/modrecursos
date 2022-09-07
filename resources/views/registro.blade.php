@@ -13,6 +13,7 @@
                     <div class="card">
                         <div class="card-body">
                             <form action="{{ route('store') }}" method="POST" class="needs-validation my-4" novalidate>
+                                @csrf
                                 @foreach ($resp as $r)
                                     <div class="form-row">
                                         <div class="col-md-2 mb-3">

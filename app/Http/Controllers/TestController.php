@@ -26,16 +26,22 @@ class TestController extends Controller
     {
         $resp = new Registro();
         $resp->codigo_persona = $request->codigo;
-        $resp->documento_persona = $request->numdoc;
-        $resp->nombre_persona = $request->nombre;
+        $resp->documento_persona = $request->docident;
+        $resp->nombre_persona = $request->nombres;
         $resp->reglab_persona = $request->reglab;
         $resp->uniorg_persona = $request->uniorg;
+        $resp->fecha_inicio_persona = Carbon::parse($request->ingreso);
         $resp->estado_persona = "ACTIVO";
-        $resp->fecha_inicio_persona = Carbon::now();
-        $resp->tipo_permiso_id = $request->tipopermiso;
-        $resp->fecha_inicio = Carbon::now();
-        $resp->fecha_fin = Carbon::now();
-
+        $resp->tipo_permiso_id = $request->tpermiso;
+        $resp->concepto_id = $request->concepto;
+        $resp->fecha_inicio = Carbon::parse($request->fecinicio);
+        $resp->fecha_fin = Carbon::parse($request->fecfin);
+        $resp->documento = $request->documento;
+        $resp->comentario = $request->comentario;
+        $resp->usuario_creador = null;
+        $resp->usuario_editor = null;
+        $resp->ip_usuario = null;
+        $resp->estado = 1;
         $resp->save();
         return redirect()->route('home');
     }
