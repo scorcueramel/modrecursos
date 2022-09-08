@@ -3,18 +3,18 @@
 Nuevo Registro |
 @endsection
 @section('content')
-    <section class="section">
-        <div class="section-header">
-            <h3 class="page__heading">Registrar Nuevo</h3>
-        </div>
-        <div class="section-body">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <form action="{{route('store')}}" method="POST" class="needs-validation" novalidate>   
-                            @foreach ( $resp as $r) 
-                            <div class="form-row">                                                   
+<section class="section">
+    <div class="section-header">
+        <h3 class="page__heading">Registrar Nuevo</h3>
+    </div>
+    <div class="section-body">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <form action="{{route('store')}}" method="POST" class="needs-validation" novalidate>
+                            @foreach ( $resp as $r)
+                            <div class="form-row">
                                 <div class="col-md-3 mb-3">
                                     <label for="docident">Documento de Identidad</label>
                                     <input type="text" class="form-control" id="docident" value="{{ $r['DOC_IDENTIDAD'] }}" name="docident" required readonly>
@@ -106,6 +106,9 @@ Nuevo Registro |
                                     <label for="tpermiso">Tipo de Permiso</label>
                                     <select class="form-control" name="tpermiso" id="tpermiso">
                                         <option selected value="SELECCIONAR">SELECCIONAR</option>
+                                        @foreach ($tipopermisos as $tp)
+                                        <option value="{{$tp->id}}">{{$tp->descripcion}}</option>
+                                        @endforeach
                                     </select>
                                     <div class="valid-feedback">
                                         Correcto!
@@ -170,37 +173,41 @@ Nuevo Registro |
 <script>
     $('document').ready(() => {
         $('#tpermiso').focus();
-        $.ajax({
-            type: 'GET',
-            url: "{{route('tipopermisos.all')}}",
-            dataType: 'json',
-            success: function(tper) {
-                var select = $('#tpermiso').add('');
-                $.each(tper, function(key, val) {
-                    select += "<option value='"+val.id+"'>" + val.descripcion + "</option>"
-                    $("#tpermiso").append(select);
-                    console.log(tper)
-                });
-            },
-            error: function() {
-                console.log(tper);
-            }
-        });
-
-        $.ajax({
-            type: 'GET',
-            url: "{{route('conceptos.all')}}",
-            dataType: 'json',
-            success: function(tcon) {
-                console.log(tcon);
-            },
-            error: function() {
-                let err = "Error desconocido, comuniquese con el administrador";
-                console.log(err);
+        
+        // $.ajax({
+        //     type: 'GET',
+        //     url: "{{route('conceptos.all')}}",
+        //     dataType: 'json',
+        //     success: function(data) {
+        //         if ($('#tpermiso').val == 1) 
+        //         {
+        //             $.each(res, function(key, value) {
+        //                 $("#concepto").append('<option value="' + value.state_id[0] + '">' + value.state_name[0] + '</option>');
+        //             });
+        //         }
+        //     },
+        //     error: function() {
+        //         let err = "Error desconocido, comuniquese con el administrador";
+        //         console.log(err);
+        //     }
+        // });
+        $("#tpermiso").change(function(){
+            var tipoconcepto_id = $(this).val();
+            if(tipoconcepto_id){
+                $.ajax({
+                    type:'GET',
+                    url:'{{ route("conceptos.all") }}',
+                    data:{"id" : tipoconcepto_id },
+                    success:function(data){
+                        $.each(data,function(key,value){
+                            $("#concepto").append('<option value="'+value.id+'">'+value.descripcion+'</option>');
+                            console.log(value);
+                        });
+                    }
+                }); 
             }
         });
     });
-
 
     (function() {
         'use strict';
