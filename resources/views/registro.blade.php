@@ -173,7 +173,7 @@ Nuevo Registro |
 <script>
     $('document').ready(() => {
         $('#tpermiso').focus();
-
+        
         // $.ajax({
         //     type: 'GET',
         //     url: "{{route('conceptos.all')}}",
@@ -191,17 +191,22 @@ Nuevo Registro |
         //         console.log(err);
         //     }
         // });
-        $("#tpermiso").change(function() {
-            $.ajax({
-                type: 'GET',
-                url: '{{ route("conceptos.all") }}',
-                success: function(data) {
-                    $.each(data, function(key, value) {
-                        $("#concepto").append('<option value="' + value.id + '">' + value.descripcion + '</option>');
-                        console.log(value);
-                    });
-                }
-            });
+        $("#tpermiso").change(function(){
+            var tipoconcepto_id = $(this).val();
+            if(tipoconcepto_id){
+                $.ajax({
+                    type:'GET',
+                    url:'{{ route("conceptos.all") }}',
+                    data:{"id" : tipoconcepto_id },
+                    success:function(data){
+                        if($('#tpermiso').val() == 1)
+                        $.each(data,function(key,value){
+                            $("#concepto").append('<option value="'+value.id+'">'+value.descripcion+'</option>');
+                            console.log(value);
+                        });
+                    }
+                }); 
+            }
         });
     });
 

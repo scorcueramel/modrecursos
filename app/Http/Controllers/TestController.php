@@ -24,7 +24,6 @@ class TestController extends Controller
     {
         $conceptos = Conceptos::all();
         return response()->json([
-        'success'=>true,
         'conceptos'=>$conceptos]);
     }
 
