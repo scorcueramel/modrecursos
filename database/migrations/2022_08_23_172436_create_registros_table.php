@@ -34,6 +34,7 @@ class CreateRegistrosTable extends Migration
             $table->string('usuario_editor')->nullable();
             $table->string('ip_usuario')->nullable();
             $table->boolean('estado')->nullable()->default(1);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

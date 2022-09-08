@@ -54,7 +54,16 @@ class TestController extends Controller
         $resp->usuario_editor = null;
         $resp->estado = 1;
         $resp->save();
-        return redirect()->route('home')->with('message', 'REGISTRO CREADO EXITOSAMENTE!');;
+        return redirect()->route('home')->with('message', 'REGISTRO CREADO EXITOSAMENTE!');
         
+    }
+
+    public function desactivar($id)
+    {
+        $registro = Registro::find($id);
+        $registro->comentario = "ELIMINADO";
+        $registro->estado = 0;
+        $registro->deleted_at = Carbon::now()->toDateTimeString();
+        $registro->update();
     }
 }
