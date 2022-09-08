@@ -63,11 +63,7 @@ Route::group(['middleware'=>['auth']],function () {
     //TEST
     Route::get('detalle/{cod}/crear',[TestController::class, 'edit'])->name('registro.edit');
     Route::post('store', [TestController::class, 'store'])->name('store');
-<<<<<<< HEAD
     Route::get('detalle/tipopermisos', [TestController::class, 'tipopermisos'])->name('tipopermisos.all');
     Route::get('detalle/conceptos', [TestController::class, 'conceptos'])->name('conceptos.all');
-=======
     Route::post('delete/{id}', [TestController::class, 'desactivar'])->name('registro.delete');
-
->>>>>>> 72b14a40d25735a4c0b7f0db6b0d988c2d35f70d
 });

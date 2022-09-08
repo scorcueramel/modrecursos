@@ -15,12 +15,7 @@ class TestController extends Controller
     public function edit($codigo)
     {
         $response = Http::acceptJson()->get('http://sistemas.munisurco.gob.pe/pidemss/servicios/siam/dat?P_APEPATERNO=&P_APEMATERNO=&P_CODIGO=' . $codigo . '&P_VCHTIDCODIGO=&P_NUMDOCUMENTO=&entidad=201&sistema=603&key=400');
-<<<<<<< HEAD
-        $tipo = TipoPermiso::all();
-        $resp = $response->json(['contenido'][0]);
-        dd($tipo);
-        return view('registro', ["resp"=>$resp])->with(compact('tipo'));
-=======
+
         $resp = $response->json(['contenido'][0]);
         return view('registro', compact('resp'));
     }
@@ -37,7 +32,6 @@ class TestController extends Controller
         $conceptos = Conceptos::all();
         return response()->json(array('success'=>true,
         'conceptos'=>$conceptos));
->>>>>>> dfa5f701a0924de367d14e585b21e52db6a541de
     }
 
     public function store(Request $request)
@@ -49,14 +43,11 @@ class TestController extends Controller
         $resp->nombre_persona = $request->nombres;
         $resp->reglab_persona = $request->reglab;
         $resp->uniorg_persona = $request->uniorg;
-<<<<<<< HEAD
         $resp->estado_persona = $request->estado_persona;
         $resp->fecha_inicio_persona = Carbon::now();
         $resp->tipo_permiso_id = $request->tipopermiso;
         $resp->fecha_inicio = Carbon::now();
         $resp->fecha_fin = Carbon::now();
-
-=======
         $resp->fecha_inicio_persona = Carbon::parse($request->ingreso);
         $resp->estado_persona = "ACTIVO";
         $resp->tipo_permiso_id = $request->tpermiso;
@@ -68,7 +59,6 @@ class TestController extends Controller
         $resp->ip_usuario = request()->ip();
         $resp->usuario_editor = null;
         $resp->estado = 1;
->>>>>>> dfa5f701a0924de367d14e585b21e52db6a541de
         $resp->save();
         return redirect()->route('home')->with('message', 'REGISTRO CREADO EXITOSAMENTE!');
         
