@@ -25,6 +25,9 @@
                                         <label for="nombre">Nombres y Apellidos</label>
                                         <input type="text" class="form-control" name="nombre" id="nombre" value="{{$r['NOMBRE_COMPLETO']}}" readonly>
 
+                                        <label for="estado_persona">Estado</label>
+                                        <input type="text" class="form-control" name="estado_persona" id="estado_persona" value="{{$r['ESTADO']}}" readonly>
+
                                         <label for="reglab">Rég. Laboral</label>
                                         <input type="text" class="form-control" name="reglab" id="reglab" value="{{$r['REGIMEN_LABORAL']}}" readonly>
 
@@ -35,7 +38,12 @@
                                         <input type="text" class="form-control" name="fechingreso" id="fechingreso" value="{{$r['FEC_INGRESO']}}" readonly>
 
                                         <label for="tipopermiso">Tipo Permiso</label>
-                                        <input type="text" class="form-control" name="tipopermiso" id="tipopermiso" value="1" readonly>
+                                        <select name="tipopermiso" class="form-control custom-select">
+                                            <option value="">Elegir Tipo Permiso</option>
+                                            @foreach($tipo_permiso as $tp)
+                                              <option value="{{ $tp->id }}"{{ $tp->descripcion }}</option>
+                                            @endforeach
+                                        </select>
 {{--  
                                         <label for="fechainicio">Fecha inicio</label>
                                         <input type="text" class="form-control" name="fechainicio" id="fechainicio" value="{{$r['REGIMEN_LABORAL']}}" readonly>
