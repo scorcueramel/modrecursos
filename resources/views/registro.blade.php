@@ -7,6 +7,11 @@
         <div class="section-header">
             <h3 class="page__heading">Registrar Nuevo</h3>
         </div>
+        @if(session()->has('message'))
+            <div class="alert alert-success">
+                {{ session()->get('message') }}
+            </div>
+        @endif
         <div class="section-body">
             <div class="row">
                 <div class="col-lg-12">
