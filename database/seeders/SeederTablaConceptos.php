@@ -58,5 +58,17 @@ class SeederTablaConceptos extends Seeder
             'tipo_permiso_id'=>3,
             'descripcion'=>'LICENCIA POR DESEMPEÑO DE CARGO SINDICAL'
         ]);
+        Conceptos::create([
+            'tipo_permiso_id'=>1,
+            'descripcion'=>'VACACIONES'
+        ]);
+        Conceptos::create([
+            'tipo_permiso_id'=>4,
+            'descripcion'=>'AISLAMIENTO'
+        ]);
+        Conceptos::create([
+            'tipo_permiso_id'=>5,
+            'descripcion'=>'SUSPENSIÓN'
+        ]);
     }
 }

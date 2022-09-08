@@ -7,6 +7,11 @@
         <div class="section-header">
             <h3 class="page__heading">Vista General</h3>
         </div>
+        @if(session()->has('message'))
+            <div class="alert alert-success">
+                {{ session()->get('message') }}
+            </div>
+        @endif
         <div class="section-body">
             <div class="row">
                 <div class="col-lg-12">
@@ -107,7 +112,7 @@
                                                         </span>
                                                     </td>
                                                     <td>
-                                                        <a class="btn btn-primary btn-sm" href="{{route('registro.edit',$resp['CODIGO'])}}">Detalle</a>
+                                                        <a class="btn btn-primary btn-sm" href="{{route('registro.edit',$resp['CODIGO'])}}">Registrar</a>
                                                     </td>
                                                 @endif
                                             </tr>
@@ -138,7 +143,6 @@
                 $('#dni').focus();                
                 event.preventDefault();
                 return false;
-
             }else{
                 if($('#codigo').val() != "" && $('#dni').val() == "")
                 {

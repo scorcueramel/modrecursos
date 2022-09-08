@@ -21,7 +21,6 @@ class CreateRegistrosTable extends Migration
             $table->string('reglab_persona')->nullable(false);
             $table->string('uniorg_persona')->nullable(false);
             $table->date('fecha_inicio_persona')->nullable(false);
-            $table->date('fecha_cese_persona')->nullable();
             $table->string('estado_persona')->nullable(false);
             $table->unsignedBigInteger('tipo_permiso_id');
             $table->foreign('tipo_permiso_id')->references('id')->on('tipo_permisos')->nullable();
@@ -35,6 +34,7 @@ class CreateRegistrosTable extends Migration
             $table->string('usuario_editor')->nullable();
             $table->string('ip_usuario')->nullable();
             $table->boolean('estado')->nullable()->default(1);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

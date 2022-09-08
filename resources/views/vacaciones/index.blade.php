@@ -21,9 +21,8 @@
                                     <th style="color: #fff">NOMBRES</th>
                                     <th style="color: #fff">REG. LAB.</th>
                                     <th style="color: #fff">UNI. ORG</th>
-                                    <th style="color: #fff">I. LABORES</th>
-                                    <th style="color: #fff">C. LABORES</th>
-                                    <th style="color: #fff">ESTADO</th>
+                                    <th style="color: #fff">F. Inicio</th>
+                                    <th style="color: #fff">F. Fin</th>
                                     <th style="color: #fff">OPCIONES</th>
                                 </thead>
                             </table>
@@ -58,17 +57,38 @@
                     {data:'nombre_persona'},
                     {data:'reglab_persona'},
                     {data:'uniorg_persona'},
-                    {data:'fecha_inicio_persona'},
-                    {data:'fecha_cese_persona'},
-                    {data:'estado_persona'},
+                    {data:'fecha_inicio'},
+                    {data:'fecha_fin'},
+                    //{data:'fecha_inicio_persona'},
+                    //{data:'estado_persona'},
                     //{data:'tipo_permiso_id'},
-                    //{data:'concepto_id'},
-                    //{data:'fecha_inicio'},
-                    //{data:'fecha_fin'},
+                    //{data:'concepto_id'},                    
+                    
                     //{data:'documento'},
                     //{data:'comentario'},
                     {data:'detalles'}
-                ]
+                ],
+                "language": {
+                    "lengthMenu": "Mostrar " +
+                        `<select class="custom-select custom-select-sm form-control form-control-sm">
+                            <option value='5'>5</option>
+                            <option value='10'>10</option>
+                            <option value='15'>15</option>
+                            <option value='20'>20</option>
+                            <option value='25'>25</option>
+                            <option value='-1'>Todos</option>
+                        </select>` +
+                        " registros por página",
+                    "zeroRecords": "Sin Resultados Actualmente",
+                    "info": "Mostrando página _PAGE_ de _PAGES_",
+                    "infoEmpty": "Sin Resultados",
+                    "infoFiltered": "(filtrado de _MAX_ registros totales)",
+                    "search": "Buscar: ",
+                    "paginate": {
+                        "next": "Siguiente",
+                        "previous": "Anterior"
+                    }
+                },
             });
      
         });
