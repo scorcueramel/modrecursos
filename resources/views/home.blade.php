@@ -138,7 +138,6 @@
                 $('#dni').focus();                
                 event.preventDefault();
                 return false;
-
             }else{
                 if($('#codigo').val() != "" && $('#dni').val() == "")
                 {

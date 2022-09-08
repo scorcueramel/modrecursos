@@ -24,7 +24,7 @@ class TestController extends Controller
     }
 
     public function store(Request $request)
-    {
+    {    
         $resp = new Registro();
         $resp->usuario_creador=Auth::id();
         $resp->codigo_persona = $request->codigo;

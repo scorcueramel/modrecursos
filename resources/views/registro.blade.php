@@ -122,7 +122,7 @@
                                                 Porfavor Valide este campo!
                                             </div>
                                         </div>
-                                        <div class="col-md-3 mb-3">
+                                        <div class="col-md-2 mb-3">
                                             <label for="tpermiso">Tipo de Permiso</label>
                                             <select class="form-control" name="tpermiso" id="tpermiso">
                                                 <option selected value="SELECCIONAR">SELECCIONAR</option>
@@ -137,7 +137,7 @@
                                                 Porfavor Valide este campo!
                                             </div>
                                         </div>
-                                        <div class="col-md-3 mb-3">
+                                        <div class="col-md-4 mb-3">
                                             <label for="concepto">Concepto</label>
                                             <select class="form-control" id="concepto" name="concepto">
                                                 <option selected value="SELECCIONAR">SELECCIONAR</option>
@@ -176,24 +176,12 @@
                                     <div class="form-row">
                                         <div class="col-md-3 mb-3">
                                             <label for="documento">Documento</label>
-                                            <input type="text" class="form-control" name="documento" id="documento" required>
-                                            <div class="valid-feedback">
-                                                Correcto!
-                                            </div>
-                                            <div class="invalid-feedback">
-                                                Porfavor Valide este campo!
-                                            </div>
+                                            <input type="text" class="form-control" name="documento" id="documento">
                                         </div>
-                                        <div class="col-md-3 mb-3">
+                                        {{--  <div class="col-md-3 mb-3">
                                             <label for="comentario">Comentario</label>
-                                            <input type="text" class="form-control" name="comentario" id="comentario" required>
-                                            <div class="valid-feedback">
-                                                Correcto!
-                                            </div>
-                                            <div class="invalid-feedback">
-                                                Porfavor Valide este campo!
-                                            </div>
-                                        </div>
+                                            <input type="text" class="form-control" name="comentario" id="comentario" >
+                                        </div>  --}}
                                         <div class="col-md-6 mt-4">
                                             <button class="btn btn-primary mt-2" type="submit"><i class="fas fa-save"></i> Crear
                                                 Registro</button>
