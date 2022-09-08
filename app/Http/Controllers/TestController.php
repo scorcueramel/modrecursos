@@ -16,11 +16,21 @@ class TestController extends Controller
     {
         $response = Http::acceptJson()->get('http://sistemas.munisurco.gob.pe/pidemss/servicios/siam/dat?P_APEPATERNO=&P_APEMATERNO=&P_CODIGO=' . $codigo . '&P_VCHTIDCODIGO=&P_NUMDOCUMENTO=&entidad=201&sistema=603&key=400');
         $resp = $response->json(['contenido'][0]);
-        // dd($resp);
-        $tipopermiso = TipoPermiso::all();
-        $concepto = Conceptos::all();
+        return view('registro', compact('resp'));
+    }
 
-        return view('registro', compact('resp','tipopermiso','concepto'));
+    public function tipopermisos()
+    {
+        $tipopermisos = TipoPermiso::all();
+        return response()->json(array('success'=>true,
+        'tipopermisos'=>$tipopermisos));
+    }
+
+    public function conceptos()
+    {
+        $conceptos = Conceptos::all();
+        return response()->json(array('success'=>true,
+        'conceptos'=>$conceptos));
     }
 
     public function store(Request $request)
