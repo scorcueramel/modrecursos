@@ -36,8 +36,8 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 Auth::routes();
 
 Route::group(['middleware'=>['auth']],function () {
-    Route::resource('roles', RolController::class);    
-    Route::resource('usuarios', UsuarioController::class);    
+    Route::resource('roles', RolController::class);
+    Route::resource('usuarios', UsuarioController::class);
 
     //vistas general (Buscador)
     Route::get('/general', [GeneralController::class, 'index'])->name('general');
@@ -52,7 +52,7 @@ Route::group(['middleware'=>['auth']],function () {
 
     Route::get('/descansosmedicos',[DescansosMedicosController::class, 'index'])->name('descansosmedicos');
     Route::get('tabladescansosmedicos',[DescansosMedicosController::class,'tabladescansosmedicos'])->name('tabla.descansosmedicos');
-    
+
     Route::get('/aislamientos',[AislamientosController::class, 'index'])->name('aislamientos');
     Route::get('tablaaislamientos',[AislamientosController::class,'tablaaislamientos'])->name('tabla.aislamientos');
 

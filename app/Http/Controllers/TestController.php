@@ -30,7 +30,7 @@ class TestController extends Controller
     }
 
     public function store(Request $request)
-    {    
+    {
         $resp = new Registro();
         $resp->usuario_creador=Auth::id();
         $resp->codigo_persona = $request->codigo;
@@ -50,8 +50,9 @@ class TestController extends Controller
         $resp->usuario_editor = null;
         $resp->estado = 1;
         $resp->save();
-        return redirect()->route('home')->with('message', 'REGISTRO CREADO EXITOSAMENTE!');
-        
+
+        return redirect()->route('home')->with('success','Se generó el registro exitosamente');
+
     }
 
     public function desactivar($id)

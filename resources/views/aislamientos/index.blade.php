@@ -19,8 +19,8 @@
                                     <th style="color: #fff">NOMBRES</th>
                                     <th style="color: #fff">REG. LAB.</th>
                                     <th style="color: #fff">UNI. ORG</th>
-                                    <th style="color: #fff">F. Inicio</th>
-                                    <th style="color: #fff">F. Fin</th>
+                                    <th style="color: #fff">F. INICIO</th>
+                                    <th style="color: #fff">F. FIN</th>
                                     <th style="color: #fff">OPCIONES</th>
                                 </thead>
                                 <tbody></tbody>
@@ -34,7 +34,7 @@
 @endsection
 
 @section('scripts')
-    <script>
+<script>
         $(document).ready(function() {
             $('#aislamientos').DataTable({
                 proccesing : true,
@@ -46,7 +46,7 @@
                 info:true,
                 "pageLength":5,
                 "aLengthMenu":[[5,10,15,-1],[5,10,15,"Todos"]],
-                "ajax":"{{route('tabla.vacaciones')}}",
+                "ajax":"{{route('tabla.aislamientos')}}",
                 "columns" : [
                     {data:'codigo_persona'},
                     {data:'documento_persona'},
@@ -79,7 +79,7 @@
                     }
                 },
             });
-     
+
         });
     </script>
 @endsection

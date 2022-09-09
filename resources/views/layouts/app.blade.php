@@ -1,19 +1,20 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="author" content="Sergio A. Corcuera M." >
-    <meta name="csrf-token" content="{{ csrf_token() }}"/>
+    <meta name="author" content="Sergio A. Corcuera M.">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     <title>@yield('title') {{ config('app.name') }}</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <!-- Bootstrap 4.1.1 -->
-    <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
     <!-- Ionicons -->
     <link href="//fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
     <link href="{{ asset('assets/css/@fortawesome/fontawesome-free/css/all.css') }}" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="{{ asset('assets/css/iziToast.min.css') }}">
-    <link href="{{ asset('assets/css/sweetalert.css') }}" rel="stylesheet" type="text/css"/>
-    <link href="{{ asset('assets/css/select2.min.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('assets/css/sweetalert.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/css/select2.min.css') }}" rel="stylesheet" type="text/css" />
     <link rel="shortcut icon" href="https://www.munisurco.gob.pe/wp-content/uploads/2019/03/favicon-mss.png" type="image/x-icon">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
@@ -27,6 +28,7 @@
     @yield('page_css')
     @yield('css')
 </head>
+
 <body>
 
     <div id="app">
@@ -34,7 +36,7 @@
             <div class="navbar-bg bg-info"></div>
             <nav class="navbar navbar-expand-lg main-navbar bg-info">
                 @include('layouts.header')
-                
+
             </nav>
             <div class="main-sidebar main-sidebar-postion">
                 @include('layouts.sidebar')
@@ -48,11 +50,11 @@
             </footer> --}}
         </div>
     </div>
-{{--      
+    {{--
     @include('profile.change_password')
     @include('profile.edit_profile')  --}}
 </body>
-{{--  <script src="https://unpkg.com/boxicons@2.1.2/dist/boxicons.js"></script>  --}}
+{{-- <script src="https://unpkg.com/boxicons@2.1.2/dist/boxicons.js"></script>  --}}
 <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
 <script src="{{ asset('assets/js/popper.min.js') }}"></script>
 <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
@@ -91,4 +93,5 @@
         };
     }(jQuery));
 </script>  --}} -->
+
 </html>

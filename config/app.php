@@ -178,8 +178,10 @@ return [
         Spatie\Permission\PermissionServiceProvider::class,
         //maatWebsite
         Maatwebsite\Excel\ExcelServiceProvider::class,
+        //datatables
         Yajra\DataTables\DataTablesServiceProvider::class,
-
+        //toastr
+        Yoeunes\Toastr\ToastrServiceProvider::class,
     ],
 
     /*

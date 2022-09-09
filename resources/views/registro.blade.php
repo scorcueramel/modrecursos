@@ -174,13 +174,11 @@ Nuevo Registro |
                         if ($('#tpermiso').val() == 1) {
                             $.each(data, (key, value) => {
                                 $("#concepto").append('<option value="' + value[11].id + '">' + value[11].descripcion + '</option>');
-                                console.log(value);
                             });
                         } else if ($('#tpermiso').val() == 2) {
                             $.each(data, function(key, value) {
                                 for (var i = 0; i < 3; i++) {
                                     $("#concepto").append('<option value="' + value[i].id + '">' + value[i].descripcion + '</option>');
-                                    console.log(value[i].descripcion);
                                 }
 
                             });
@@ -188,20 +186,17 @@ Nuevo Registro |
                             $.each(data, function(key, value) {
                                 for (var i = 3; i < 11; i++) {
                                     $("#concepto").append('<option value="' + value[i].id + '">' + value[i].descripcion + '</option>');
-                                    console.log(value[i].descripcion);
                                 }
 
                             });
                         }else if ($('#tpermiso').val() == 4) {
                             $.each(data, (key, value) => {
                                 $("#concepto").append('<option value="' + value[12].id + '">' + value[12].descripcion + '</option>');
-                                console.log(value);
                             });
                         }
                         else if ($('#tpermiso').val() == 5) {
                             $.each(data, (key, value) => {
                                 $("#concepto").append('<option value="' + value[13].id + '">' + value[13].descripcion + '</option>');
-                                console.log(value);
                             });
                         }
                     }
