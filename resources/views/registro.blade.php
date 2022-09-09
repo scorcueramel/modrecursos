@@ -127,12 +127,12 @@
                                                 Porfavor Valide este campo!
                                             </div>
                                         </div>
-                                        <div class="col-md-2 mb-3">
+                                        <div class="col-md-4 mb-3">
                                             <label for="tpermiso">Tipo de Permiso</label>
                                             <select class="form-control" name="tpermiso" id="tpermiso">
                                                 <option selected value="SELECCIONAR">SELECCIONAR</option>
                                                 @foreach ($tipopermiso as $tp)
-                                                    <option value="{{ $tp->id }}">{{ $tp->descripcion }}</option>
+                                                    <option value="{{$tp->id}}">{{$tp->descripcion}}</option>
                                                 @endforeach
                                             </select>
                                             <div class="valid-feedback">
@@ -142,12 +142,12 @@
                                                 Porfavor Valide este campo!
                                             </div>
                                         </div>
-                                        <div class="col-md-4 mb-3">
+                                        <div class="col-md-6 mb-3">
                                             <label for="concepto">Concepto</label>
                                             <select class="form-control" id="concepto" name="concepto">
                                                 <option selected value="SELECCIONAR">SELECCIONAR</option>
-                                                @foreach ($concepto as $c)
-                                                    <option value="{{ $c->id }}">{{ $c->descripcion }}</option>
+                                                @foreach ($conceptos as $c)
+                                                <option value="{{$c->id}}">{{$c->descripcion}}</option>
                                                 @endforeach
                                             </select>
                                             <div class="valid-feedback">
@@ -156,8 +156,10 @@
                                             <div class="invalid-feedback">
                                                 Porfavor Valide este campo!
                                             </div>
-                                        </div>
-                                        <div class="col-md-2 mb-3">
+                                        </div>                                        
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col-md-3 mb-3">
                                             <label for="fecinicio">Inicio Permiso</label>
                                             <input type="date" class="form-control" name="fecinicio" id="fecinicio" required>
                                             <div class="valid-feedback">
@@ -167,7 +169,7 @@
                                                 Porfavor Valide este campo!
                                             </div>
                                         </div>
-                                        <div class="col-md-2 mb-3">
+                                        <div class="col-md-3 mb-3">
                                             <label for="fecfin">Fin Permiso</label>
                                             <input type="date" class="form-control" name="fecfin" id="fecfin" required>
                                             <div class="valid-feedback">
@@ -177,8 +179,6 @@
                                                 Porfavor Valide este campo!
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="form-row">
                                         <div class="col-md-3 mb-3">
                                             <label for="documento">Documento</label>
                                             <input type="text" class="form-control" name="documento" id="documento">
@@ -187,7 +187,7 @@
                                             <label for="comentario">Comentario</label>
                                             <input type="text" class="form-control" name="comentario" id="comentario" >
                                         </div>  --}}
-                                        <div class="col-md-6 mt-4">
+                                        <div class="col-md-3 mt-4">
                                             <button class="btn btn-primary mt-2" type="submit"><i class="fas fa-save"></i> Crear
                                                 Registro</button>
                                         </div>

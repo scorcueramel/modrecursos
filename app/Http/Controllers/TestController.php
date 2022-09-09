@@ -3,24 +3,25 @@
 namespace App\Http\Controllers;
 
 use Auth;
-use App\Models\Conceptos;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use App\Models\Registro;
 use App\Models\TipoPermiso;
+use App\Models\Conceptos;
 use Carbon\Carbon;
 
 class TestController extends Controller
 {
+
     public function edit($codigo)
     {
         $response = Http::acceptJson()->get('http://sistemas.munisurco.gob.pe/pidemss/servicios/siam/dat?P_APEPATERNO=&P_APEMATERNO=&P_CODIGO=' . $codigo . '&P_VCHTIDCODIGO=&P_NUMDOCUMENTO=&entidad=201&sistema=603&key=400');
         $resp = $response->json(['contenido'][0]);
         // dd($resp);
         $tipopermiso = TipoPermiso::all();
-        $concepto = Conceptos::all();
-
-        return view('registro', compact('resp','tipopermiso','concepto'));
+        $conceptos = Conceptos::all();
+        return view('registro', compact('resp', 'tipopermiso','conceptos'));
     }
 
     public function store(Request $request)
@@ -44,7 +45,6 @@ class TestController extends Controller
         $resp->usuario_editor = null;
         $resp->estado = 1;
         $resp->save();
-        return redirect()->route('home')->with('message', 'REGISTRO CREADO EXITOSAMENTE!');;
-        
+        return redirect()->route('home')->with('message', 'REGISTRO CREADO EXITOSAMENTE!');
     }
 }
