@@ -88,7 +88,6 @@ Nuevo Registro |
                                         Porfavor Valide este campo!
                                     </div>
                                 </div>
-
                             </div>
                             <div class="form-row">
                                 <div class="col-md-4 mb-3">

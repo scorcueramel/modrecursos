@@ -19,7 +19,7 @@ class SeederTablaTipoPermiso extends Seeder
             'DESCANSO MEDICO',
             'LICENCIA',
             'AISLAMIENTO',
-            'SUSPENSiÓN',
+            'SUSPENSIÓN',
         ];
         foreach($tipoPermisos as $tp){
             TipoPermiso::create(['descripcion'=>$tp]);
