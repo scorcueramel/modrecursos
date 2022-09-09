@@ -14,28 +14,27 @@ Vacaciones |
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body">
-                        <form action="" method="post" class="mb-4">
-                            <div class="row">
-                                <div class="col-md-3">
+                        <div class="row">
+                            <div class="col-md-3">
                                 <h5 class="my-4">Filtro por fechas</h5>
-                                </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-3">
+                        </div>
+                        <div class="row mb-4">
+                            <div class="col-md-3">
                                 <label for="finicio">Fecha de inicio</label>
-                                <input type='text' id='min' name="min" class="form-control" placeholder='Fecha Inicio' class="form-control">
-                                </div>
-                                <div class="col-md-3">
-                                <label for="Fecha de Fin">Fecha de fin</label>
-                                <input type='text' id='max' name="max" class="form-control" placeholder='Fecha fin' class="form-control">
-                                </div>
-                                <div class="col-md-3">
-                                    <button type="submit">
-                                        Buscar
-                                    </button>
-                                </div>
+                                <input type='text' id='start_date' name="min" class="form-control start_date" placeholder='Fecha Inicio' class="form-control">
                             </div>
-                        </form>
+                            <div class="col-md-3">
+                                <label for="Fecha de Fin">Fecha de fin</label>
+                                <input type='text' id='end_date' name="max" class="form-control end_date" placeholder='Fecha fin' class="form-control">
+                            </div>
+                            <div class="col-md-3 mt-4">
+                                <button class="btn btn-primary mt-2" id="filtrar">
+                                    Buscar
+                                </button>
+                            </div>
+                        </div>
+
                         <div class="row">
                             <div class="col-md-12">
                                 <table class="table table-bordered table-hover mt-2" id="vacaciones">
@@ -65,7 +64,16 @@ Vacaciones |
 
 <script>
     $(document).ready(function() {
-        $('#vacaciones').DataTable({
+        $('#filtrar').focus();
+
+        $('.start_date').datepicker({
+            format: 'dd-mm-yyyy'
+        });
+        $('.end_date').datepicker({
+            format: 'dd-mm-yyyy'
+        });
+
+        const table = $('#vacaciones').DataTable({
             proccesing: true,
             info: true,
             "order": [
@@ -80,7 +88,17 @@ Vacaciones |
                 [5, 10, 15, -1],
                 [5, 10, 15, "Todos"]
             ],
-            "ajax": "{{route('tabla.vacaciones')}}",
+            "ajax": {
+                url: "{{route('tabla.vacaciones')}}",
+                headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                type: 'GET',
+                data: function(d) {
+                    d.start_date = $('.start_date').val(),
+                    d.end_date = $('.end_date').val()
+                }
+            },
             "columns": [{
                     data: 'codigo_persona'
                 },
@@ -128,6 +146,10 @@ Vacaciones |
                 }
             },
         });
+
+        $('#filtrar').click(function() {
+            table.draw();
+        })
     });
 </script>
 @endsection
