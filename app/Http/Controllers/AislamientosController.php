@@ -18,7 +18,7 @@ class AislamientosController extends Controller
         ->get();
         return datatables()->of($tblaislamientos)
         ->addColumn('detalles',function ($row){
-            return '<td><button type="button" class="btn btn-primary btn-sm" data-id="'.$row['id'].'" id="modalPendiente">Detalles</button></td>';
+            return '<td><button type="button" class="btn btn-primary btn-sm" data-id="'.$row['id'].'" id="modalPendiente">Editar</button></td>';
         })
         ->rawColumns(['detalles'])
         ->make(true);

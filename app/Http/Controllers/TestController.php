@@ -31,19 +31,25 @@ class TestController extends Controller
 
     public function store(Request $request)
     {
+        $respuesta = "";
         $resp = new Registro();
-        $resp->usuario_creador=Auth::id();
+        $resp->usuario_creador=Auth::user()->name;
         $resp->codigo_persona = $request->codigo;
         $resp->documento_persona = $request->documento_persona;
         $resp->nombre_persona = $request->nombres;
         $resp->reglab_persona = $request->reglaboral;
         $resp->uniorg_persona = $request->uniorg;
         $resp->estado_persona = $request->estado;
-        $resp->tipo_permiso_id = $request->tpermiso;
+        if($request->tpermiso == "SELECCIONAR")
+        {
+            $respuesta = "No Elejiste un tipo de permiso, vuelve a intentarlo!";
+            return back()->with('error', $respuesta);
+        }else{
+            $resp->tipo_permiso_id = $request->tpermiso;
+        }
         $resp->fecha_inicio = Carbon::parse($request->fecinicio);
         $resp->fecha_fin = Carbon::parse($request->fecfin);
         $resp->fecha_inicio_persona = Carbon::parse($request->ingreso);
-        $resp->tipo_permiso_id = $request->tpermiso;
         $resp->concepto_id = $request->concepto;
         $resp->documento = $request->documento_ref;
         $resp->ip_usuario = request()->ip();

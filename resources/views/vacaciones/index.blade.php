@@ -14,23 +14,28 @@ Vacaciones |
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body">
-                        <table class="mb-4">
-                            <thead>
-                                <th>
-                                    <h5 class="my-4">Filtro por fechas</h5>
-                                </th>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><label for="finicio">Fecha de inicio</label></td>
-                                    <td><input type='date' id='min' name="min" class="form-control" placeholder='Fecha Inicio' class="form-control"></td>
-                                </tr>
-                                <tr>
-                                    <td><label for="Fecha de Fin">Fecha de fin</label></td>
-                                    <td><input type='date' id='max' name="max" class="form-control" placeholder='Fecha fin' class="form-control"></td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <form action="" method="post" class="mb-4">
+                            <div class="row">
+                                <div class="col-md-3">
+                                <h5 class="my-4">Filtro por fechas</h5>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                <label for="finicio">Fecha de inicio</label>
+                                <input type='text' id='min' name="min" class="form-control" placeholder='Fecha Inicio' class="form-control">
+                                </div>
+                                <div class="col-md-3">
+                                <label for="Fecha de Fin">Fecha de fin</label>
+                                <input type='text' id='max' name="max" class="form-control" placeholder='Fecha fin' class="form-control">
+                                </div>
+                                <div class="col-md-3">
+                                    <button type="submit">
+                                        Buscar
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
                         <div class="row">
                             <div class="col-md-12">
                                 <table class="table table-bordered table-hover mt-2" id="vacaciones">
