@@ -25,6 +25,7 @@
                                     <th style="color: #fff">F. Fin</th>
                                     <th style="color: #fff">OPCIONES</th>
                                 </thead>
+                                <tbody></tbody>
                             </table>
                         </div>
                     </div>
@@ -40,9 +41,6 @@
             $('#vacaciones').DataTable({
                 proccesing : true,
                 info:true,
-                "language": {
-                    "url": "http://cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
-                },
                 "order": [[ 0, "DESC" ]],
                 responsive:true,
                 autoWidth:false,
@@ -59,13 +57,6 @@
                     {data:'uniorg_persona'},
                     {data:'fecha_inicio'},
                     {data:'fecha_fin'},
-                    //{data:'fecha_inicio_persona'},
-                    //{data:'estado_persona'},
-                    //{data:'tipo_permiso_id'},
-                    //{data:'concepto_id'},                    
-                    
-                    //{data:'documento'},
-                    //{data:'comentario'},
                     {data:'detalles'}
                 ],
                 "language": {

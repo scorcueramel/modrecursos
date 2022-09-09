@@ -13,94 +13,42 @@ Nuevo Registro |
                 <div class="card">
                     <div class="card-body">
                         <form action="{{route('store')}}" method="POST" class="needs-validation" novalidate>
+                            @csrf
                             @foreach ( $resp as $r)
                             <div class="form-row">
-                                <div class="col-md-3 mb-3">
-                                    <label for="docident">Documento de Identidad</label>
-                                    <input type="text" class="form-control" id="docident" value="{{ $r['DOC_IDENTIDAD'] }}" name="docident" required readonly>
+                                <div class="col-md-2 mb-6">
+                                    <label for="codigo">Cdigo</label>
+                                    <input type="text" class="form-control" id="codigo" value="{{ $r['CODIGO'] }}" name="codigo" required readonly>
                                     <div class="valid-feedback">
                                         Correcto!
                                     </div>
                                     <div class="invalid-feedback">
                                         Porfavor Valide este campo!
                                     </div>
-                                    <div class="form-row">
-                                        <div class="col-md-2 mb-3">
-                                            <label for="estado">Estado</label>
-                                            <input type="text" class="form-control" id="estado"
-                                                value="{{ $r['ESTADO'] }}" name="estado" required readonly>
-                                            <div class="valid-feedback">
-                                                Correcto!
-                                            </div>
-                                            <div class="invalid-feedback">
-                                                Porfavor Valide este campo!
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4 mb-3">
-                                            <label for="tpermiso">Tipo de Permiso</label>
-                                            <select class="form-control" name="tpermiso" id="tpermiso">
-                                                <option selected value="SELECCIONAR">SELECCIONAR</option>
-                                                @foreach ($tipopermiso as $tp)
-                                                    <option value="{{$tp->id}}">{{$tp->descripcion}}</option>
-                                                @endforeach
-                                            </select>
-                                            <div class="valid-feedback">
-                                                Correcto!
-                                            </div>
-                                            <div class="invalid-feedback">
-                                                Porfavor Valide este campo!
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 mb-3">
-                                            <label for="concepto">Concepto</label>
-                                            <select class="form-control" id="concepto" name="concepto">
-                                                <option selected value="SELECCIONAR">SELECCIONAR</option>
-                                                @foreach ($conceptos as $c)
-                                                <option value="{{$c->id}}">{{$c->descripcion}}</option>
-                                                @endforeach
-                                            </select>
-                                            <div class="valid-feedback">
-                                                Correcto!
-                                            </div>
-                                            <div class="invalid-feedback">
-                                                Porfavor Valide este campo!
-                                            </div>
-                                        </div>                                        
+                                </div>
+                                <div class="col-md-2 mb-6">
+                                    <label for="documento_persona">Documento</label>
+                                    <input type="text" class="form-control" id="documento_persona" value="{{ $r['DOC_IDENTIDAD'] }}" name="documento_persona" required readonly>
+                                    <div class="valid-feedback">
+                                        Correcto!
                                     </div>
-                                    <div class="form-row">
-                                        <div class="col-md-3 mb-3">
-                                            <label for="fecinicio">Inicio Permiso</label>
-                                            <input type="date" class="form-control" name="fecinicio" id="fecinicio" required>
-                                            <div class="valid-feedback">
-                                                Correcto!
-                                            </div>
-                                            <div class="invalid-feedback">
-                                                Porfavor Valide este campo!
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3 mb-3">
-                                            <label for="fecfin">Fin Permiso</label>
-                                            <input type="date" class="form-control" name="fecfin" id="fecfin" required>
-                                            <div class="valid-feedback">
-                                                Correcto!
-                                            </div>
-                                            <div class="invalid-feedback">
-                                                Porfavor Valide este campo!
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3 mb-3">
-                                            <label for="documento">Documento</label>
-                                            <input type="text" class="form-control" name="documento" id="documento">
-                                        </div>
-                                        <div class="col-md-3 mt-4">
-                                            <button class="btn btn-primary mt-2" type="submit"><i class="fas fa-save"></i> Crear
-                                                Registro</button>
-                                        </div>
+                                    <div class="invalid-feedback">
+                                        Porfavor Valide este campo!
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-6">
+                                    <label for="nombres">Nombres y Apellidos</label>
+                                    <input type="text" class="form-control" id="nombres" value="{{ $r['NOMBRE_COMPLETO'] }}" name="nombres" required readonly>
+                                    <div class="valid-feedback">
+                                        Correcto!
+                                    </div>
+                                    <div class="invalid-feedback">
+                                        Porfavor Valide este campo!
                                     </div>
                                 </div>
                                 <div class="col-md-2 mb-3">
-                                    <label for="reglab">Regimen Laboral</label>
-                                    <input type="text" class="form-control" id="reglab" value="{{ $r['REGIMEN_LABORAL'] }}" name="reglab" required readonly>
+                                    <label for="reglaboral">Regimen Laboral</label>
+                                    <input type="text" class="form-control" id="reglaboral" value="{{ $r['REGIMEN_LABORAL'] }}" name="reglaboral" required readonly>
                                     <div class="valid-feedback">
                                         Correcto!
                                     </div>
@@ -130,32 +78,7 @@ Nuevo Registro |
                                         Porfavor Valide este campo!
                                     </div>
                                 </div>
-                                @if ($r['FEC_CESE'] == '')
                                 <div class="col-md-3 mb-3">
-                                    <label for="cese">Fecha Cese</label>
-                                    <input type="text" class="form-control" name="cese" id="cese" value="Laborando" required readonly>
-                                    <div class="valid-feedback">
-                                        Correcto!
-                                    </div>
-                                    <div class="invalid-feedback">
-                                        Porfavor Valide este campo!
-                                    </div>
-                                </div>
-                                @else
-                                <div class="col-md-3 mb-3">
-                                    <label for="cese">Fecha Cese</label>
-                                    <input type="text" class="form-control" id="cese" value="{{ $r['FEC_CESE'] }}" name="cese" required readonly>
-                                    <div class="valid-feedback">
-                                        Correcto!
-                                    </div>
-                                    <div class="invalid-feedback">
-                                        Porfavor Valide este campo!
-                                    </div>
-                                </div>
-                                @endif
-                            </div>
-                            <div class="form-row">
-                                <div class="col-md-2 mb-3">
                                     <label for="estado">Estado</label>
                                     <input type="text" class="form-control" id="estado" value="{{ $r['ESTADO'] }}" name="estado" required readonly>
                                     <div class="valid-feedback">
@@ -165,12 +88,15 @@ Nuevo Registro |
                                         Porfavor Valide este campo!
                                     </div>
                                 </div>
-                                <div class="col-md-2 mb-3">
+
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-4 mb-3">
                                     <label for="tpermiso">Tipo de Permiso</label>
                                     <select class="form-control" name="tpermiso" id="tpermiso">
                                         <option selected value="SELECCIONAR">SELECCIONAR</option>
-                                        @foreach ($tipopermisos as $tp)
-                                        <option value="{{$tp->id}}">{{$tp->descripcion}}</option>
+                                        @foreach($permisos as $p)
+                                        <option value="{{$p->id}}">{{$p->descripcion}}</option>
                                         @endforeach
                                     </select>
                                     <div class="valid-feedback">
@@ -183,7 +109,6 @@ Nuevo Registro |
                                 <div class="col-md-4 mb-3">
                                     <label for="concepto">Concepto</label>
                                     <select class="form-control" id="concepto" name="concepto">
-                                        <option selected value="SELECCIONAR">SELECCIONAR</option>
                                     </select>
                                     <div class="valid-feedback">
                                         Correcto!
@@ -212,15 +137,14 @@ Nuevo Registro |
                                         Porfavor Valide este campo!
                                     </div>
                                 </div>
+                                <div class="col-md-3 mb-3">
+                                    <label for="documento_ref">Documento Respaldo</label>
+                                    <input type="text" class="form-control" name="documento_ref" id="documento_ref">
+                                </div>
                             </div>
                             <div class="form-row">
-                                <div class="col-md-3 mb-3">
-                                    <label for="documento">Documento</label>
-                                    <input type="text" class="form-control" name="documento" id="documento">
-                                </div>
-                                <div class="col-md-6 mt-4">
-                                    <button class="btn btn-primary mt-2" type="submit"><i class="fas fa-save"></i> Crear
-                                        Registro</button>
+                                <div class="col-md-12 d-flex justify-content-end">
+                                    <button class="btn btn-primary mt-2" type="submit"><i class="fas fa-save"></i> Crear Registro</button>
                                 </div>
                             </div>
                             @endforeach
@@ -236,39 +160,53 @@ Nuevo Registro |
 <script>
     $('document').ready(() => {
         $('#tpermiso').focus();
-        
-        // $.ajax({
-        //     type: 'GET',
-        //     url: "{{route('conceptos.all')}}",
-        //     dataType: 'json',
-        //     success: function(data) {
-        //         if ($('#tpermiso').val == 1) 
-        //         {
-        //             $.each(res, function(key, value) {
-        //                 $("#concepto").append('<option value="' + value.state_id[0] + '">' + value.state_name[0] + '</option>');
-        //             });
-        //         }
-        //     },
-        //     error: function() {
-        //         let err = "Error desconocido, comuniquese con el administrador";
-        //         console.log(err);
-        //     }
-        // });
-        $("#tpermiso").change(function(){
+
+        $("#tpermiso").change(function() {
             var tipoconcepto_id = $(this).val();
-            if(tipoconcepto_id){
+            if (tipoconcepto_id) {
                 $.ajax({
-                    type:'GET',
-                    url:'{{ route("conceptos.all") }}',
-                    data:{"id" : tipoconcepto_id },
-                    success:function(data){
-                        if($('#tpermiso').val() == 1)
-                        $.each(data,function(key,value){
-                            $("#concepto").append('<option value="'+value.id+'">'+value.descripcion+'</option>');
-                            console.log(value);
-                        });
+                    type: 'GET',
+                    url: '{{ route("conceptos.all") }}',
+                    dataType: 'json',
+                    success: function(data) {
+                        $('#tpermiso').on('click', () => {
+                            $("#concepto").empty();
+                        })
+                        if ($('#tpermiso').val() == 1) {
+                            $.each(data, (key, value) => {
+                                $("#concepto").append('<option value="' + value[11].id + '">' + value[11].descripcion + '</option>');
+                                console.log(value);
+                            });
+                        } else if ($('#tpermiso').val() == 2) {
+                            $.each(data, function(key, value) {
+                                for (var i = 0; i < 3; i++) {
+                                    $("#concepto").append('<option value="' + value[i].id + '">' + value[i].descripcion + '</option>');
+                                    console.log(value[i].descripcion);
+                                }
+
+                            });
+                        } else if ($('#tpermiso').val() == 3) {
+                            $.each(data, function(key, value) {
+                                for (var i = 3; i < 11; i++) {
+                                    $("#concepto").append('<option value="' + value[i].id + '">' + value[i].descripcion + '</option>');
+                                    console.log(value[i].descripcion);
+                                }
+
+                            });
+                        }else if ($('#tpermiso').val() == 4) {
+                            $.each(data, (key, value) => {
+                                $("#concepto").append('<option value="' + value[12].id + '">' + value[12].descripcion + '</option>');
+                                console.log(value);
+                            });
+                        }
+                        else if ($('#tpermiso').val() == 5) {
+                            $.each(data, (key, value) => {
+                                $("#concepto").append('<option value="' + value[13].id + '">' + value[13].descripcion + '</option>');
+                                console.log(value);
+                            });
+                        }
                     }
-                }); 
+                });
             }
         });
     });

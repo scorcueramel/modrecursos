@@ -17,9 +17,9 @@ class TestController extends Controller
     public function edit($codigo)
     {
         $response = Http::acceptJson()->get('http://sistemas.munisurco.gob.pe/pidemss/servicios/siam/dat?P_APEPATERNO=&P_APEMATERNO=&P_CODIGO=' . $codigo . '&P_VCHTIDCODIGO=&P_NUMDOCUMENTO=&entidad=201&sistema=603&key=400');
-        $tipopermisos = TipoPermiso::all();
+        $permisos = TipoPermiso::all();
         $resp = $response->json(['contenido'][0]);
-        return view('registro', compact('resp', 'tipopermisos'));
+        return view('registro', compact('resp', 'permisos'));
     }
 
     public function conceptos()
@@ -34,23 +34,18 @@ class TestController extends Controller
         $resp = new Registro();
         $resp->usuario_creador=Auth::id();
         $resp->codigo_persona = $request->codigo;
-        $resp->documento_persona = $request->docident;
+        $resp->documento_persona = $request->documento_persona;
         $resp->nombre_persona = $request->nombres;
-        $resp->reglab_persona = $request->reglab;
+        $resp->reglab_persona = $request->reglaboral;
         $resp->uniorg_persona = $request->uniorg;
-        $resp->estado_persona = $request->estado_persona;
-        $resp->fecha_inicio_persona = Carbon::now();
-        $resp->tipo_permiso_id = $request->tipopermiso;
-        $resp->fecha_inicio = Carbon::now();
-        $resp->fecha_fin = Carbon::now();
-        $resp->fecha_inicio_persona = Carbon::parse($request->ingreso);
-        $resp->estado_persona = "ACTIVO";
+        $resp->estado_persona = $request->estado;
         $resp->tipo_permiso_id = $request->tpermiso;
-        $resp->concepto_id = $request->concepto;
         $resp->fecha_inicio = Carbon::parse($request->fecinicio);
         $resp->fecha_fin = Carbon::parse($request->fecfin);
-        $resp->documento = $request->documento;
-        $resp->comentario = $request->comentario;
+        $resp->fecha_inicio_persona = Carbon::parse($request->ingreso);
+        $resp->tipo_permiso_id = $request->tpermiso;
+        $resp->concepto_id = $request->concepto;
+        $resp->documento = $request->documento_ref;
         $resp->ip_usuario = request()->ip();
         $resp->usuario_editor = null;
         $resp->estado = 1;
