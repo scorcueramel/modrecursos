@@ -66,7 +66,7 @@
                                 </div>
                             @endif
                             <table class="table table-bordered table-hover" id="personal">
-                                <thead class="bg-success">
+                                <thead class="bg-info">
                                     <th style="color: #fff">COD</th>
                                     <th style="color: #fff">DOC.</th>
                                     <th style="color: #fff">NOMBRES</th>

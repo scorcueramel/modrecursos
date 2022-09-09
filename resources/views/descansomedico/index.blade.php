@@ -13,7 +13,7 @@
                     <div class="card">
                         <div class="card-body">
                             <table class="table table-bordered table-hover mt-2" id="descansosmedicos">
-                                <thead class="bg-success">
+                                <thead class="bg-info">
                                     <th style="color: #fff">COD</th>
                                     <th style="color: #fff">DNI</th>
                                     <th style="color: #fff">NOMBRES</th>

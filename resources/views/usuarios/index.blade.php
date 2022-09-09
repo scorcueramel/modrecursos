@@ -20,7 +20,7 @@
                                     Nuevo usuario</a>
                             @endcan
                             <table class="table table-striped my-2" id="usuarios">
-                                <thead class="bg-success">
+                                <thead class="bg-info">
                                     <th style="color: #fff">Nombre completo</th>
                                     <th style="color: #fff">Correo electrónico</th>
                                     <th style="color: #fff">Rol</th>

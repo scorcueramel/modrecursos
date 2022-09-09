@@ -31,8 +31,8 @@
 
     <div id="app">
         <div class="main-wrapper main-wrapper-1">
-            <div class="navbar-bg bg-success"></div>
-            <nav class="navbar navbar-expand-lg main-navbar bg-success">
+            <div class="navbar-bg bg-info"></div>
+            <nav class="navbar navbar-expand-lg main-navbar bg-info">
                 @include('layouts.header')
                 
             </nav>
