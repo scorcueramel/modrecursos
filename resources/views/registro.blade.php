@@ -70,11 +70,11 @@ Nuevo Registro |
                                 </div>
                                 <div class="col-md-2 mb-3">
                                     <label for="fecinicio">Inicio Permiso</label>
-                                    <input type="date" class="form-control" name="fecinicio" id="fecinicio" min="2022-09-01" max="2030-12-31" required>
+                                    <input type="date" class="form-control" name="fecinicio" id="fecinicio" required>
                                 </div>
                                 <div class="col-md-2 mb-3">
                                     <label for="fecfin">Fin Permiso</label>
-                                    <input type="date" class="form-control" name="fecfin" id="fecfin" min="2022-09-01" max="2030-12-31" required>
+                                    <input type="date" class="form-control" name="fecfin" id="fecfin" required>
                                 </div>
                                 <div class="col-md-3 mb-3">
                                     <label for="documento_ref">Documento Sustentario</label>

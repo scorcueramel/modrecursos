@@ -59,10 +59,9 @@ Route::group(['middleware'=>['auth']],function () {
     Route::get('/suspensiones',[SuspensionesController::class, 'index'])->name('suspensiones');
     Route::get('tablasuspensiones',[SuspensionesController::class,'tablasuspensiones'])->name('tabla.suspensiones');
 
-
     //TEST
     Route::get('detalle/{cod}/crear',[TestController::class, 'edit'])->name('registro.edit');
     Route::post('store', [TestController::class, 'store'])->name('store');
     Route::get('detalle/conceptos', [TestController::class, 'conceptos'])->name('conceptos.all');
-    Route::post('delete/{id}', [TestController::class, 'desactivar'])->name('registro.delete');
+    Route::get('delete/{id}', [TestController::class, 'desactivar'])->name('registro.delete');
 });

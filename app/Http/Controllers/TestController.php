@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Auth;
 
-use Carbon\CarbonPeriod;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use App\Models\Registro;
@@ -12,7 +11,7 @@ use App\Models\TipoPermiso;
 use App\Models\Conceptos;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
-use phpDocumentor\Reflection\DocBlock\Tags\Throws;
+
 
 class TestController extends Controller
 {
@@ -35,21 +34,20 @@ class TestController extends Controller
 
     public function store(Request $request)
     {
+
         $msn = "";
         $codigo = $request->codigo;
-        $fi = Carbon::parse($request->fecinicio);
-        $ff = Carbon::parse($request->fecfin);
+        $fi = $request->fecinicio;
+        $ff = $request->fecfin;
 
         $persona = DB::table('registros')
             ->join('tipo_permisos', function ($join) {
                 $join->on('tipo_permisos.id', '=', 'registros.tipo_permiso_id');
             })
             ->where('codigo_persona', '=', $codigo)
-            ->where('fecha_inicio', '<=', $fi)
-            ->where('fecha_fin', '>=', $ff)
+            ->whereDate('fecha_inicio', '<=', $ff)
+            ->whereDate('fecha_fin', '>=', $fi)
             ->get();
-
-//        return response()->json(["resp"=>$user]);
 
         $resp = new Registro();
         $resp->usuario_creador = Auth::user()->name;
@@ -65,9 +63,14 @@ class TestController extends Controller
         } else {
             $resp->tipo_permiso_id = $request->tpermiso;
         }
+
         if (count($persona) > 0) {
             foreach ($persona as $key => $value) {
-                if ($persona[$key]->codigo_persona == $codigo && !empty($persona[$key]->tipo_permiso_id)) {
+                if (
+                    $persona[$key]->codigo_persona == $codigo
+                    && $persona[$key]->fecha_inicio <= $ff
+                    && $persona[$key]->fecha_fin >= $fi
+                ) {
                     $msn = "Actualmete cuenta con " . $persona[$key]->descripcion . " en el rango de fecha seleccionado";
                     return back()->with('error', $msn);
                 }
@@ -75,8 +78,8 @@ class TestController extends Controller
         } else {
             $resp->fecha_inicio = $fi;
             $resp->fecha_fin = $ff;
-//            $msn = "Se puede otorgar el permiso";
-//            return back()->with('success', $msn);
+            //    $msn = "Se puede otorgar el permiso";
+            //    return back()->with('success', $msn);
         }
         $resp->fecha_inicio_persona = Carbon::parse($request->ingreso);
         $resp->concepto_id = $request->concepto;
@@ -89,12 +92,42 @@ class TestController extends Controller
         return redirect()->route('home')->with('success', $msn);
     }
 
-    public function desactivar($id)
+    public function desactivar($codigo)
     {
-        $registro = Registro::find($id);
-        $registro->comentario = "ELIMINADO";
-        $registro->estado = 0;
-        $registro->deleted_at = Carbon::now()->toDateTimeString();
-        $registro->update();
+        $hoy = Carbon::now()->format('Y-m-d');
+        $fi = '2022-09-11';
+        $ff = '2022-09-18';
+
+        $persona = DB::table('registros')
+            ->join('tipo_permisos', function ($join) {
+                $join->on('tipo_permisos.id', '=', 'registros.tipo_permiso_id');
+            })
+            ->where('codigo_persona', '=', $codigo)
+            ->whereDate('fecha_inicio', '<=', $ff)
+            ->whereDate('fecha_fin', '>=', $fi)
+            ->get();
+
+        if (count($persona) > 0) {
+            foreach ($persona as $key => $value) {
+                if (
+                    $persona[$key]->codigo_persona == $codigo
+                    && $persona[$key]->fecha_inicio >= $hoy
+                    && $persona[$key]->fecha_fin <= $hoy
+                ) {
+                    $msn = "No se puede editar por que cuenta con " . $persona[$key]->descripcion . " en curso";
+                    // return back()->with('error', $msn);
+                    return response()->json(["resp" => $msn]);
+                }
+            }
+        }
+
+
+        // dd($persona);
+
+        // $registro = Registro::find($id);
+        // $registro->comentario = "ELIMINADO";
+        // $registro->estado = 0;
+        // $registro->deleted_at = Carbon::now()->toDateTimeString();
+        // $registro->update();
     }
 }

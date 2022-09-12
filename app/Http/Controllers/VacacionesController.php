@@ -14,7 +14,7 @@ class VacacionesController extends Controller
 
     public function tablavacaciones(Request $request)
     {
-        $tblvacaciones = Registro::where('estado', 1);
+        $tblvacaciones = Registro::where('tipo_permiso_id', 1);
         return datatables()->of($tblvacaciones)
         ->addColumn('detalles',function ($row){
             return '<td><button type="button" class="btn btn-primary btn-sm" data-id="'.$row['id'].'" id="modalPendiente">Editar</button></td>';
