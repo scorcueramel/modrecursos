@@ -18,3 +18,5 @@ class Registro extends Model
     						'estado'];
 }
 
+
+

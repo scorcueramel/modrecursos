@@ -3,7 +3,6 @@
 @section('title')
 Vacaciones |
 @endsection
-
 @section('content')
 <section class="section">
     <div class="section-header">
@@ -14,25 +13,20 @@ Vacaciones |
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <h5 class="my-4">Filtro por fechas</h5>
-                            </div>
-                        </div>
                         <div class="row mb-4">
-                            <div class="col-md-3">
-                                <label for="finicio">Fecha de inicio</label>
-                                <input type='text' id='start_date' name="min" class="form-control start_date" placeholder='Fecha Inicio' class="form-control">
-                            </div>
-                            <div class="col-md-3">
-                                <label for="Fecha de Fin">Fecha de fin</label>
-                                <input type='text' id='end_date' name="max" class="form-control end_date" placeholder='Fecha fin' class="form-control">
-                            </div>
-                            <div class="col-md-3 mt-4">
-                                <button class="btn btn-primary mt-2" id="filtrar">
-                                    Buscar
-                                </button>
-                            </div>
+                            <table border="0" cellspacing="5" cellpadding="5" class="ml-3">
+                                <tbody>
+                                    <tr>
+                                        <td>Desde:</td>
+                                        <td><input type="date" id="min" name="min" class="form-control"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Hasta:</td>
+                                        <td><input type="date" id="max" name="max" class="form-control"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
                         </div>
 
                         <div class="row">
@@ -61,72 +55,32 @@ Vacaciones |
 @endsection
 
 @section('scripts')
-
 <script>
-    $(document).ready(function() {
-        $('#filtrar').focus();
-
-        $('.start_date').datepicker({
-            format: 'dd-mm-yyyy'
-        });
-        $('.end_date').datepicker({
-            format: 'dd-mm-yyyy'
-        });
-
-        const table = $('#vacaciones').DataTable({
-            proccesing: true,
-            info: true,
-            "order": [
-                [0, "DESC"]
-            ],
-            responsive: true,
-            autoWidth: false,
-            processing: true,
-            info: true,
-            "pageLength": 5,
-            "aLengthMenu": [
-                [5, 10, 15, -1],
-                [5, 10, 15, "Todos"]
-            ],
-            "ajax": {
-                url: "{{route('tabla.vacaciones')}}",
-                headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
-                type: 'GET',
-                data: function(d) {
-                    d.start_date = $('.start_date').val(),
-                    d.end_date = $('.end_date').val()
-                }
-            },
-            "columns": [{
-                    data: 'codigo_persona'
-                },
-                {
-                    data: 'documento_persona'
-                },
-                {
-                    data: 'nombre_persona'
-                },
-                {
-                    data: 'reglab_persona'
-                },
-                {
-                    data: 'uniorg_persona'
-                },
-                {
-                    data: 'fecha_inicio'
-                },
-                {
-                    data: 'fecha_fin'
-                },
-                {
-                    data: 'detalles'
-                }
-            ],
-            "language": {
-                "lengthMenu": "Mostrar " +
-                    `<select class="custom-select custom-select-sm form-control form-control-sm">
+        $(document).ready(function() {
+            $('#vacaciones').DataTable({
+                proccesing : true,
+                info:true,
+                "order": [[ 0, "desc" ]],
+                responsive:true,
+                autoWidth:false,
+                processing:true,
+                info:true,
+                "pageLength":5,
+                "aLengthMenu":[[5,10,15,-1],[5,10,15,"Todos"]],
+                "ajax":"{{route('tabla.vacaciones')}}",
+                "columns" : [
+                    {data:'codigo_persona'},
+                    {data:'documento_persona'},
+                    {data:'nombre_persona'},
+                    {data:'reglab_persona'},
+                    {data:'uniorg_persona'},
+                    {data:'fecha_inicio'},
+                    {data:'fecha_fin'},
+                    {data:'detalles'}
+                ],
+                "language": {
+                    "lengthMenu": "Mostrar " +
+                        `<select class="custom-select custom-select-sm form-control form-control-sm">
                             <option value='5'>5</option>
                             <option value='10'>10</option>
                             <option value='15'>15</option>
@@ -134,22 +88,19 @@ Vacaciones |
                             <option value='25'>25</option>
                             <option value='-1'>Todos</option>
                         </select>` +
-                    " registros por página",
-                "zeroRecords": "Sin Resultados Actualmente",
-                "info": "Mostrando página _PAGE_ de _PAGES_",
-                "infoEmpty": "Sin Resultados",
-                "infoFiltered": "(filtrado de _MAX_ registros totales)",
-                "search": "Buscar: ",
-                "paginate": {
-                    "next": "Siguiente",
-                    "previous": "Anterior"
-                }
-            },
-        });
+                        " registros por página",
+                    "zeroRecords": "Sin Resultados Actualmente",
+                    "info": "Mostrando página _PAGE_ de _PAGES_",
+                    "infoEmpty": "Sin Resultados",
+                    "infoFiltered": "(filtrado de _MAX_ registros totales)",
+                    "search": "Buscar: ",
+                    "paginate": {
+                        "next": "Siguiente",
+                        "previous": "Anterior"
+                    }
+                },
+            });
 
-        $('#filtrar').click(function() {
-            table.draw();
-        })
-    });
-</script>
+        });
+    </script>
 @endsection
