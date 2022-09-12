@@ -11,10 +11,8 @@ use App\Http\Controllers\VacacionesController;
 use App\Http\Controllers\DescansosMedicosController;
 use App\Http\Controllers\LicenciasController;
 use App\Http\Controllers\AislamientosController;
+use App\Http\Controllers\RegistroController;
 use App\Http\Controllers\SuspensionesController;
-
-//test
-use App\Http\Controllers\TestController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,11 +37,9 @@ Route::group(['middleware'=>['auth']],function () {
     Route::resource('roles', RolController::class);
     Route::resource('usuarios', UsuarioController::class);
 
-    //vistas general (Buscador)
     Route::get('/general', [GeneralController::class, 'index'])->name('general');
     Route::post('/general', [GeneralController::class, 'consultar'])->name('general.consultar');
 
-    //vacaciones
     Route::get('/vacaciones',[VacacionesController::class, 'index'])->name('vacaciones');
     Route::get('tablavacaciones',[VacacionesController::class,'tablavacaciones'])->name('tabla.vacaciones');
 
@@ -59,10 +55,8 @@ Route::group(['middleware'=>['auth']],function () {
     Route::get('/suspensiones',[SuspensionesController::class, 'index'])->name('suspensiones');
     Route::get('tablasuspensiones',[SuspensionesController::class,'tablasuspensiones'])->name('tabla.suspensiones');
 
-
-    //TEST
-    Route::get('detalle/{cod}/crear',[TestController::class, 'edit'])->name('registro.edit');
-    Route::post('store', [TestController::class, 'store'])->name('store');
-    Route::get('detalle/conceptos', [TestController::class, 'conceptos'])->name('conceptos.all');
-    Route::post('delete/{id}', [TestController::class, 'desactivar'])->name('registro.delete');
+    Route::get('detalle/{cod}/crear',[RegistroController::class, 'edit'])->name('registro.edit');
+    Route::post('store', [RegistroController::class, 'store'])->name('store');
+    Route::get('detalle/conceptos', [RegistroController::class, 'conceptos'])->name('conceptos.all');
+    Route::get('delete/{cod}', [RegistroController::class, 'desactivar'])->name('registro.delete');
 });

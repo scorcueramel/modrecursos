@@ -70,11 +70,25 @@ Nuevo Registro |
                                 </div>
                                 <div class="col-md-2 mb-3">
                                     <label for="fecinicio">Inicio Permiso</label>
-                                    <input type="date" class="form-control" name="fecinicio" id="fecinicio" min="2022-09-01" max="2030-12-31" required>
+                                    <input type="date" class="form-control" name="fecinicio" id="fecinicio" required>
                                 </div>
                                 <div class="col-md-2 mb-3">
                                     <label for="fecfin">Fin Permiso</label>
-                                    <input type="date" class="form-control" name="fecfin" id="fecfin" min="2022-09-01" max="2030-12-31" required>
+                                    <input type="date" class="form-control" name="fecfin" id="fecfin" required>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3 mb-3">
+                                    <label for="diaspersonal">Cantidad de Días</label>
+                                    <input type="text" class="form-control" name="diaspersonal" id="diaspersonal" readonly>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <label for="anioperiodo">Año Periodo</label>
+                                    <input type="text" class="form-control" name="anioperiodo" id="anioperiodo">
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <label for="observaciones">Observaciones</label>
+                                    <input type="text" class="form-control" name="observaciones" id="observaciones">
                                 </div>
                                 <div class="col-md-3 mb-3">
                                     <label for="documento_ref">Documento Sustentario</label>
@@ -98,8 +112,23 @@ Nuevo Registro |
 @section('scripts')
 <script>
     $('document').ready(() => {
+        var fecinicio, fecfin, totaldias;
 
         $('#tpermiso').focus();
+
+        $('#fecinicio').change(function () {
+            fecinicio = $('#fecinicio').val();
+            parseInt(fecinicio);
+         });
+
+        $('#fecfin').change(function () {
+            fecfin = $('#fecfin').val();
+            parseInt(fecfin);
+            totaldias = fecinicio - fecfin;
+            console.log(totaldias);
+            totaldias.toString();
+            $('#diaspersonal').val(totaldias);
+        });
 
         $("#tpermiso").change(function() {
             var tipoconcepto_id = $(this).val();
@@ -141,18 +170,18 @@ Nuevo Registro |
                 });
             }
 
-            //Bloquear las fechas anteriores a la actual
-            var fecha = new Date();
-            var anio = fecha.getFullYear();
-            var dia = fecha.getDate();
-            var _mes = fecha.getMonth();//viene con valores de 0 al 11
-            _mes = _mes + 1;//ahora lo tienes de 1 al 12
-            if (_mes < 10)//ahora le agregas un 0 para el formato date
-            { var mes = "0" + _mes;}
-            else
-            { var mes = _mes.toString;}
-            document.getElementById("fecinicio").min = anio+'-'+mes+'-'+dia;
-            document.getElementById("fecfin").min = anio+'-'+mes+'-'+dia;
+            // //Bloquear las fechas anteriores a la actual
+            // var fecha = new Date();
+            // var anio = fecha.getFullYear();
+            // var dia = fecha.getDate();
+            // var _mes = fecha.getMonth();//viene con valores de 0 al 11
+            // _mes = _mes + 1;//ahora lo tienes de 1 al 12
+            // if (_mes < 10)//ahora le agregas un 0 para el formato date
+            // { var mes = "0" + _mes;}
+            // else
+            // { var mes = _mes.toString;}
+            // document.getElementById("fecinicio").min = anio+'-'+mes+'-'+dia;
+            // document.getElementById("fecfin").min = anio+'-'+mes+'-'+dia;
         });
 
     });

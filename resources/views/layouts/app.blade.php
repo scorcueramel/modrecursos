@@ -24,7 +24,6 @@
 
 
     @yield('page_css')
-    <!-- Template CSS -->
     <link rel="stylesheet" href="{{ asset('web/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('web/css/components.css')}}">
     @yield('page_css')
@@ -38,12 +37,10 @@
             <div class="navbar-bg bg-info"></div>
             <nav class="navbar navbar-expand-lg main-navbar bg-info">
                 @include('layouts.header')
-
             </nav>
             <div class="main-sidebar main-sidebar-postion">
                 @include('layouts.sidebar')
             </div>
-            <!-- Main Content -->
             <div class="main-content">
                 @yield('content')
             </div>
@@ -78,9 +75,6 @@
 <script src="https://cdn.datatables.net/responsive/2.2.9/js/responsive.bootstrap4.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.2/moment.min.js"></script>
 <script src="https://cdn.datatables.net/datetime/1.1.2/js/dataTables.dateTime.min.js"></script>
-
-
-
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-
 datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>

@@ -3,8 +3,8 @@
     Registro de usuarios
 @endsection
 @section('content')
-    <div class="card card-success">
-        <div class="card-header"><h4 class="text-success">Registro de usuario</h4></div>
+    <div class="card card-info">
+        <div class="card-header"><h4 class="text-info">Registro de usuario</h4></div>
 
         <div class="card-body pt-1">
             <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
@@ -66,7 +66,7 @@
                     </div>
                     <div class="col-md-12 mt-4">
                         <div class="form-group">
-                            <button type="submit" class="btn btn-success btn-lg btn-block" tabindex="4">
+                            <button type="submit" class="btn btn-info btn-lg btn-block" tabindex="4">
                                 Registrar usuario
                             </button>
                         </div>
