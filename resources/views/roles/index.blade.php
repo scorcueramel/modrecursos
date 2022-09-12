@@ -27,8 +27,8 @@ Roles |
                                 @foreach ($roles as $role)
                                 <tr>
                                     <td>{{ $role->name }}</td>
-                                    @can('editar-rols')
                                     <td>
+                                        @can('editar-rols')
                                         <a class="btn btn-warning" href="{{ route('roles.edit', $role->id) }}"><i class="fas fa-edit"></i></a>
                                         @endcan
                                         @can('borrar-rols')
@@ -39,8 +39,8 @@ Roles |
                                                 <i class="fas fa-minus-square"></i>
                                             </button>
                                         </form>
+                                        @endcan
                                     </td>
-                                    @endcan
                                 </tr>
                                 @endforeach
                             </tbody>

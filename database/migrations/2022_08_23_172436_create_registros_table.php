@@ -29,6 +29,7 @@ class CreateRegistrosTable extends Migration
             $table->date('fecha_inicio')->nullable(false);
             $table->date('fecha_fin')->nullable(false);
             $table->string('documento',40)->nullable();
+            $table->string('anio_periodo')->nullable();
             $table->string('comentario')->nullable();
             $table->string('usuario_creador')->nullable();
             $table->string('usuario_editor')->nullable();

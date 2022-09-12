@@ -3,8 +3,8 @@
     Inicio de Sesion
 @endsection
 @section('content')
-    <div class="card card-success">
-        <div class="card-header"><h4 class="text-success">Inicio de Sesion</h4></div>
+    <div class="card card-info">
+        <div class="card-header"><h4 class="text-info">Inicio de Sesion</h4></div>
 
         <div class="card-body">
             <form method="POST" action="{{ route('login') }}">
@@ -58,7 +58,7 @@
                 </div>
 
                 <div class="form-group">
-                    <button type="submit" class="btn btn-success btn-lg btn-block" tabindex="4">
+                    <button type="submit" class="btn btn-info btn-lg btn-block" tabindex="4">
                         Iniciar Sesion
                     </button>
                 </div>

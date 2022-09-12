@@ -12,8 +12,7 @@ use App\Models\Conceptos;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
-
-class TestController extends Controller
+class RegistroController extends Controller
 {
 
     public function edit($codigo)
@@ -71,7 +70,7 @@ class TestController extends Controller
                     && $persona[$key]->fecha_inicio <= $ff
                     && $persona[$key]->fecha_fin >= $fi
                 ) {
-                    $msn = "Actualmete cuenta con " . $persona[$key]->descripcion . " en el rango de fecha seleccionado";
+                    $msn = "Actualmente cuenta con " . $persona[$key]->descripcion . " en el rango de fecha seleccionado";
                     return back()->with('error', $msn);
                 }
             }
@@ -95,35 +94,37 @@ class TestController extends Controller
     public function desactivar($codigo)
     {
         $hoy = Carbon::now()->format('Y-m-d');
-        $fi = '2022-09-11';
-        $ff = '2022-09-18';
 
-        $persona = DB::table('registros')
-            ->join('tipo_permisos', function ($join) {
-                $join->on('tipo_permisos.id', '=', 'registros.tipo_permiso_id');
-            })
-            ->where('codigo_persona', '=', $codigo)
-            ->whereDate('fecha_inicio', '<=', $ff)
-            ->whereDate('fecha_fin', '>=', $fi)
-            ->get();
+        $persona = DB::table('registros')->where('codigo_persona','=',$codigo)->get();
 
-        if (count($persona) > 0) {
-            foreach ($persona as $key => $value) {
-                if (
-                    $persona[$key]->codigo_persona == $codigo
-                    && $persona[$key]->fecha_inicio >= $hoy
-                    && $persona[$key]->fecha_fin <= $hoy
-                ) {
-                    $msn = "No se puede editar por que cuenta con " . $persona[$key]->descripcion . " en curso";
-                    // return back()->with('error', $msn);
-                    return response()->json(["resp" => $msn]);
-                }
-            }
+        foreach ($persona as $key => $value) {
+            print_r($persona[$key]->nombre_persona);
         }
+        // if($hoy <= $ff && $hoy >= $fi)
+        // {
+        //     dd("En curso");
+        // }else
+        // {
+        //     dd("Puede Editar");
+        // }
 
 
-        // dd($persona);
+        // $persona = DB::table('registros')
+        //     ->join('tipo_permisos', function ($join) {
+        //         $join->on('tipo_permisos.id', '=', 'registros.tipo_permiso_id');
+        //     })
+        //     ->where('codigo_persona', '=', $codigo)
+        //     ->whereDate('fecha_inicio', '<=', $ff)
+        //     ->whereDate('fecha_fin', '>=', $fi)
+        //     ->get();
 
+        // foreach ($persona as $key => $value) {
+        //     if($persona[$key]->codigo_persona == $codigo
+        //         && $persona[$key]->fecha_inicio == $hoy)
+        //     {
+        //         dd('En curso');
+        //     }
+        // }
         // $registro = Registro::find($id);
         // $registro->comentario = "ELIMINADO";
         // $registro->estado = 0;
