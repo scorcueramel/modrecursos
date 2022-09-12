@@ -76,6 +76,20 @@ Nuevo Registro |
                                     <label for="fecfin">Fin Permiso</label>
                                     <input type="date" class="form-control" name="fecfin" id="fecfin" required>
                                 </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3 mb-3">
+                                    <label for="diaspersonal">Cantidad de Días</label>
+                                    <input type="text" class="form-control" name="diaspersonal" id="diaspersonal" readonly>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <label for="anioperiodo">Año Periodo</label>
+                                    <input type="text" class="form-control" name="anioperiodo" id="anioperiodo">
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <label for="observaciones">Observaciones</label>
+                                    <input type="text" class="form-control" name="observaciones" id="observaciones">
+                                </div>
                                 <div class="col-md-3 mb-3">
                                     <label for="documento_ref">Documento Sustentario</label>
                                     <input type="text" class="form-control" name="documento_ref" id="documento_ref">
@@ -98,8 +112,20 @@ Nuevo Registro |
 @section('scripts')
 <script>
     $('document').ready(() => {
+        var fecinicio, fecfin, totaldias;
 
         $('#tpermiso').focus();
+
+        $('#fecinicio').change(function () {
+            fecinicio = $('#fecinicio').val();
+         });
+
+        $('#fecfin').change(function () {
+            fecfin = $('#fecfin').val();
+            totaldias = fecinicio - fecfin;
+            totaldias.toString();
+            $('#diaspersonal').val(totaldias);
+        });
 
         $("#tpermiso").change(function() {
             var tipoconcepto_id = $(this).val();

@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Http;
 use App\Models\Registro;
 use App\Models\TipoPermiso;
 use App\Models\Conceptos;
+use App\Models\DiasPersonal;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
@@ -47,8 +48,9 @@ class RegistroController extends Controller
             ->whereDate('fecha_inicio', '<=', $ff)
             ->whereDate('fecha_fin', '>=', $fi)
             ->get();
-
+        $diasPersonal = DiasPersonal::all();
         $resp = new Registro();
+
         $resp->usuario_creador = Auth::user()->name;
         $resp->codigo_persona = $request->codigo;
         $resp->documento_persona = $request->documento_persona;
@@ -82,7 +84,9 @@ class RegistroController extends Controller
         }
         $resp->fecha_inicio_persona = Carbon::parse($request->ingreso);
         $resp->concepto_id = $request->concepto;
+        $resp->anio_periodo = $request->anioperiodo;
         $resp->documento = $request->documento_ref;
+        $resp->comentario = $request->observaciones;
         $resp->ip_usuario = request()->ip();
         $resp->usuario_editor = null;
         $resp->estado = 1;
