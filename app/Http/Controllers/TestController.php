@@ -45,8 +45,8 @@ class TestController extends Controller
                 $join->on('tipo_permisos.id', '=', 'registros.tipo_permiso_id');
             })
             ->where('codigo_persona', '=', $codigo)
-            ->where('fecha_inicio', '<=', $fi)
-            ->where('fecha_fin', '>=', $ff)
+            ->whereDate('fecha_inicio', '>=', $fi)
+            ->whereDate('fecha_fin', '<=', $ff)
             ->get();
 
 //        return response()->json(["resp"=>$user]);
