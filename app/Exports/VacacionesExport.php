@@ -2,19 +2,23 @@
 
 namespace App\Exports;
 
+use App\Models\DiasPersonal;
 use App\Models\Registro;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithCustomCsvSettings;
+use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
-class VacacionesExport implements FromCollection, WithCustomCsvSettings
+class VacacionesExport implements FromCollection, WithCustomCsvSettings, WithHeadingRow
 {
     /**
     * @return \Illuminate\Support\Collection
     */
     public function collection()
     {
-        return Registro::select('tipo_documento_persona','documento_persona','concepto_id')
-        ->where('tipo_permiso_id', 1)->get();
+        return Registro::select('tipo_documento_persona','documento_persona','codigo_pdt','inicial')
+        ->join('conceptos', 'registros.concepto_id', '=', 'conceptos.id')
+        ->join('dias_personals', 'registros.id', '=', 'dias_personals.id_registro')
+        ->where('registros.tipo_permiso_id', 1)->get();
     }
 
     public function getCsvSettings(): array
