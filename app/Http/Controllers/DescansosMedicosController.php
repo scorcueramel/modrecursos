@@ -18,7 +18,7 @@ class DescansosmedicosController extends Controller
         ->get();
         return datatables()->of($tbldescansosmedicos)
         ->addColumn('detalles',function ($row){
-            return '<a class="btn btn-primary btn-sm" href="delete/'.$row['codigo_persona'].'">Editar</a>';
+            return '<a class="btn btn-warning btn-sm" href="delete/'.$row['codigo_persona'].'">Editar</a>';
         })
         ->rawColumns(['detalles'])
         ->make(true);

@@ -18,7 +18,7 @@ class SuspensionesController extends Controller
         ->get();
         return datatables()->of($tblsuspensiones)
         ->addColumn('detalles',function ($row){
-            return '<td><button type="button" class="btn btn-primary btn-sm" data-id="'.$row['id'].'" id="modalPendiente">Editar</button></td>';
+            return '<td><button type="button" class="btn btn-warning btn-sm" data-id="'.$row['id'].'" id="modalPendiente">Editar</button></td>';
         })
         ->rawColumns(['detalles'])
         ->make(true);
