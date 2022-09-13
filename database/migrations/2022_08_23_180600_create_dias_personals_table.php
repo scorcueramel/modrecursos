@@ -19,8 +19,8 @@ class CreateDiasPersonalsTable extends Migration
             $table->foreign('id_registro')->references('id')->on('registros');
             $table->integer('inicial');
             $table->integer('saldo');
-            $table->integer('adicional');
-            $table->integer('total');
+            $table->integer('adicional')->default(0);
+            $table->integer('total')->default(0);
             $table->timestamps();
         });
     }

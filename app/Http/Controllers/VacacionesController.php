@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Registro;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class VacacionesController extends Controller
 {
@@ -14,12 +15,21 @@ class VacacionesController extends Controller
 
     public function tablavacaciones(Request $request)
     {
-        $tblvacaciones = Registro::where('tipo_permiso_id', 1);
+//        $tblvacaciones = Registro::where('tipo_permiso_id', 1);
+        $tblvacaciones = DB::table('registros')
+        ->where('tipo_permiso_id','=',1)
+        ->join('dias_personals', function ($join) {
+            $join->on('dias_personals.id_registro', '=', 'registros.id');
+        });
         return datatables()->of($tblvacaciones)
         ->addColumn('detalles',function ($row){
             return '<td><button type="button" class="btn btn-warning btn-sm" data-id="'.$row['id'].'" id="modalPendiente">Editar</button></td>';
         })
-        ->rawColumns(['detalles'])
+        ->addColumn('diaspermiso',function ($row)
+        {
+            return '<td>'.$row['dias_personals.saldo'].'</td>';
+        })
+        ->rawColumns(['detalles','diaspermiso'])
         ->make(true);
     }
 }
