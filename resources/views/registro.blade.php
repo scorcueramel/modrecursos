@@ -26,6 +26,10 @@ Nuevo Registro |
                                     <label for="codigo">Código</label>
                                     <input type="text" class="form-control" id="codigo" value="{{ $r['CODIGO'] }}" name="codigo" required readonly>
                                 </div>
+                                <div class="col-md-2 mb-6" style="display: none;">
+                                    <label for="tipo_documento_persona">Tipo Documento</label>
+                                    <input type="text" class="form-control" id="tipo_documento_persona" value="{{ $r['DOC_CODIGO'] }}" name="tipo_documento_persona" required readonly>
+                                </div>
                                 <div class="col-md-2 mb-6">
                                     <label for="documento_persona">Documento</label>
                                     <input type="text" class="form-control" id="documento_persona" value="{{ $r['DOC_IDENTIDAD'] }}" name="documento_persona" required readonly>

@@ -16,6 +16,7 @@ class CreateRegistrosTable extends Migration
         Schema::create('registros', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('codigo_persona',6)->nullable(false);
+            $table->string('tipo_documento_persona',2)->nullable(false);
             $table->string('documento_persona')->nullable(false);
             $table->string('nombre_persona')->nullable(false);
             $table->string('reglab_persona')->nullable(false);

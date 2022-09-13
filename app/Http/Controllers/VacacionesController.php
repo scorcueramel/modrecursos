@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\VacacionesExport;
+use Maatwebsite\Excel\Facades\Excel;
 use App\Models\Registro;
 use Illuminate\Http\Request;
 
@@ -21,5 +23,10 @@ class VacacionesController extends Controller
         })
         ->rawColumns(['detalles'])
         ->make(true);
+    }
+
+    public function export() 
+    {
+        return Excel::download(new VacacionesExport, 'vacaciones.csv');
     }
 }

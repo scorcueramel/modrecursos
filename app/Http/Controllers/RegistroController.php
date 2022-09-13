@@ -55,6 +55,7 @@ class RegistroController extends Controller
 
         $resp->usuario_creador = Auth::user()->name;
         $resp->codigo_persona = $request->codigo;
+        $resp->tipo_documento_persona = $request->tipo_documento_persona;
         $resp->documento_persona = $request->documento_persona;
         $resp->nombre_persona = $request->nombres;
         $resp->reglab_persona = $request->reglaboral;

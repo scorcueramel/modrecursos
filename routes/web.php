@@ -60,5 +60,6 @@ Route::group(['middleware'=>['auth']],function () {
     Route::get('detalle/conceptos', [RegistroController::class, 'conceptos'])->name('conceptos.all');
     Route::get('delete/{cod}', [RegistroController::class, 'desactivar'])->name('registro.delete');
 
+    Route::get('vacaciones/export/', [VacacionesController::class, 'export'])->name('vacaciones.export');
     Route::post('import', [RegistroController::class, 'import'])->name('import');
 });
