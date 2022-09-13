@@ -43,6 +43,7 @@ Vacaciones |
                                         <th style="color: #fff">UNI. ORG</th>
                                         <th style="color: #fff">F. INICIO</th>
                                         <th style="color: #fff">F. FIN</th>
+{{--                                        <th style="color: #fff">DIAS</th>--}}
                                         <th style="color: #fff">OPCIONES</th>
                                     </thead>
                                     <tbody></tbody>
@@ -79,6 +80,7 @@ Vacaciones |
                     {data:'uniorg_persona'},
                     {data:'fecha_inicio'},
                     {data:'fecha_fin'},
+                    // {data:'diaspermiso.inicial'},
                     {data:'detalles'}
                 ],
                 "language": {

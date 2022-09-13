@@ -50,11 +50,10 @@ class RegistroController extends Controller
             ->whereDate('fecha_inicio', '<=', $ff)
             ->whereDate('fecha_fin', '>=', $fi)
             ->get();
-        $diasPersonal = DiasPersonal::all();
-        $resp = new Registro();
 
+        $resp = new Registro();
         $resp->usuario_creador = Auth::user()->name;
-        $resp->codigo_persona = $request->codigo;
+        $resp->codigo_persona = $codigo;
         $resp->tipo_documento_persona = $request->tipo_documento_persona;
         $resp->documento_persona = $request->documento_persona;
         $resp->nombre_persona = $request->nombres;
@@ -82,8 +81,6 @@ class RegistroController extends Controller
         } else {
             $resp->fecha_inicio = $fi;
             $resp->fecha_fin = $ff;
-            //    $msn = "Se puede otorgar el permiso";
-            //    return back()->with('success', $msn);
         }
         $resp->fecha_inicio_persona = Carbon::parse($request->ingreso);
         $resp->concepto_id = $request->concepto;
@@ -94,6 +91,20 @@ class RegistroController extends Controller
         $resp->usuario_editor = null;
         $resp->estado = 1;
         $resp->save();
+
+        $per = DB::table('registros')
+            ->where('codigo_persona','=',$request->codigo)->get();
+
+        $diaPer = new DiasPersonal();
+
+        foreach ($per as $key => $value)
+        {
+            $diaPer->id_registro = $per[$key]->id;
+            $diaPer->inicial = $request->diaspersonal;
+            $diaPer->saldo = $request->diaspersonal;
+            $diaPer->save();
+        }
+
         $msn = 'Se generó el registro exitosamente';
         return redirect()->route('home')->with('success', $msn);
     }

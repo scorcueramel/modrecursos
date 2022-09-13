@@ -82,15 +82,15 @@ Nuevo Registro |
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-3 mb-3">
-                                    <label for="diaspersonal">Cantidad de Días</label>
+                                <div class="col-md-2 mb-3">
+                                    <label for="diaspersonal">Días</label>
                                     <input type="text" class="form-control" name="diaspersonal" id="diaspersonal" readonly>
                                 </div>
-                                <div class="col-md-3 mb-3">
+                                <div class="col-md-2 mb-3">
                                     <label for="anioperiodo">Año Periodo</label>
                                     <input type="text" class="form-control" name="anioperiodo" id="anioperiodo">
                                 </div>
-                                <div class="col-md-3 mb-3">
+                                <div class="col-md-5 mb-3">
                                     <label for="observaciones">Observaciones</label>
                                     <input type="text" class="form-control" name="observaciones" id="observaciones">
                                 </div>
@@ -116,22 +116,24 @@ Nuevo Registro |
 @section('scripts')
 <script>
     $('document').ready(() => {
-        var fecinicio, fecfin, totaldias;
 
+        //Calculo de días automatico
+        var f1,f2,r1,r2,t, resp;
+        const anio = 1000*60*60*24;
         $('#tpermiso').focus();
 
         $('#fecinicio').change(function () {
-            fecinicio = $('#fecinicio').val();
-            parseInt(fecinicio);
+            f1 = new Date($('#fecinicio').val());
+            r1 = f1.getTime();
          });
 
         $('#fecfin').change(function () {
-            fecfin = $('#fecfin').val();
-            parseInt(fecfin);
-            totaldias = fecinicio - fecfin;
-            console.log(totaldias);
-            totaldias.toString();
-            $('#diaspersonal').val(totaldias);
+            f2 = new Date($('#fecfin').val());
+            r2 = f2.getTime();
+            t = r2-r1;
+            resp = Math.floor(t/anio);
+            console.log(Math.floor(t/anio));
+            $('#diaspersonal').val(resp);
         });
 
         $("#tpermiso").change(function() {

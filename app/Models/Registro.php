@@ -10,7 +10,11 @@ class Registro extends Model
 {
     use HasFactory, SoftDeletes;
 
+<<<<<<< HEAD
     protected $fillable = ['codigo_persona','documento_persona','tipo_documento_persona','nombre_persona',
+=======
+    protected $fillable = [ 'id','codigo_persona','documento_persona','nombre_persona',
+>>>>>>> 4bdbb341f532a66a9438f13e0b0a828100052218
     						'reglab_persona','uniorg_persona','fecha_inicio_persona',
     						'fecha_cese_persona','estado_persona','tipo_permiso_id',
     						'concepto_id','fecha_inicio','fecha_fin','documento',
