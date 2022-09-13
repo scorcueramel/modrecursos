@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\DescansosMedicosExport;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
 use App\Models\Registro;
 
-class DescansosmedicosController extends Controller
+class DescansosMedicosController extends Controller
 {
     public function index()
     {
@@ -22,5 +24,10 @@ class DescansosmedicosController extends Controller
         })
         ->rawColumns(['detalles'])
         ->make(true);
+    }
+    
+    public function export() 
+    {
+        return Excel::download(new DescansosMedicosExport, 'descansosmedicos.csv');
     }
 }

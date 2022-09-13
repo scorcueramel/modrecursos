@@ -12,21 +12,40 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
-                            <table class="table table-bordered table-hover mt-2" id="descansosmedicos">
-                                <thead class="bg-info">
-                                    <th style="color: #fff">COD</th>
-                                    <th style="color: #fff">DNI</th>
-                                    <th style="color: #fff">NOMBRES</th>
-                                    <th style="color: #fff">REG. LAB.</th>
-                                    <th style="color: #fff">UNI. ORG</th>
-                                    <th style="color: #fff">F. INICIO</th>
-                                    <th style="color: #fff">F. FIN</th>
-                                    <th style="color: #fff">OPCIONES</th>
-                                </thead>
-                                <tbody>
-
-                                </tbody>
-                            </table>
+                            <div class="row mb-4">
+                                <table border="0" cellspacing="5" cellpadding="5" class="ml-3">
+                                    <tbody>
+                                        <tr>
+                                            <td>Desde:</td>
+                                            <td><input type="date" id="min" name="min" class="form-control"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Hasta:</td>
+                                            <td><input type="date" id="max" name="max" class="form-control"></td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="{{route('descansosmedicos.export')}}">Exportar</a></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <table class="table table-bordered table-hover mt-2" id="descansosmedicos">
+                                        <thead class="bg-info">
+                                            <th style="color: #fff">COD</th>
+                                            <th style="color: #fff">DNI</th>
+                                            <th style="color: #fff">NOMBRES</th>
+                                            <th style="color: #fff">REG. LAB.</th>
+                                            <th style="color: #fff">UNI. ORG</th>
+                                            <th style="color: #fff">F. INICIO</th>
+                                            <th style="color: #fff">F. FIN</th>
+                                            <th style="color: #fff">OPCIONES</th>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

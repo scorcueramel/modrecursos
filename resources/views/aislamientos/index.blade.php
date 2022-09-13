@@ -5,26 +5,47 @@
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h3 class="page__heading">Personal Con Aislaminetos Registrados</h3>
+            <h3 class="page__heading">Personal Con Aislamientos Registrados</h3>
         </div>
         <div class="section-body">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
-                            <table class="table table-bordered table-hover mt-2" id="aislamientos">
-                                <thead class="bg-info">
-                                    <th style="color: #fff">COD</th>
-                                    <th style="color: #fff">DNI</th>
-                                    <th style="color: #fff">NOMBRES</th>
-                                    <th style="color: #fff">REG. LAB.</th>
-                                    <th style="color: #fff">UNI. ORG</th>
-                                    <th style="color: #fff">F. INICIO</th>
-                                    <th style="color: #fff">F. FIN</th>
-                                    <th style="color: #fff">OPCIONES</th>
-                                </thead>
-                                <tbody></tbody>
-                            </table>
+                            <div class="row mb-4">
+                                <table border="0" cellspacing="5" cellpadding="5" class="ml-3">
+                                    <tbody>
+                                        <tr>
+                                            <td>Desde:</td>
+                                            <td><input type="date" id="min" name="min" class="form-control"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Hasta:</td>
+                                            <td><input type="date" id="max" name="max" class="form-control"></td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="{{route('aislamientos.export')}}">Exportar</a></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <table class="table table-bordered table-hover mt-2" id="aislamientos">
+                                        <thead class="bg-info">
+                                            <th style="color: #fff">COD</th>
+                                            <th style="color: #fff">DNI</th>
+                                            <th style="color: #fff">NOMBRES</th>
+                                            <th style="color: #fff">REG. LAB.</th>
+                                            <th style="color: #fff">UNI. ORG</th>
+                                            <th style="color: #fff">F. INICIO</th>
+                                            <th style="color: #fff">F. FIN</th>
+                                            <th style="color: #fff">OPCIONES</th>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

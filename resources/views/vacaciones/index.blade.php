@@ -25,11 +25,10 @@ Vacaciones |
                                         <td><input type="date" id="max" name="max" class="form-control"></td>
                                     </tr>
                                     <tr>
-                                    <td><a href="{{route('vacaciones.export')}}">Exportar</a></td>
+                                        <td><a href="{{route('vacaciones.export')}}">Exportar</a></td>
                                     </tr>
                                 </tbody>
                             </table>
-
                         </div>
 
                         <div class="row">

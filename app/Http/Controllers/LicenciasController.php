@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\LicenciasExport;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
 use App\Models\Registro;
 
@@ -22,5 +24,10 @@ class LicenciasController extends Controller
         })
         ->rawColumns(['detalles'])
         ->make(true);
+    }
+
+    public function export() 
+    {
+        return Excel::download(new LicenciasExport, 'licencias.csv');
     }
 }

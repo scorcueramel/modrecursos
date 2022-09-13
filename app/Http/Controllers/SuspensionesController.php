@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\SuspensionesExport;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
 use App\Models\Registro;
 
@@ -22,5 +24,10 @@ class SuspensionesController extends Controller
         })
         ->rawColumns(['detalles'])
         ->make(true);
+    }
+    
+    public function export() 
+    {
+        return Excel::download(new SuspensionesExport, 'suspensiones.csv');
     }
 }
