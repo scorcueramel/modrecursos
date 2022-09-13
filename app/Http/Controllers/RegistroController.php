@@ -48,6 +48,7 @@ class RegistroController extends Controller
             ->whereDate('fecha_inicio', '<=', $ff)
             ->whereDate('fecha_fin', '>=', $fi)
             ->get();
+
         $resp = new Registro();
         $resp->usuario_creador = Auth::user()->name;
         $resp->codigo_persona = $codigo;
