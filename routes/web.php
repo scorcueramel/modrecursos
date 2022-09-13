@@ -64,4 +64,7 @@ Route::group(['middleware'=>['auth']],function () {
     Route::post('store', [TestController::class, 'store'])->name('store');
     Route::get('detalle/conceptos', [TestController::class, 'conceptos'])->name('conceptos.all');
     Route::get('delete/{id}', [TestController::class, 'desactivar'])->name('registro.delete');
+
+    
+    Route::post('import', [TestController::class, 'import'])->name('import');
 });
