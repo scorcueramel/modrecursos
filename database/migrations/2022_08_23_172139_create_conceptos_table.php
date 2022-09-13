@@ -12,6 +12,7 @@ class CreateConceptosTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('tipo_permiso_id');
             $table->foreign('tipo_permiso_id')->references('id')->on('tipo_permisos');
+            $table->string('codigo_pdt');
             $table->string('descripcion');
             $table->boolean('estado')->nullable()->default(1);
             $table->timestamps();
