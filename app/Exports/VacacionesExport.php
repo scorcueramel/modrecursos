@@ -23,7 +23,8 @@ class VacacionesExport implements FromCollection, WithCustomCsvSettings
     public function getCsvSettings(): array
     {
         return [
-            'delimiter' => "|"
+            'delimiter' => "|",
+            'enclosure' => ''
         ];
     }
 }
