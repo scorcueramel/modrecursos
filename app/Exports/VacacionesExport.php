@@ -6,9 +6,8 @@ use App\Models\DiasPersonal;
 use App\Models\Registro;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithCustomCsvSettings;
-use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
-class VacacionesExport implements FromCollection, WithCustomCsvSettings, WithHeadingRow
+class VacacionesExport implements FromCollection, WithCustomCsvSettings
 {
     /**
     * @return \Illuminate\Support\Collection
@@ -22,9 +21,9 @@ class VacacionesExport implements FromCollection, WithCustomCsvSettings, WithHea
     }
 
     public function getCsvSettings(): array
-{
-    return [
-        'delimiter' => "|"
-    ];
-}
+    {
+        return [
+            'delimiter' => "|"
+        ];
+    }
 }
