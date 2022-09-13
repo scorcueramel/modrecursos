@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Auth;
 
+use App\Imports\RegistrosImport;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use App\Models\Registro;
@@ -145,5 +147,12 @@ class RegistroController extends Controller
         // $registro->estado = 0;
         // $registro->deleted_at = Carbon::now()->toDateTimeString();
         // $registro->update();
+    }
+
+    public function import(Request $request) 
+    {
+        Excel::import(new RegistrosImport, $request->file);
+        
+        return redirect()->back()->with('success', 'Archivo cargado correctamente!');
     }
 }

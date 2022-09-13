@@ -40,12 +40,20 @@ Vista General |
                                     </div>
                                     <div class="form-row my-4">
                                         <div class="col">
-                                            <button type="submit" class="btn btn-warning mb-2" onclick="validarNumericos();">Búscar <i class="fas fa-search"></i></button>
+                                            <button type="submit" class="btn btn-warning mb-2" onclick="validarNumericos();">Buscar <i class="fas fa-search"></i></button>
                                         </div>
                                     </div>
                                 </form>
+                                <div class="form-row">
+                                    <form action="{{ route('import') }}" method="POST" enctype="multipart/form-data">
+                                        @csrf
+                                        <input type="file" name="file" class="form-control">
+                                        <br>
+                                        <button class="btn btn-success">Carga masiva</button>
+                                    </form>
+                                </div>
                             </div>
-                        </div>
+                        </div><br>
                         <h4>Resultados de la Búsqueda</h4>
                         <!-- TOASTR -->
                         @if(session()->has('error'))
