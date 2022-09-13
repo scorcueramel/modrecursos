@@ -61,7 +61,7 @@ class RegistroController extends Controller
         $resp->uniorg_persona = $request->uniorg;
         $resp->estado_persona = $request->estado;
         if ($request->tpermiso == "SELECCIONAR") {
-            $msn = "No Elejiste un tipo de permiso, vuelve a intentarlo!";
+            $msn = "No Elegiste un tipo de permiso, vuelve a intentarlo!";
             return back()->with('error', $msn);
         } else {
             $resp->tipo_permiso_id = $request->tpermiso;
