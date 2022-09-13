@@ -15,7 +15,8 @@ class Registro extends Model
     						'fecha_cese_persona','estado_persona','tipo_permiso_id',
     						'concepto_id','fecha_inicio','fecha_fin','documento',
     						'comentario','anio_periodo','usuario_creador','usuario_editor','ip_usuario',
-    						'estado'];
+    						'estado'
+						];
 }
 
 
