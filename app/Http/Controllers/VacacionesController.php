@@ -27,7 +27,6 @@ class VacacionesController extends Controller
                     </td>';
         })
         ->addColumn('borrar',function ($row){
-            // return '<td><a href="desactivar/'.$row['id'].'" class="btn btn-danger btn-sm" id="eliminar">Borrar</a></td>';
             return '<td>
                         <button type="button" class="btn btn-danger btn-sm" data-id="'.$row['id'].'" id="borrar">Borrar</a>
                     </td>';

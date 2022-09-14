@@ -155,7 +155,7 @@ Vacaciones |
                         if(data.code == 1){
                             swal({
                                 title: 'Eliminado!',
-                                text: data.msn,
+                                text: "Se elimino el registro",
                                 icon: "success",
                                 showCancelButton: true,
                                 dangerMode: true,
