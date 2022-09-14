@@ -135,8 +135,6 @@ Licencias |
                                 title: 'Eliminado!',
                                 text: "Se elimino el registro",
                                 icon: "success",
-                                showCancelButton: true,
-                                dangerMode: true,
                             })
                             window.location.reload(true);
                         } else if (data.code == 0) {

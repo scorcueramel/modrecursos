@@ -157,17 +157,13 @@ Aislamientos |
                                 title: 'Eliminado!',
                                 text: "Se elimino el registro",
                                 icon: "success",
-                                showCancelButton: true,
-                                dangerMode: true,
                             })
                             window.location.reload(true);
                         } else if (data.code == 0) {
                             swal({
                                 title: 'Eliminado!',
                                 text: data.msn,
-                                icon: "error",
-                                showCancelButton: true,
-                                dangerMode: true,
+                                icon: "error"
                             })
                         }
                     }, 'json');
