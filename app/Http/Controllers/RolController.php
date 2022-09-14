@@ -9,17 +9,14 @@ use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Support\Facades\DB;
 
-use Illuminate\Validation\Validator;
-
-
 class RolController extends Controller
 {
     function __construct()
     {
-        $this->middleware('permission:ver-rols|crear-rols|editar-rols|borrar-rols', ['only'=>['index']]);
-        $this->middleware('permission:crear-rols', ['only'=>['create','store']]);
-        $this->middleware('permission:editar-rols', ['only'=>['edit','update']]);
-        $this->middleware('permission:borrar-rols', ['only'=>['destroy']]);
+        $this->middleware('permission:VER-ROLES|CREAR-ROLES|EDITAR-ROLES|BORRAR-ROLES', ['only'=>['index']]);
+        $this->middleware('permission:CREAR-ROLES', ['only'=>['create','store']]);
+        $this->middleware('permission:EDITAR-ROLES', ['only'=>['edit','update']]);
+        $this->middleware('permission:BORRAR-ROLES', ['only'=>['destroy']]);
     }
 
     public function index()

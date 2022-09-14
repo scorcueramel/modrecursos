@@ -12,14 +12,14 @@ Roles |
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body">
-                        @can('crear-rols')
+                        @can('CREAR-ROLES')
                         <a class="btn btn-info mb-4" href="{{ route('roles.create') }}"><i class="fas fa-cog"></i> Nuevo
                             rol</a>
                         @endcan
                         <table class="table table-striped mt-2" id="roles">
                             <thead class="bg-info">
                                 <th style="color: #fff">Rol</th>
-                                @can('editar-rols')
+                                @can('EDITAR-ROLES')
                                 <th style="color: #fff">Acciones</th>
                                 @endcan
                             </thead>
@@ -28,10 +28,10 @@ Roles |
                                 <tr>
                                     <td>{{ $role->name }}</td>
                                     <td>
-                                        @can('editar-rols')
+                                        @can('EDITAR-ROLES')
                                         <a class="btn btn-warning" href="{{ route('roles.edit', $role->id) }}"><i class="fas fa-edit"></i></a>
                                         @endcan
-                                        @can('borrar-rols')
+                                        @can('BORRAR-ROLES')
                                         <form action="{{ route('roles.destroy', $role->id) }}" method="POST" style="display:inline" class="frmDelete">
                                             @csrf
                                             @method('DELETE')
@@ -68,8 +68,7 @@ Roles |
                     confirm: "Si, Eliminar",
                 },
                 dangerMode: true,
-            })
-            .then((willDelete) => {
+            }).then((willDelete) => {
                 if (willDelete) {
                     this.submit();
                     swal("El registro se elimino de la base de datos", {
@@ -77,7 +76,7 @@ Roles |
                     });
                 }
             });
-    });
+        });
 </script>
 <script>
     $(document).ready(function() {

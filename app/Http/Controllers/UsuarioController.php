@@ -16,10 +16,10 @@ class UsuarioController extends Controller
 {
     function __construct()
     {
-        $this->middleware('permission:ver-users|crear-users|editar-users|borrar-users', ['only'=>['index']]);
-        $this->middleware('permission:crear-users', ['only'=>['create','store']]);
-        $this->middleware('permission:editar-users', ['only'=>['edit','update']]);
-        $this->middleware('permission:borrar-users', ['only'=>['destroy']]);
+        $this->middleware('permission:VER-USUARIOS|CREAR-USUARIOS|EDITAR-USUARIOS|BORRAR-USUARIOS', ['only'=>['index']]);
+        $this->middleware('permission:CREAR-USUARIOS', ['only'=>['create','store']]);
+        $this->middleware('permission:EDITAR-USUARIOS', ['only'=>['edit','update']]);
+        $this->middleware('permission:BORRAR-USUARIOS', ['only'=>['destroy']]);
     }
     /**
      * Display a listing of the resource.
@@ -107,7 +107,7 @@ class UsuarioController extends Controller
         ]);
 
         $input = $request->all();
-        
+
         if(!empty($input['password'])){
             $input['password'] = Hash::make($input['password']);
         }else{

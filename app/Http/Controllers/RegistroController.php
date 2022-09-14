@@ -48,7 +48,7 @@ class RegistroController extends Controller
             ->where('codigo_persona', '=', $codigo)
             ->whereDate('fecha_inicio', '<=', $ff)
             ->whereDate('fecha_fin', '>=', $fi)
-            ->where('registros.estado', '>',0)
+            ->where('registros.estado', '>', 0)
             ->get();
 
         $resp = new Registro();
@@ -94,12 +94,11 @@ class RegistroController extends Controller
         $resp->save();
 
         $per = DB::table('registros')
-            ->where('codigo_persona','=',$request->codigo)->get();
+            ->where('codigo_persona', '=', $request->codigo)->get();
 
         $diaPer = new DiasPersonal();
 
-        foreach ($per as $key => $value)
-        {
+        foreach ($per as $key => $value) {
             $diaPer->id_registro = $per[$key]->id;
             $diaPer->inicial = $request->diaspersonal;
             $diaPer->saldo = $request->diaspersonal;
@@ -109,15 +108,24 @@ class RegistroController extends Controller
         return redirect()->route('home')->with('success', $msn);
     }
 
-    public function desactivar($id)
+    public function desactivar(Request $request)
     {
-         $msn = "Se elimino el registro";
-//         $registro = Registro::find($id);
-//         $registro->usuario_creador = Auth::user()->name;
-//         $registro->estado = 0;
-//         $registro->deleted_at = Carbon::now()->toDateTimeString();
-//         $registro->update();
-         return redirect()->back()->with('success', $msn);
+
+        $msn = "Se elimino el registro, ya no lo podrás ver en la tabla";
+        $id_registro = $request->id;
+
+        $registro = Registro::find($id_registro);
+
+        if ($registro) {
+            $registro->usuario_editor = Auth::user()->name;
+            $registro->estado = 0;
+            $registro->deleted_at = Carbon::now()->toDateTimeString();
+            $registro->ip_usuario = request()->ip();
+            $registro->update();
+            return response()->json(['code' => 1, 'msn' => $msn]);
+        } else {
+            return response()->json(['code' => 0, 'msn' => 'No se elimino el registro']);
+        }
     }
 
     public function cargamasiva()
@@ -128,7 +136,6 @@ class RegistroController extends Controller
     public function import(Request $request)
     {
         Excel::import(new RegistrosImport, $request->file);
-
         return redirect()->back()->with('warning', 'Archivo cargado correctamente!');
     }
 }

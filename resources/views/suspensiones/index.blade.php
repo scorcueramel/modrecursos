@@ -33,17 +33,17 @@ Suspensiones |
                             <div class="col-md-12">
                                 <table class="table table-bordered table-hover mt-2" id="suspensiones">
                                     <thead class="bg-info">
-                                        <th style="color: #fff">COD</th>
-                                        <th style="color: #fff">DCUMENTO PERSONA</th>
+<!-- {{--                               <th style="color: #fff">COD</th>--}} -->
+                                        <th style="color: #fff">DCUMENTO IDENTIDAD</th>
                                         <th style="color: #fff">NOMBRES</th>
-                                        <th style="color: #fff">REG. LAB.</th>
-                                        <th style="color: #fff">UNI. ORG</th>
+<!-- {{--                               <th style="color: #fff">REG. LAB.</th>--}}
+{{--                                    <th style="color: #fff">UNI. ORG</th>--}} -->
                                         <th style="color: #fff">F. INICIO</th>
                                         <th style="color: #fff">F. FIN</th>
                                         <th style="color: #fff">DIAS</th>
                                         <th style="color: #fff">PERIODO</th>
-                                        <th style="color: #fff">DOC</th>
-                                        <th style="color: #fff">OPCIONES</th>
+                                        <th style="color: #fff">DOCUMENTO</th>
+                                        <th style="color: #fff" colspan="2" class="text-center">OPCIONES</th>
                                     </thead>
                                     <tbody></tbody>
                                 </table>
@@ -72,17 +72,18 @@ Suspensiones |
                 "aLengthMenu":[[5,10,15,-1],[5,10,15,"Todos"]],
                 "ajax":"{{route('tabla.suspensiones')}}",
                 "columns" : [
-                    {data:'codigo_persona'},
-                    {data:'documento_persona'},
-                    {data:'nombre_persona'},
-                    {data:'reglab_persona'},
-                    {data:'uniorg_persona'},
-                    {data:'fecha_inicio'},
-                    {data:'fecha_fin'},
-                    {data:'inicial'},
-                    {data:'anio_periodo'},
-                    {data:'documento'},
-                    {data:'detalles'}
+                    // {data:'codigo_persona'},
+                    {data: 'documento_persona'},
+                    {data: 'nombre_persona'},
+                    // {data:'reglab_persona'},
+                    // {data:'uniorg_persona'},
+                    {data: 'fecha_inicio'},
+                    {data: 'fecha_fin'},
+                    {data: 'inicial'},
+                    {data: 'anio_periodo'},
+                    {data: 'docsus'},
+                    {data: 'detalles'},
+                    {data: 'borrar'}
                 ],
                 "language": {
                     "lengthMenu": "Mostrar " +

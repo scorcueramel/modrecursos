@@ -14,7 +14,6 @@ class VacacionesController extends Controller
     {
         return view('vacaciones.index');
     }
-
     public function tablavacaciones(Request $request)
     {
         $tblvacaciones = Registro::join('dias_personals','registros.id','=','dias_personals.id_registro')
@@ -28,7 +27,10 @@ class VacacionesController extends Controller
                     </td>';
         })
         ->addColumn('borrar',function ($row){
-            return '<td><a href="desactivar/'.$row['id'].'" class="btn btn-danger btn-sm" id="borrar">Borrar</a></td>';
+            // return '<td><a href="desactivar/'.$row['id'].'" class="btn btn-danger btn-sm" id="eliminar">Borrar</a></td>';
+            return '<td>
+                        <button type="button" class="btn btn-danger btn-sm" data-id="'.$row['id'].'" id="borrar">Borrar</a>
+                    </td>';
         })
         ->addColumn('docsus',function ($row){
             $docsus = "";

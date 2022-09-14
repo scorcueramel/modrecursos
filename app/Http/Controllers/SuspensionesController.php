@@ -21,9 +21,24 @@ class SuspensionesController extends Controller
             ->where('tipo_permiso_id','=',5);
         return datatables()->of($tblsuspensiones)
         ->addColumn('detalles',function ($row){
-            return '<td><button type="button" class="btn btn-warning btn-sm" data-id="'.$row['id'].'" id="modalPendiente">Editar</button></td>';
+            return '<td>
+                        <a href="" class="btn btn-warning btn-sm">Editar</a>
+                    </td>';
         })
-        ->rawColumns(['detalles'])
+        ->addColumn('borrar',function ($row){
+            return '<td><a href="desactivar/'.$row['id'].'" class="btn btn-danger btn-sm" id="borrar">Borrar</a></td>';
+        })
+        ->addColumn('docsus',function ($row){
+            $docsus = "";
+            if($row['documento'] == "")
+            {
+                $docsus = "Sin Documento";
+            }else{
+                $docsus = $row['documento'];
+            }
+            return $docsus;
+        })
+        ->rawColumns(['detalles','borrar','docsus'])
         ->make(true);
     }
 

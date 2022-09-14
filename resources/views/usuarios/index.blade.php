@@ -14,7 +14,7 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
-                            @can('crear-usuarios')
+                            @can('CREAR-USUARIOS')
                                 <a class="btn btn-info mb-4" href="{{ route('usuarios.create') }}"><i
                                         class="fas fa-user-plus"></i>
                                     Nuevo usuario</a>
@@ -24,7 +24,7 @@
                                     <th style="color: #fff">Nombre completo</th>
                                     <th style="color: #fff">Correo electrónico</th>
                                     <th style="color: #fff">Rol</th>
-                                    @can('editar-usuarios')
+                                    @can('EDITAR-USUARIOS')
                                         <th style="color: #fff">Acciones</th>
                                     @endcan
                                 </thead>
@@ -42,11 +42,11 @@
                                                 @endif
                                             </td>
                                             <td>
-                                                @can('editar-usuarios')
+                                                @can('EDITAR-USUARIOS')
                                                     <a class="btn btn-warning" href="{{ route('usuarios.edit', $item->id) }}"><i
                                                             class="fas fa-user-edit"></i></a>
                                                 @endcan
-                                                @can('borrar-usuarios')
+                                                @can('BORRAR-USUARIOS')
                                                     <form action="{{ route('usuarios.destroy', $item->id) }}" method="POST"
                                                         style="display:inline" class="frmDelete">
                                                         @csrf

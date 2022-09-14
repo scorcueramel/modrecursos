@@ -34,11 +34,11 @@ Vacaciones |
                             <div class="col-md-12">
                                 <table class="table table-bordered table-hover mt-2" id="vacaciones">
                                     <thead class="bg-info">
-{{--                                        <th style="color: #fff">COD</th>--}}
+                                        <!-- {{--                                        <th style="color: #fff">COD</th>--}} -->
                                         <th style="color: #fff">DCUMENTO IDENTIDAD</th>
                                         <th style="color: #fff">NOMBRES</th>
-{{--                                        <th style="color: #fff">REG. LAB.</th>--}}
-{{--                                        <th style="color: #fff">UNI. ORG</th>--}}
+                                        <!-- {{--                                        <th style="color: #fff">REG. LAB.</th>--}}
+{{--                                        <th style="color: #fff">UNI. ORG</th>--}} -->
                                         <th style="color: #fff">F. INICIO</th>
                                         <th style="color: #fff">F. FIN</th>
                                         <th style="color: #fff">DIAS</th>
@@ -59,31 +59,55 @@ Vacaciones |
 @endsection
 @section('scripts')
 <script>
-    $(document).ready(function () {
+    $(document).ready(function() {
         $('#vacaciones').DataTable({
             proccesing: true,
             info: true,
-            "order": [[0, "desc"]],
+            "order": [
+                [0, "desc"]
+            ],
             responsive: true,
             autoWidth: false,
             processing: true,
             info: true,
             "pageLength": 5,
-            "aLengthMenu": [[5, 10, 15, -1], [5, 10, 15, "Todos"]],
+            "aLengthMenu": [
+                [5, 10, 15, -1],
+                [5, 10, 15, "Todos"]
+            ],
             "ajax": "{{route('tabla.vacaciones')}}",
             "columns": [
                 // {data:'codigo_persona'},
-                {data: 'documento_persona'},
-                {data: 'nombre_persona'},
+                {
+                    data: 'documento_persona'
+                },
+                {
+                    data: 'nombre_persona'
+                },
                 // {data:'reglab_persona'},
                 // {data:'uniorg_persona'},
-                {data: 'fecha_inicio'},
-                {data: 'fecha_fin'},
-                {data: 'inicial'},
-                {data: 'anio_periodo'},
-                {data: 'docsus'},
-                {data: 'detalles'},
-                {data: 'borrar'}
+                {
+                    data: 'fecha_inicio'
+                },
+                {
+                    data: 'fecha_fin'
+                },
+                {
+                    data: 'inicial'
+                },
+                {
+                    data: 'anio_periodo'
+                },
+                {
+                    data: 'docsus'
+                },
+                {
+                    data: 'detalles'
+                },
+                {
+                    data: 'borrar'
+                }
+
             ],
             "language": {
                 "lengthMenu": "Mostrar " +
@@ -107,6 +131,48 @@ Vacaciones |
                 }
             },
         });
+    });
+
+    $(document).on('click', '#borrar', function() {
+        var id = $(this).data('id');
+        // alert(id);
+        var url = '<?= route('desactivar.registro') ?>';
+        swal({
+                title: 'Seguro de eliminar este Registro?',
+                text: "Si eliminas este registro no podrás recuperarlo",
+                icon: "warning",
+                showCancelButton: true,
+                buttons: true,
+                buttons: {
+                    cancel: 'No, eliminar',
+                    confirm: "Si, Eliminar",
+                },
+                dangerMode: true,
+            })
+            .then((result) => {
+                if (result) {
+                    $.get(url, {id: id},function(data){
+                        if(data.code == 1){
+                            swal({
+                                title: 'Eliminado!',
+                                text: data.msn,
+                                icon: "success",
+                                showCancelButton: true,
+                                dangerMode: true,
+                            })
+                            window.location.reload(true);
+                        }else if(data.code == 0){
+                            swal({
+                                title: 'Eliminado!',
+                                text: data.msn,
+                                icon: "error",
+                                showCancelButton: true,
+                                dangerMode: true,
+                            })
+                        }
+                    }, 'json');
+                }
+            });
     });
 </script>
 @endsection

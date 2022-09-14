@@ -18,8 +18,3 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('cuarteles', function(){
-    return datatables()
-    ->eloquent(App\Models\Cuarteles::query())
-    ->toJson();
-});

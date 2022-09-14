@@ -69,5 +69,6 @@ Route::group(['middleware'=>['auth']],function () {
     Route::get('cargamasiva', [RegistroController::class, 'cargamasiva'])->name('cargamasiva');
     Route::post('import', [RegistroController::class, 'import'])->name('import');
 
-    Route::get('desactivar/{id}', [RegistroController::class, 'desactivar'])->name('desactivar.registro');
+    // Route::get('desactivar/{id}', [RegistroController::class, 'desactivar'])->name('desactivar.registro');
+    Route::get('desactivar',[RegistroController::class, 'desactivar'])->name('desactivar.registro');
 });
