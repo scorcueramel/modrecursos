@@ -112,11 +112,11 @@ class RegistroController extends Controller
     public function desactivar($id)
     {
          $msn = "Se elimino el registro";
-         $registro = Registro::find($id);
-         $registro->usuario_creador = Auth::user()->name;
-         $registro->estado = 0;
-         $registro->deleted_at = Carbon::now()->toDateTimeString();
-         $registro->update();
+//         $registro = Registro::find($id);
+//         $registro->usuario_creador = Auth::user()->name;
+//         $registro->estado = 0;
+//         $registro->deleted_at = Carbon::now()->toDateTimeString();
+//         $registro->update();
          return redirect()->back()->with('success', $msn);
     }
 

@@ -28,7 +28,7 @@ class VacacionesController extends Controller
                     </td>';
         })
         ->addColumn('borrar',function ($row){
-            return '<td><a href="desactivar/'.$row['id'].'" class="btn btn-danger btn-sm frmDelete" >Borrar</a></td>';
+            return '<td><a href="desactivar/'.$row['id'].'" class="btn btn-danger btn-sm" id="borrar">Borrar</a></td>';
         })
         ->addColumn('docsus',function ($row){
             $docsus = "";

@@ -107,30 +107,6 @@ Vacaciones |
                 }
             },
         });
-
-        $('.frmDelete').on('click',function(e) {
-            e.preventDefault();
-            swal({
-                title: 'Seguro de eliminar este rol?',
-                text: "Si eliminas este registro no podrás recuperarlo",
-                icon: "warning",
-                showCancelButton: true,
-                buttons: true,
-                buttons: {
-                    cancel: 'No, eliminar',
-                    confirm: "Si, Eliminar",
-                },
-                dangerMode: true,
-            })
-                .then((willDelete) => {
-                    if (willDelete) {
-                        this.submit();
-                        swal("El registro se elimino de la base de datos", {
-                            icon: "success",
-                        });
-                    }
-                });
-        });
     });
 </script>
 @endsection
