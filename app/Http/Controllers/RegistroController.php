@@ -36,7 +36,6 @@ class RegistroController extends Controller
 
     public function store(Request $request)
     {
-
         $msn = "";
         $codigo = $request->codigo;
         $fi = $request->fecinicio;
@@ -49,6 +48,7 @@ class RegistroController extends Controller
             ->where('codigo_persona', '=', $codigo)
             ->whereDate('fecha_inicio', '<=', $ff)
             ->whereDate('fecha_fin', '>=', $fi)
+            ->where('registros.estado', '>',0)
             ->get();
 
         $resp = new Registro();
@@ -73,6 +73,7 @@ class RegistroController extends Controller
                     $persona[$key]->codigo_persona == $codigo
                     && $persona[$key]->fecha_inicio <= $ff
                     && $persona[$key]->fecha_fin >= $fi
+                    && $persona[$key]->estado != 0
                 ) {
                     $msn = "Actualmente cuenta con " . $persona[$key]->descripcion . " en el rango de fecha seleccionado";
                     return back()->with('error', $msn);
@@ -104,56 +105,30 @@ class RegistroController extends Controller
             $diaPer->saldo = $request->diaspersonal;
             $diaPer->save();
         }
-
         $msn = 'Se generó el registro exitosamente';
         return redirect()->route('home')->with('success', $msn);
     }
 
-    public function desactivar($codigo)
+    public function desactivar($id)
     {
-        $hoy = Carbon::now()->format('Y-m-d');
-
-        $persona = DB::table('registros')->where('codigo_persona','=',$codigo)->get();
-
-        foreach ($persona as $key => $value) {
-            print_r($persona[$key]->nombre_persona);
-        }
-        // if($hoy <= $ff && $hoy >= $fi)
-        // {
-        //     dd("En curso");
-        // }else
-        // {
-        //     dd("Puede Editar");
-        // }
-
-
-        // $persona = DB::table('registros')
-        //     ->join('tipo_permisos', function ($join) {
-        //         $join->on('tipo_permisos.id', '=', 'registros.tipo_permiso_id');
-        //     })
-        //     ->where('codigo_persona', '=', $codigo)
-        //     ->whereDate('fecha_inicio', '<=', $ff)
-        //     ->whereDate('fecha_fin', '>=', $fi)
-        //     ->get();
-
-        // foreach ($persona as $key => $value) {
-        //     if($persona[$key]->codigo_persona == $codigo
-        //         && $persona[$key]->fecha_inicio == $hoy)
-        //     {
-        //         dd('En curso');
-        //     }
-        // }
-        // $registro = Registro::find($id);
-        // $registro->comentario = "ELIMINADO";
-        // $registro->estado = 0;
-        // $registro->deleted_at = Carbon::now()->toDateTimeString();
-        // $registro->update();
+         $msn = "Se elimino el registro";
+         $registro = Registro::find($id);
+         $registro->usuario_creador = Auth::user()->name;
+         $registro->estado = 0;
+         $registro->deleted_at = Carbon::now()->toDateTimeString();
+         $registro->update();
+         return redirect()->back()->with('success', $msn);
     }
 
-    public function import(Request $request) 
+    public function cargamasiva()
+    {
+        return view('cargamasiva');
+    }
+
+    public function import(Request $request)
     {
         Excel::import(new RegistrosImport, $request->file);
-        
-        return redirect()->back()->with('success', 'Archivo cargado correctamente!');
+
+        return redirect()->back()->with('warning', 'Archivo cargado correctamente!');
     }
 }

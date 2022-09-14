@@ -88,7 +88,7 @@ Nuevo Registro |
                                 </div>
                                 <div class="col-md-2 mb-3">
                                     <label for="anioperiodo">Año Periodo</label>
-                                    <input type="text" class="form-control" name="anioperiodo" id="anioperiodo">
+                                    <input type="text" class="form-control" name="anioperiodo" id="anioperiodo" required>
                                 </div>
                                 <div class="col-md-5 mb-3">
                                     <label for="observaciones">Observaciones</label>
@@ -118,7 +118,7 @@ Nuevo Registro |
     $('document').ready(() => {
 
         //Calculo de días automatico
-        var f1,f2,r1,r2,t, resp;
+        var f1,f2,r1,r2,t,tf,resp;
         const anio = 1000*60*60*24;
         $('#tpermiso').focus();
 
@@ -131,8 +131,9 @@ Nuevo Registro |
             f2 = new Date($('#fecfin').val());
             r2 = f2.getTime();
             t = r2-r1;
-            resp = Math.floor(t/anio);
-            console.log(Math.floor(t/anio));
+            tf = Math.floor(t/anio);
+            resp = tf+1;
+            console.log(resp);
             $('#diaspersonal').val(resp);
         });
 

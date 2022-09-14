@@ -9,5 +9,5 @@ class DiasPersonal extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['inicial','saldo','total'];
+    protected $fillable = ['id_registro','inicial','saldo','total'];
 }

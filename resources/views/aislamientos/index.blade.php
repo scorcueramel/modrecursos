@@ -34,12 +34,15 @@
                                     <table class="table table-bordered table-hover mt-2" id="aislamientos">
                                         <thead class="bg-info">
                                             <th style="color: #fff">COD</th>
-                                            <th style="color: #fff">DNI</th>
+                                            <th style="color: #fff">DCUMENTO PERSONA</th>
                                             <th style="color: #fff">NOMBRES</th>
                                             <th style="color: #fff">REG. LAB.</th>
                                             <th style="color: #fff">UNI. ORG</th>
                                             <th style="color: #fff">F. INICIO</th>
                                             <th style="color: #fff">F. FIN</th>
+                                            <th style="color: #fff">DIAS</th>
+                                            <th style="color: #fff">PERIODO</th>
+                                            <th style="color: #fff">DOCUMENTO</th>
                                             <th style="color: #fff">OPCIONES</th>
                                         </thead>
                                         <tbody></tbody>
@@ -76,6 +79,9 @@
                     {data:'uniorg_persona'},
                     {data:'fecha_inicio'},
                     {data:'fecha_fin'},
+                    {data:'inicial'},
+                    {data:'anio_periodo'},
+                    {data:'documento'},
                     {data:'detalles'}
                 ],
                 "language": {

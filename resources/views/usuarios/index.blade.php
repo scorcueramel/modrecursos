@@ -69,7 +69,7 @@
 @endsection
 @section('scripts')
     <script>
-        $('.frmDelete').submit(function(e) {            
+        $('.frmDelete').submit(function(e) {
             e.preventDefault();
             swal({
                     title: 'Seguro de eliminar al usuario?',

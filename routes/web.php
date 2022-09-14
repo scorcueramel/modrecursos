@@ -65,5 +65,9 @@ Route::group(['middleware'=>['auth']],function () {
     Route::get('descansosmedicos/export/', [DescansosMedicosController::class, 'export'])->name('descansosmedicos.export');
     Route::get('licencias/export/', [LicenciasController::class, 'export'])->name('licencias.export');
     Route::get('aislamientos/export/', [AislamientosController::class, 'export'])->name('aislamientos.export');
+
+    Route::get('cargamasiva', [RegistroController::class, 'cargamasiva'])->name('cargamasiva');
     Route::post('import', [RegistroController::class, 'import'])->name('import');
+
+    Route::get('desactivar/{id}', [RegistroController::class, 'desactivar'])->name('desactivar.registro');
 });
