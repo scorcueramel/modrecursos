@@ -1,11 +1,11 @@
 @extends('layouts.app')
 @section('title')
-    Nuevo Registro |
+    Editar Registro |
 @endsection
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h3 class="page__heading">Nuevo Registro</h3>
+            <h3 class="page__heading">Editar Registro</h3>
         </div>
         <div class="section-body">
             <div class="row">
@@ -18,36 +18,36 @@
                             @elseif (session()->has('success'))
                                 {{ session()->get('success') }}
                             @endif
-                            <form action="{{route('store')}}" method="POST">
+                            <form action="#" method="POST">
                                 @csrf
-                                @foreach ( $resp as $r)
+                                @foreach ( $registro as $r)
                                     <div class="form-row">
                                         <div class="col-md-2 mb-6">
                                             <label for="codigo">Código</label>
                                             <input type="text" class="form-control" id="codigo"
-                                                   value="{{ $r['CODIGO'] }}" name="codigo" required readonly>
+                                                   value="{{ $r->codigo_persona }}" name="codigo" required readonly>
                                         </div>
-                                        <div class="col-md-2 mb-6" style="display: none;">
-                                            <label for="tipo_documento_persona">Tipo Documento</label>
-                                            <input type="text" class="form-control" id="tipo_documento_persona"
-                                                   value="{{ $r['DOC_CODIGO'] }}" name="tipo_documento_persona" required
-                                                   readonly>
-                                        </div>
+{{--                                        <div class="col-md-2 mb-6" style="display: none;">--}}
+{{--                                            <label for="tipo_documento_persona">Tipo Documento</label>--}}
+{{--                                            <input type="text" class="form-control" id="tipo_documento_persona"--}}
+{{--                                                   value="{{ $r->documento_persona }}" name="tipo_documento_persona" required--}}
+{{--                                                   readonly>--}}
+{{--                                        </div>--}}
                                         <div class="col-md-2 mb-6">
                                             <label for="documento_persona">Documento</label>
                                             <input type="text" class="form-control" id="documento_persona"
-                                                   value="{{ $r['DOC_IDENTIDAD'] }}" name="documento_persona" required
+                                                   value="{{ $r->documento_persona }}" name="documento_persona" required
                                                    readonly>
                                         </div>
                                         <div class="col-md-6 mb-6">
                                             <label for="nombres">Nombres y Apellidos</label>
                                             <input type="text" class="form-control" id="nombres"
-                                                   value="{{ $r['NOMBRE_COMPLETO'] }}" name="nombres" required readonly>
+                                                   value="{{ $r->nombre_persona }}" name="nombres" required readonly>
                                         </div>
                                         <div class="col-md-2 mb-3">
                                             <label for="reglaboral">Regimen Laboral</label>
                                             <input type="text" class="form-control" id="reglaboral"
-                                                   value="{{ $r['REGIMEN_LABORAL'] }}" name="reglaboral" required
+                                                   value="{{ $r->reglab_persona }}" name="reglaboral" required
                                                    readonly>
                                         </div>
                                     </div>
@@ -55,24 +55,24 @@
                                         <div class="col-md-6 mb-6">
                                             <label for="uniorg">Unidad Orgánica</label>
                                             <input type="text" class="form-control" id="uniorg"
-                                                   value="{{ $r['CENTROCOSTO'] }}" name="uniorg" required readonly>
+                                                   value="{{ $r->uniorg_persona }}" name="uniorg" required readonly>
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label for="ingreso">Ingreso Labores</label>
                                             <input type="text" class="form-control" id="ingreso"
-                                                   value="{{ $r['FEC_INGRESO'] }}" name="ingreso" required readonly>
+                                                   value="{{ $r->fecha_inicio_persona }}" name="ingreso" required readonly>
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label for="estado">Estado</label>
                                             <input type="text" class="form-control" id="estado"
-                                                   value="{{ $r['ESTADO'] }}" name="estado" required readonly>
+                                                   value="{{ $r->estado_persona }}" name="estado" required readonly>
                                         </div>
                                     </div>
                                     <div class="form-row">
                                         <div class="col-md-3 mb-3">
                                             <label for="tpermiso">Tipo de Permiso</label>
                                             <select class="form-control" name="tpermiso" id="tpermiso">
-                                                <option selected value="">SELECCIONAR</option>
+                                                <option selected value="{{ $r->tipo_permiso_id }}">{{ $r->tipo_permiso_id}}</option>
                                             </select>
                                         </div>
                                         <div class="col-md-5 mb-3">
@@ -82,12 +82,12 @@
                                         </div>
                                         <div class="col-md-2 mb-3">
                                             <label for="fecinicio">Inicio Permiso</label>
-                                            <input type="date" class="form-control" name="fecinicio" id="fecinicio"
+                                            <input type="date" class="form-control" name="fecinicio" id="fecinicio" value="{{ $r->fecha_inicio }}"
                                                    required>
                                         </div>
                                         <div class="col-md-2 mb-3">
                                             <label for="fecfin">Fin Permiso</label>
-                                            <input type="date" class="form-control" name="fecfin" id="fecfin" required>
+                                            <input type="date" class="form-control" name="fecfin" id="fecfin" value="{{ $r->fecha_fin }}" required>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -98,24 +98,23 @@
                                         </div>
                                         <div class="col-md-2 mb-3">
                                             <label for="anioperiodo">Año Periodo</label>
-                                            <input type="text" class="form-control" name="anioperiodo" id="anioperiodo"
-                                                   required>
+                                            <input type="text" class="form-control" name="anioperiodo" id="anioperiodo" value="{{ $r->anio_periodo }}" required>
                                         </div>
                                         <div class="col-md-5 mb-3">
                                             <label for="observaciones">Observaciones</label>
                                             <input type="text" class="form-control" name="observaciones"
-                                                   id="observaciones">
+                                                   id="observaciones" value="{{ $r->comentario }}">
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label for="documento_ref">Documento Sustentario</label>
                                             <input type="text" class="form-control" name="documento_ref"
-                                                   id="documento_ref">
+                                                   id="documento_ref" value="{{ $r->documento }}">
                                         </div>
                                     </div>
                                     <div class="form-row">
                                         <div class="col-md-12 d-flex justify-content-end">
                                             <button class="btn btn-primary mt-2" type="submit"><i
-                                                    class="fas fa-save"></i> Crear Registro
+                                                    class="fas fa-save"></i> Editar Registro
                                             </button>
                                         </div>
                                     </div>

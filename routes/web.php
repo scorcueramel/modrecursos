@@ -14,6 +14,7 @@ use App\Http\Controllers\AislamientosController;
 use App\Http\Controllers\RegistroController;
 use App\Http\Controllers\SuspensionesController;
 use App\Http\Controllers\TestController;
+use App\Http\Controllers\EditarController;
 
 /*
 |--------------------------------------------------------------------------
@@ -56,7 +57,7 @@ Route::group(['middleware'=>['auth']],function () {
     Route::get('/suspensiones',[SuspensionesController::class, 'index'])->name('suspensiones');
     Route::get('tablasuspensiones',[SuspensionesController::class,'tablasuspensiones'])->name('tabla.suspensiones');
 
-    Route::get('detalle/{cod}/crear',[RegistroController::class, 'edit'])->name('registro.edit');
+    Route::get('detalle/{cod}/crear',[RegistroController::class, 'registrar'])->name('registro.edit');
     Route::post('store', [RegistroController::class, 'store'])->name('store');
     Route::get('detalle/conceptos', [RegistroController::class, 'conceptos'])->name('conceptos.todos');
     Route::get('delete/{cod}', [RegistroController::class, 'desactivar'])->name('registro.delete');
@@ -71,4 +72,6 @@ Route::group(['middleware'=>['auth']],function () {
     Route::post('import', [RegistroController::class, 'import'])->name('import');
 
     Route::get('desactivar',[RegistroController::class, 'desactivar'])->name('desactivar.registro');
+
+    Route::get('registro/{id}/editar', [EditarController::class, 'edit'])->name('registro.editar');
 });

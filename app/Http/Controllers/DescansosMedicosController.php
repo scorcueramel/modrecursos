@@ -24,8 +24,8 @@ class DescansosMedicosController extends Controller
             if (auth()->user()->can('EDITAR-DESCANSOS-MEDICOS'))
             {
                 return '<td>
-                            <a href="" class="btn btn-warning btn-sm">Editar</a>
-                        </td>';
+                            <a href="registro/'.$row['id'].'/editar" class="btn btn-warning btn-sm">Editar</a>
+                        </td>';;
             }
         })
         ->addColumn('borrar',function ($row){
