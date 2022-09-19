@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Arr;
@@ -11,6 +10,8 @@ use Illuminate\Support\Arr;
 //modelos para los roles
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\DB;
+
+use Auth;
 
 class UsuarioController extends Controller
 {
@@ -21,34 +22,19 @@ class UsuarioController extends Controller
         $this->middleware('permission:EDITAR-USUARIOS', ['only'=>['edit','update']]);
         $this->middleware('permission:BORRAR-USUARIOS', ['only'=>['destroy']]);
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         $usuarios = User::all();
         return view('usuarios.index', compact('usuarios'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         $roles = Role::pluck('name','name')->all();
         return view('usuarios.crear', compact('roles'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $this->validate($request, [
@@ -65,23 +51,11 @@ class UsuarioController extends Controller
         return redirect()->route('usuarios.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $user = User::find($id);
@@ -90,13 +64,6 @@ class UsuarioController extends Controller
         return view('usuarios.editar', compact('user','roles','userRol'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         $this->validate($request,[
@@ -122,12 +89,6 @@ class UsuarioController extends Controller
         return redirect()->route('usuarios.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         User::find($id)->delete();

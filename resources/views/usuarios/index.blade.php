@@ -36,7 +36,7 @@
                                             <td>
                                                 @if (!empty($item->getRoleNames()))
                                                     @foreach ($item->getRoleNames() as $rolName)
-                                                        <h5><span class="badge badge-info">{{ $rolName }}</span>
+                                                        <h5><span class="badge badge-primary">{{ $rolName }}</span>
                                                         </h5>
                                                     @endforeach
                                                 @endif

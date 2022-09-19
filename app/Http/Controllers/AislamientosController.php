@@ -21,14 +21,20 @@ class AislamientosController extends Controller
             ->where('tipo_permiso_id','=',4);
         return datatables()->of($tblaislamientos)
         ->addColumn('detalles',function ($row){
-            return '<td>
-                        <a href="" class="btn btn-warning btn-sm">Editar</a>
-                    </td>';
+            if (auth()->user()->can('EDITAR-AISLAMIENTOS'))
+            {
+                return '<td>
+                            <a href="" class="btn btn-warning btn-sm">Editar</a>
+                        </td>';
+            }
         })
         ->addColumn('borrar',function ($row){
-            return '<td>
-                        <button type="button" class="btn btn-danger btn-sm" data-id="'.$row['id'].'" id="borrar">Borrar</a>
-                    </td>';
+            if (auth()->user()->can('BORRAR-AISLAMIENTOS'))
+            {
+                return '<td>
+                            <button type="button" class="btn btn-danger btn-sm" data-id="'.$row['id'].'" id="borrar">Borrar</a>
+                        </td>';
+            }
         })
         ->addColumn('docsus',function ($row){
             $docsus = "";
