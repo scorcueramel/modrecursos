@@ -142,6 +142,6 @@ class RegistroController extends Controller
     public function import(Request $request)
     {
         Excel::import(new RegistrosImport, $request->file);
-        return redirect()->back()->with('warning', 'Archivo cargado correctamente!');
+        return redirect()->back()->with('success', 'Archivo cargado correctamente!');
     }
 }
