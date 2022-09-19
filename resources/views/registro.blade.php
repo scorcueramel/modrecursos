@@ -143,36 +143,35 @@
                             // console.log(data.conceptos[2][i]['descripcion']);
                             // console.log(data.conceptos[3][i]['descripcion']);
                             $('#tpermiso').append('<option value="' + data.conceptos[3][i]['id'] + '">' + data.conceptos[3][i]['descripcion'] + '</option>');
-
                         }
                         if (data.conceptos[1][0] == 'Técnico Aislamientos')
                         {
                             // console.log(data.conceptos[3][3]['descripcion']);
-                            $('#tpermiso').append('<option value="' + data.conceptos[3][3]['id'] + '">' + data.conceptos[3][3]['descripcion'] + '</option>');
+                            $('#tpermiso').append('<option value="' + data.conceptos[3][i]['id'] + '">' + data.conceptos[3][i]['descripcion'] + '</option>');
                             break;
                         }
                         if (data.conceptos[1][0] == 'Técnico Descansos Médicos')
                         {
                             // console.log(data.conceptos[3][1]['descripcion']);
-                            $('#tpermiso').append('<option value="' + data.conceptos[3][1]['id'] + '">' + data.conceptos[3][1]['descripcion'] + '</option>');
+                            $('#tpermiso').append('<option value="' + data.conceptos[3][i]['id'] + '">' + data.conceptos[3][i]['descripcion'] + '</option>');
                             break;
                         }
                         if (data.conceptos[1][0] == 'Técnico Licencias')
                         {
                             // console.log(data.conceptos[3][2]['descripcion']);
-                            $('#tpermiso').append('<option value="' + data.conceptos[3][2]['id'] + '">' + data.conceptos[3][2]['descripcion'] + '</option>');
+                            $('#tpermiso').append('<option value="' + data.conceptos[3][i]['id'] + '">' + data.conceptos[3][i]['descripcion'] + '</option>');
                             break;
                         }
                         if (data.conceptos[1][0] == 'Técnico Suspensiones')
                         {
-                            // console.log(data.conceptos[3][4]['descripcion']);
-                            $('#tpermiso').append('<option value="' + data.conceptos[3][4]['id'] + '">' + data.conceptos[3][4]['descripcion'] + '</option>');
+                            console.log(data.conceptos[3][4]['descripcion']);
+                            $('#tpermiso').append('<option value="' + data.conceptos[3][i]['id'] + '">' + data.conceptos[3][i]['descripcion'] + '</option>');
                             break;
                         }
                         if (data.conceptos[1][0] == 'Técnico Vacaciones')
                         {
                             // console.log(data.conceptos[3][0]['descripcion']);
-                            $('#tpermiso').append('<option value="' + data.conceptos[3][0]['id'] + '">' + data.conceptos[3][0]['descripcion'] + '</option>');
+                            $('#tpermiso').append('<option value="' + data.conceptos[3][i]['id'] + '">' + data.conceptos[3][i]['descripcion'] + '</option>');
                             break;
                         }
                     }
