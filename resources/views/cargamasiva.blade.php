@@ -18,6 +18,12 @@
                                     <h4>Subir el Archivo</h4>
                                 </div>
                             </div>
+                            <!-- TOASTR -->
+                            @if(session()->has('error'))
+                                {{ session()->get('error') }}
+                            @elseif (session()->has('success'))
+                                {{ session()->get('success') }}
+                            @endif
                             <form action="{{ route('import') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-row">

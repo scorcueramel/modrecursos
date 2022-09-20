@@ -9,6 +9,7 @@ use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\Importable;
 use Maatwebsite\Excel\Concerns\WithStartRow;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class RegistrosImport implements ToModel, WithStartRow
 {
@@ -32,8 +33,6 @@ class RegistrosImport implements ToModel, WithStartRow
         ->where('deleted_at', '=', null)
         ->get();
 
-        dd($query);
-
         if (count($query) > 0) {
             foreach ($query as $key => $value) {
                 if (
@@ -42,8 +41,7 @@ class RegistrosImport implements ToModel, WithStartRow
                     && $query[$key]->fecha_fin >= $fi
                     && $query[$key]->estado != 0
                 ) {
-                    $msn = "Actualmente cuenta con " . $query[$key]->descripcion . " en el rango de fecha seleccionado";
-                    return back()->with('error', $msn);
+                    Session::flash('error', 'ARCHIVO CON ERRORES');
                 }
             }
         }   else {
