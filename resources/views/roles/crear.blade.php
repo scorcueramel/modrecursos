@@ -5,7 +5,7 @@ Crear Rol |
 @section('content')
 <section class="section">
     <div class="section-header">
-        <h3 class="page__heading">Crear rol</h3>
+        <h3 class="page__heading">Crear Nuevo Rol</h3>
     </div>
     <div class="section-body">
         <div class="row">
@@ -24,7 +24,13 @@ Crear Rol |
                             </button>
                         </div>
                         @endif
-
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-5">
+                                <div class="form-group">
+                                    <h6>ASIGNAR PERMISOS PARA EL ROL</h6>
+                                </div>
+                            </div>
+                        </div>
                         {!! Form::open(['route' => 'roles.store', 'method' => 'POST']) !!}
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-5">
@@ -35,15 +41,15 @@ Crear Rol |
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-xs-12 col-sm-12 col-md-5 mb-4">
-                                <label>Asignar Permisos al Rol </label>
-                            </div>
-                            <div class="col-xs-12 col-sm-12 col-md-12">
-                                @foreach ($permission as $item)
-                                <label>{!! Form::checkbox('permission[]', $item->id, false, ['class' => 'name']) !!}
-                                    &nbsp;{{$item->name}}
-                                </label>&nbsp;&nbsp;&nbsp;
-                                @endforeach
+                            <div class="col-xs-12 col-sm-12 col-md-7">
+                                <div class="form-group">
+                                    @foreach ($permission as $item)
+                                        <label>{!! Form::checkbox('permission[]', $item->id, false, ['class' => 'name']) !!}
+                                            &nbsp;{{$item->name}}
+                                        </label>&nbsp;&nbsp;&nbsp;
+                                        <br>
+                                    @endforeach
+                                </div>
                             </div>
                         </div>
                         <div class="row">

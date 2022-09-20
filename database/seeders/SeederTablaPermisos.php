@@ -28,10 +28,30 @@ class SeederTablaPermisos extends Seeder
             'EDITAR-USUARIOS',
             'BORRAR-USUARIOS',
 
-            'VER-REGISTROS',
-            'CREAR-REGISTROS',
-            'EDITAR-REGISTROS',
-            'BORRAR-REGISTROS',
+            'VER-VACACIONES',
+            'CREAR-VACACIONES',
+            'EDITAR-VACACIONES',
+            'BORRAR-VACACIONES',
+
+            'VER-DESCANSOS-MEDICOS',
+            'CREAR-DESCANSOS-MEDICOS',
+            'EDITAR-DESCANSOS-MEDICOS',
+            'BORRAR-DESCANSOS-MEDICOS',
+
+            'VER-LICENCIAS',
+            'CREAR-LICENCIAS',
+            'EDITAR-LICENCIAS',
+            'BORRAR-LICENCIAS',
+
+            'VER-AISLAMIENTOS',
+            'CREAR-AISLAMIENTOS',
+            'EDITAR-AISLAMIENTOS',
+            'BORRAR-AISLAMIENTOS',
+
+            'VER-SUSPENSIONES',
+            'CREAR-SUSPENSIONES',
+            'EDITAR-SUSPENSIONES',
+            'BORRAR-SUSPENSIONES',
         ];
         foreach($permisos as $permiso){
             Permission::create(['name'=>$permiso]);

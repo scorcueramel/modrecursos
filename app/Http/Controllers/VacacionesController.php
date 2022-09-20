@@ -6,7 +6,6 @@ use App\Exports\VacacionesExport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Models\Registro;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class VacacionesController extends Controller
 {
@@ -14,6 +13,7 @@ class VacacionesController extends Controller
     {
         return view('vacaciones.index');
     }
+
     public function tablavacaciones(Request $request)
     {
         $tblvacaciones = Registro::join('dias_personals','registros.id','=','dias_personals.id_registro')
@@ -22,14 +22,20 @@ class VacacionesController extends Controller
 
         return datatables()->of($tblvacaciones)
         ->addColumn('detalles',function ($row){
-            return '<td>
-                        <a href="" class="btn btn-warning btn-sm">Editar</a>
-                    </td>';
+            if (auth()->user()->can('EDITAR-VACACIONES'))
+            {
+                return '<td>
+                            <a href="registro/'.$row['id'].'/editar" class="btn btn-warning btn-sm">Editar</a>
+                        </td>';
+            }
         })
         ->addColumn('borrar',function ($row){
-            return '<td>
-                        <button type="button" class="btn btn-danger btn-sm" data-id="'.$row['id'].'" id="borrar">Borrar</a>
-                    </td>';
+            if (auth()->user()->can('BORRAR-VACACIONES'))
+            {
+                return '<td>
+                            <button type="button" class="btn btn-danger btn-sm" data-id="'.$row['id'].'" id="borrar">Borrar</a>
+                        </td>';
+            }
         })
         ->addColumn('docsus',function ($row){
             $docsus = "";

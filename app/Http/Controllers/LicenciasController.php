@@ -21,14 +21,20 @@ class LicenciasController extends Controller
             ->where('tipo_permiso_id','=',3);
         return datatables()->of($tbllicencias)
         ->addColumn('detalles',function ($row){
-            return '<td>
-                        <a href="" class="btn btn-warning btn-sm">Editar</a>
-                    </td>';
+            if (auth()->user()->can('EDITAR-LICENCIAS'))
+            {
+                return '<td>
+                            <a href="registro/'.$row['id'].'/editar" class="btn btn-warning btn-sm">Editar</a>
+                        </td>';
+            }
         })
         ->addColumn('borrar',function ($row){
-            return '<td>
+            if (auth()->user()->can('BORRAR-LICENCIAS'))
+            {
+                return '<td>
                         <button type="button" class="btn btn-danger btn-sm" data-id="'.$row['id'].'" id="borrar">Borrar</a>
                     </td>';
+            }
         })
         ->addColumn('docsus',function ($row){
             $docsus = "";

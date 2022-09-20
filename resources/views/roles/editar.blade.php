@@ -5,7 +5,7 @@
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h3 class="page__heading">Editar rol</h3>
+            <h3 class="page__heading">Editar el Rol</h3>
         </div>
         <div class="section-body">
             <div class="row">
@@ -13,17 +13,24 @@
                     <div class="card">
                         <div class="card-body">
                             {{-- Alerta validacion --}}
-                            @if ($errors->any())                                                
+                            @if ($errors->any())
                                 <div class="alert alert-dark alert-dismissible fade show" role="alert">
-                                <strong>¡Revise los campos!</strong>                        
-                                    @foreach ($errors->all() as $error)                                    
+                                <strong>¡Revise los campos!</strong>
+                                    @foreach ($errors->all() as $error)
                                         <span class="badge badge-danger">{{ $error }}</span>
-                                    @endforeach                        
+                                    @endforeach
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                                 </div>
                             @endif
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-5">
+                                    <div class="form-group">
+                                        <h6>ASIGNAR PERMISOS PARA EL ROL</h6>
+                                    </div>
+                                </div>
+                            </div>
 
                             {!! Form::model($role,['method'=>'PUT','route'=>['roles.update',$role->id]]) !!}
                             <div class="row">
@@ -37,8 +44,6 @@
                             <div class="row">
                                 <div class="col-xs-12 col-sm-12 col-md-7">
                                     <div class="form-group">
-                                        <label>Permisos para este rol</label>
-                                        <br>
                                         @foreach($permission as $value)
                                             <label>{{ Form::checkbox('permission[]', $value->id, in_array($value->id, $rolePermission) ? true : false, array('class' => 'name')) }}
                                                 {{ $value->name }}</label>

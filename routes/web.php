@@ -13,6 +13,8 @@ use App\Http\Controllers\LicenciasController;
 use App\Http\Controllers\AislamientosController;
 use App\Http\Controllers\RegistroController;
 use App\Http\Controllers\SuspensionesController;
+use App\Http\Controllers\TestController;
+use App\Http\Controllers\EditarController;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,9 +57,9 @@ Route::group(['middleware'=>['auth']],function () {
     Route::get('/suspensiones',[SuspensionesController::class, 'index'])->name('suspensiones');
     Route::get('tablasuspensiones',[SuspensionesController::class,'tablasuspensiones'])->name('tabla.suspensiones');
 
-    Route::get('detalle/{cod}/crear',[RegistroController::class, 'edit'])->name('registro.edit');
+    Route::get('detalle/{cod}/crear',[RegistroController::class, 'registrar'])->name('registro.edit');
     Route::post('store', [RegistroController::class, 'store'])->name('store');
-    Route::get('detalle/conceptos', [RegistroController::class, 'conceptos'])->name('conceptos.all');
+    Route::get('detalle/conceptos', [RegistroController::class, 'conceptos'])->name('conceptos.todos');
     Route::get('delete/{cod}', [RegistroController::class, 'desactivar'])->name('registro.delete');
 
     Route::get('vacaciones/export/', [VacacionesController::class, 'export'])->name('vacaciones.export');
@@ -69,6 +71,7 @@ Route::group(['middleware'=>['auth']],function () {
     Route::get('cargamasiva', [RegistroController::class, 'cargamasiva'])->name('cargamasiva');
     Route::post('import', [RegistroController::class, 'import'])->name('import');
 
-    // Route::get('desactivar/{id}', [RegistroController::class, 'desactivar'])->name('desactivar.registro');
     Route::get('desactivar',[RegistroController::class, 'desactivar'])->name('desactivar.registro');
+
+    Route::get('registro/{id}/editar', [EditarController::class, 'edit'])->name('registro.editar');
 });

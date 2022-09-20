@@ -31,19 +31,21 @@ Descansos Medicos |
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <table class="table table-bordered table-hover mt-2" id="descansosmedicos">
+                                <table class="table mt-2" id="descansosmedicos">
                                     <thead class="bg-info">
-                                        <!-- {{--                                        <th style="color: #fff">COD</th>--}} -->
+{{--                                        <th style="color: #fff">COD</th>--}}
                                         <th style="color: #fff">DCUMENTO IDENTIDAD</th>
                                         <th style="color: #fff">NOMBRES</th>
-                                        <!-- {{--                                        <th style="color: #fff">REG. LAB.</th>--}}
-{{--                                        <th style="color: #fff">UNI. ORG</th>--}} -->
+{{--                                        <th style="color: #fff">REG. LAB.</th>--}}
+{{--                                        <th style="color: #fff">UNI. ORG</th>--}}
                                         <th style="color: #fff">F. INICIO</th>
                                         <th style="color: #fff">F. FIN</th>
                                         <th style="color: #fff">DIAS</th>
                                         <th style="color: #fff">PERIODO</th>
                                         <th style="color: #fff">DOCUMENTO</th>
+                                        @can('EDITAR-DESCANSOS-MEDICOS')
                                         <th style="color: #fff" colspan="2" class="text-center">OPCIONES</th>
+                                        @endcan
                                     </thead>
                                     <tbody></tbody>
                                 </table>
@@ -60,6 +62,7 @@ Descansos Medicos |
 @section('scripts')
 <script>
     $(document).ready(function() {
+
         $('#descansosmedicos').DataTable({
             proccesing: true,
             info: true,
@@ -102,7 +105,7 @@ Descansos Medicos |
                     data: 'docsus'
                 },
                 {
-                    data: 'detalles'
+                    data: 'editar'
                 },
                 {
                     data: 'borrar'
@@ -135,7 +138,6 @@ Descansos Medicos |
 
     $(document).on('click', '#borrar', function() {
         var id = $(this).data('id');
-        // alert(id);
         var url = '<?= route('desactivar.registro') ?>';
         swal({
                 title: 'Seguro de eliminar este Registro?',
@@ -163,8 +165,8 @@ Descansos Medicos |
                             window.location.reload(true);
                         } else if (data.code == 0) {
                             swal({
-                                title: 'Eliminado!',
-                                text: data.msn,
+                                title: 'Error!',
+                                text: "No se elimino el registro",
                                 icon: "error",
                                 showCancelButton: true,
                                 dangerMode: true,

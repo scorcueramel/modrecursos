@@ -17,20 +17,26 @@ use Illuminate\Support\Facades\DB;
 
 class RegistroController extends Controller
 {
-
-    public function edit($codigo)
+    public function registrar($codigo)
     {
         $response = Http::acceptJson()->get('http://sistemas.munisurco.gob.pe/pidemss/servicios/siam/dat?P_APEPATERNO=&P_APEMATERNO=&P_CODIGO=' . $codigo . '&P_VCHTIDCODIGO=&P_NUMDOCUMENTO=&entidad=201&sistema=603&key=400');
-        $permisos = TipoPermiso::all();
         $resp = $response->json(['contenido'][0]);
-        return view('registro', compact('resp', 'permisos'));
+        return view('registro', compact('resp'));
     }
 
     public function conceptos()
     {
         $conceptos = Conceptos::all();
+        $user = auth()->user();
+        $userRoles = $user->getRoleNames();
+        $permisos = DB::table('roles')
+            ->join('role_has_permissions', 'roles.id', '=', 'role_has_permissions.role_id')
+            ->join('permissions', 'role_has_permissions.permission_id', '=', 'permissions.id')
+            ->select(['permissions.name as perm', 'roles.name as rol'])
+            ->get();
+        $tipopermiso = TipoPermiso::all();
         return response()->json([
-            'conceptos' => $conceptos
+            'conceptos' => [$conceptos,$userRoles,$permisos,$tipopermiso]
         ]);
     }
 
@@ -111,12 +117,12 @@ class RegistroController extends Controller
     public function desactivar(Request $request)
     {
 
-        $msn = "Se elimino el registro, ya no lo podrás ver en la tabla";
+        $msn = "Se elimino el registro, ya no lo verás en la tabla";
         $id_registro = $request->id;
 
         $registro = Registro::find($id_registro);
 
-        if ($registro) {
+        if (!is_null($registro)) {
             $registro->usuario_editor = Auth::user()->name;
             $registro->estado = 0;
             $registro->deleted_at = Carbon::now()->toDateTimeString();

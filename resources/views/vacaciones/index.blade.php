@@ -32,7 +32,7 @@ Vacaciones |
 
                         <div class="row">
                             <div class="col-md-12">
-                                <table class="table table-bordered table-hover mt-2" id="vacaciones">
+                                <table class="table mt-2" id="vacaciones">
                                     <thead class="bg-info">
                                         <!-- {{--                                        <th style="color: #fff">COD</th>--}} -->
                                         <th style="color: #fff">DCUMENTO IDENTIDAD</th>
@@ -44,7 +44,9 @@ Vacaciones |
                                         <th style="color: #fff">DIAS</th>
                                         <th style="color: #fff">PERIODO</th>
                                         <th style="color: #fff">DOCUMENTO</th>
+                                        @can('EDITAR-VACACIONES')
                                         <th style="color: #fff" colspan="2" class="text-center">OPCIONES</th>
+                                        @endcan
                                     </thead>
                                     <tbody></tbody>
                                 </table>
