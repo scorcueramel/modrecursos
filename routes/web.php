@@ -73,5 +73,6 @@ Route::group(['middleware'=>['auth']],function () {
 
     Route::get('desactivar',[RegistroController::class, 'desactivar'])->name('desactivar.registro');
 
-    Route::get('registro/{id}/editar', [EditarController::class, 'edit'])->name('registro.editar');
+    Route::get('registro/{id}/editar', [RegistroController::class, 'edit'])->name('registro.editar');
+    Route::get('editar/{id}', [RegistroController::class, 'update'])->name('update');
 });

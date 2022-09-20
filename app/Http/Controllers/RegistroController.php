@@ -35,8 +35,9 @@ class RegistroController extends Controller
             ->select(['permissions.name as perm', 'roles.name as rol'])
             ->get();
         $tipopermiso = TipoPermiso::all();
+        $roles = DB::table('roles')->get();
         return response()->json([
-            'conceptos' => [$conceptos,$userRoles,$permisos,$tipopermiso]
+            'conceptos' => [$conceptos,$userRoles,$permisos,$tipopermiso,$roles]
         ]);
     }
 
@@ -110,7 +111,7 @@ class RegistroController extends Controller
             $diaPer->saldo = $request->diaspersonal;
             $diaPer->save();
         }
-        $msn = 'Se generó el registro exitosamente';
+        $msn = 'Se Generó El Registro Exitosamente!';
         return redirect()->route('home')->with('success', $msn);
     }
 
@@ -143,5 +144,87 @@ class RegistroController extends Controller
     {
         Excel::import(new RegistrosImport, $request->file);
         return redirect()->back()->with('success', 'Archivo cargado correctamente!');
+    }
+
+    public function edit($id)
+    {
+        $registro = Registro::find($id);
+        $tipopermiso = Registro::join('tipo_permisos', 'registros.tipo_permiso_id', '=', 'tipo_permisos.id')
+        ->where('registros.id','=',$registro->id)
+        ->get(['registros.*','tipo_permisos.descripcion']);
+        $tp = $tipopermiso[0];
+        return view('editar', compact('tp'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $msn = "";
+        $resp = Registro::find($id);
+        $codigo = $request->codigo;
+        $fi = $request->fecinicio;
+        $ff = $request->fecfin;
+        $tipoper = $request->tpermiso;
+
+        $persona = DB::table('registros')
+            ->join('tipo_permisos', function ($join) {
+                $join->on('tipo_permisos.id', '=', 'registros.tipo_permiso_id');
+            })
+            ->where('codigo_persona', '=', $codigo)
+            ->whereDate('fecha_inicio', '<=', $ff)
+            ->whereDate('fecha_fin', '>=', $fi)
+            ->where('registros.estado', '>', 0)
+            ->get();
+
+        $resp->codigo_persona = $codigo;
+        // $resp->tipo_documento_persona = $request->tipo_documento_persona;
+        $resp->documento_persona = $request->documento_persona;
+        $resp->nombre_persona = $request->nombres;
+        $resp->reglab_persona = $request->reglaboral;
+        $resp->uniorg_persona = $request->uniorg;
+        $resp->estado_persona = $request->estado;
+        if ($request->tpermiso == "SELECCIONAR") {
+            $msn = "No Elegiste un tipo de permiso, vuelve a intentarlo!";
+            return back()->with('error', $msn);
+        } else {
+            $resp->tipo_permiso_id = $tipoper;
+        }
+
+        if (count($persona) > 0) {
+            foreach ($persona as $key => $value) {
+                if (
+                    $persona[$key]->codigo_persona == $codigo
+                    && $persona[$key]->fecha_inicio <= $ff
+                    && $persona[$key]->fecha_fin >= $fi
+                    && $persona[$key]->tipo_permiso_id != $tipoper
+                    && $persona[$key]->estado != 0
+                ) {
+                    $msn = "Actualmente cuenta con " . $persona[$key]->descripcion . " en el rango de fecha seleccionado";
+                    return back()->with('error', $msn);
+                }
+            }
+        } else {
+            $resp->fecha_inicio = $fi;
+            $resp->fecha_fin = $ff;
+        }
+        $resp->fecha_inicio_persona = Carbon::parse($request->ingreso);
+        $resp->concepto_id = $request->concepto;
+        $resp->anio_periodo = $request->anioperiodo;
+        $resp->documento = $request->documento_ref;
+        $resp->comentario = $request->observaciones;
+        $resp->ip_usuario = request()->ip();
+        $resp->usuario_editor = Auth::user()->name;
+        $resp->estado = 1;
+        $resp->save();
+
+        $diaPer = DiasPersonal::find($resp->id);
+
+        foreach ($diaPer as $key => $value) {
+            // $diaPer->id_registro = $diaPer[$key]->id;
+            $diaPer->inicial = $request->diaspersonal;
+            $diaPer->saldo = $request->diaspersonal;
+            $diaPer->save();
+        }
+        $msn = 'Se Actualizo El Registro Exitosamente!';
+        return redirect()->route('home')->with('success', $msn);
     }
 }
