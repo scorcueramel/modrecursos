@@ -21,7 +21,6 @@ class RegistrosImport implements ToModel, WithStartRow
     */
     public function model(array $row)
     {
-        $msn = "";
         $codigo = $row[0];
         $fi = $row[11];
         $ff = $row[12];
@@ -33,7 +32,7 @@ class RegistrosImport implements ToModel, WithStartRow
         ->where('deleted_at', '=', null)
         ->get();
 
-        if (count($query) > 0) {
+        if (count($query) == 1) {
             foreach ($query as $key => $value) {
                 if (
                     $query[$key]->codigo_persona == $codigo
@@ -45,6 +44,8 @@ class RegistrosImport implements ToModel, WithStartRow
                 }
             }
         }   else {
+
+        Session::flash('success', 'ARCHIVO CARGADO CORRECTAMENTE!');
 
         return new Registro([
             'codigo_persona' => $row[0],
@@ -62,6 +63,17 @@ class RegistrosImport implements ToModel, WithStartRow
             'fecha_fin' => $row[12],
          ]);
 
+        $per = DB::table('registros')
+            ->where('codigo_persona', '=', $row[0])->get();
+
+        return new DiasPersonal();
+
+        foreach ($per as $key => $value) {
+                $diaPer->id_registro = $per[$key]->id;
+                $diaPer->inicial = 10;
+                $diaPer->saldo = 10;
+                $diaPer->save();
+            }
         }
     }
 
