@@ -74,4 +74,7 @@ Route::group(['middleware'=>['auth']],function () {
 
     Route::get('registro/{id}/editar', [RegistroController::class, 'edit'])->name('registro.editar');
     Route::get('editar/{id}', [RegistroController::class, 'update'])->name('update');
+
+
+    Route::get('manual/{file}', [RegistroController::class, 'descargamanual'])->name('descargar.manual');
 });

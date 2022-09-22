@@ -37,7 +37,7 @@ class RegistroController extends Controller
         $tipopermiso = TipoPermiso::all();
         $roles = DB::table('roles')->get();
         return response()->json([
-            'conceptos' => [$conceptos,$userRoles,$permisos,$tipopermiso,$roles]
+            'conceptos' => [$conceptos, $userRoles, $permisos, $tipopermiso, $roles]
         ]);
     }
 
@@ -152,8 +152,8 @@ class RegistroController extends Controller
     {
         $registro = Registro::find($id);
         $tipopermiso = Registro::join('tipo_permisos', 'registros.tipo_permiso_id', '=', 'tipo_permisos.id')
-        ->where('registros.id','=',$registro->id)
-        ->get(['registros.*','tipo_permisos.descripcion']);
+            ->where('registros.id', '=', $registro->id)
+            ->get(['registros.*', 'tipo_permisos.descripcion']);
         $tp = $tipopermiso[0];
         return view('editar', compact('tp'));
     }
@@ -175,7 +175,7 @@ class RegistroController extends Controller
             ->whereDate('fecha_inicio', '<=', $ff)
             ->whereDate('fecha_fin', '>=', $fi)
             ->where('registros.estado', '>', 0)
-            ->where('tipo_permiso_id','=',$tipoper)
+            ->where('tipo_permiso_id', '=', $tipoper)
             ->get();
 
         $resp->codigo_persona = $codigo;
@@ -229,5 +229,11 @@ class RegistroController extends Controller
         }
         $msn = 'Se Actualizo El Registro Exitosamente!';
         return redirect()->route('home')->with('success', $msn);
+    }
+
+    public function descargamanual($file)
+    {
+        $pathtoFile = public_path() . '/' . $file;
+        return response()->download($pathtoFile);
     }
 }
