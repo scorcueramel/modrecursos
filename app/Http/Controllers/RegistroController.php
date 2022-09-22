@@ -118,9 +118,9 @@ class RegistroController extends Controller
     public function desactivar(Request $request)
     {
 
-        $msn = "Se elimino el registro, ya no lo verás en la tabla";
+        $msn = "Registro Eliminado Con Éxito!";
         $id_registro = $request->id;
-
+        $motivo = $request->comentario;
         $registro = Registro::find($id_registro);
 
         if (!is_null($registro)) {
@@ -128,11 +128,12 @@ class RegistroController extends Controller
             $registro->estado = 0;
             $registro->deleted_at = Carbon::now()->toDateTimeString();
             $registro->ip_usuario = request()->ip();
-            $registro->comentario = $request->motivo;
+            $registro->comentario = $motivo;
             $registro->update();
-            return response()->json(['code' => 1, 'msn' => $msn]);
+            return back()->with('success', $msn);
         } else {
-            return response()->json(['code' => 0, 'msn' => 'No se elimino el registro por error interno']);
+            $msn = 'No Se Elimino El Registro ¡Error!';
+            return back()->with('error', $msn);
         }
     }
 

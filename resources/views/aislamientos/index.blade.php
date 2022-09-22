@@ -57,6 +57,7 @@ Aislamientos |
         </div>
     </div>
 </section>
+@include('modal-borrar.borrar-modal')
 @endsection
 
 @section('scripts')
@@ -133,46 +134,12 @@ Aislamientos |
             },
         });
 
-        $(document).on('click', '#borrar', function() {
-        var id = $(this).data('id');
-        // alert(id);
-        var url = '<?= route('desactivar.registro') ?>';
-        swal({
-                title: 'Seguro de eliminar este Registro?',
-                text: "Si eliminas este registro no podrás recuperarlo",
-                icon: "warning",
-                showCancelButton: true,
-                buttons: true,
-                buttons: {
-                    cancel: 'No, eliminar',
-                    confirm: "Si, Eliminar",
-                },
-                dangerMode: true,
-            })
-            .then((result) => {
-                if (result) {
-                    $.get(url, {
-                        id: id
-                    }, function(data) {
-                        if (data.code == 1) {
-                            swal({
-                                title: 'Eliminado!',
-                                text: "Se elimino el registro",
-                                icon: "success",
-                            })
-                            window.location.reload(true);
-                        } else if (data.code == 0) {
-                            swal({
-                                title: 'Eliminado!',
-                                text: data.msn,
-                                icon: "error"
-                            })
-                        }
-                    }, 'json');
-                }
-            });
     });
 
+    $(document).on('click', '#borrar', function() {
+        var id = $(this).data('id');
+        $('#delete').modal('show');
+        $('#delete').find('input[name="id"]').val(id);
     });
 </script>
 @endsection

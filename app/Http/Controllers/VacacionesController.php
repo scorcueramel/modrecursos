@@ -17,7 +17,7 @@ class VacacionesController extends Controller
     public function tablavacaciones(Request $request)
     {
         $tblvacaciones = Registro::join('dias_personals','registros.id','=','dias_personals.id_registro')
-        ->select('registros.id','registros.codigo_persona','registros.documento_persona','registros.nombre_persona','registros.reglab_persona','registros.uniorg_persona','registros.fecha_inicio','registros.fecha_fin','registros.anio_periodo','registros.documento','dias_personals.inicial as inicial')
+        ->select('registros.id','registros.codigo_persona','registros.documento_persona','registros.nombre_persona','registros.reglab_persona','registros.uniorg_persona','registros.fecha_inicio','registros.fecha_fin','registros.anio_periodo','registros.documento','registros.comentario','dias_personals.inicial as inicial')
         ->where('tipo_permiso_id','=',1);
 
         return datatables()->of($tblvacaciones)

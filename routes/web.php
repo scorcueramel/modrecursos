@@ -60,7 +60,6 @@ Route::group(['middleware'=>['auth']],function () {
     Route::get('detalle/{cod}/crear',[RegistroController::class, 'registrar'])->name('registro.edit');
     Route::post('store', [RegistroController::class, 'store'])->name('store');
     Route::get('detalle/conceptos', [RegistroController::class, 'conceptos'])->name('conceptos.todos');
-    Route::get('delete/{cod}', [RegistroController::class, 'desactivar'])->name('registro.delete');
 
     Route::get('vacaciones/export/', [VacacionesController::class, 'export'])->name('vacaciones.export');
     Route::get('suspensiones/export/', [SuspensionesController::class, 'export'])->name('suspensiones.export');
@@ -71,7 +70,7 @@ Route::group(['middleware'=>['auth']],function () {
     Route::get('cargamasiva', [RegistroController::class, 'cargamasiva'])->name('cargamasiva');
     Route::post('import', [RegistroController::class, 'import'])->name('import');
 
-    Route::get('desactivar',[RegistroController::class, 'desactivar'])->name('desactivar.registro');
+    Route::post('desactivar',[RegistroController::class, 'desactivar'])->name('desactivar.registro');
 
     Route::get('registro/{id}/editar', [RegistroController::class, 'edit'])->name('registro.editar');
     Route::get('editar/{id}', [RegistroController::class, 'update'])->name('update');
