@@ -39,13 +39,33 @@ class DescansosMedicosController extends Controller
             $docsus = "";
             if($row['documento'] == "")
             {
-                $docsus = "Sin Documento";
+                $docsus = "S/D";
             }else{
                 $docsus = $row['documento'];
             }
             return $docsus;
         })
-        ->rawColumns(['editar','borrar','docsus'])
+        ->addColumn('periodo',function ($row){
+            $docsus = "";
+            if($row['anio_periodo'] == "")
+            {
+                $docsus = "S/P";
+            }else{
+                $docsus = $row['anio_periodo'];
+            }
+            return $docsus;
+        })
+        ->addColumn('obs',function ($row){
+            $docsus = "";
+            if($row['comentario'] == "")
+            {
+                $docsus = "S/O";
+            }else{
+                $docsus = $row['comentario'];
+            }
+            return $docsus;
+        })
+        ->rawColumns(['editar','borrar','docsus','periodo','obs'])
         ->make(true);
     }
 

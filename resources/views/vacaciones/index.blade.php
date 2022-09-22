@@ -29,7 +29,6 @@ Vacaciones |
                                 </tbody>
                             </table>
                         </div>
-
                         <div class="row">
                             <div class="col-md-12">
                                 <table class="table mt-2" id="vacaciones">
@@ -44,6 +43,7 @@ Vacaciones |
                                         <th style="color: #fff">DIAS</th>
                                         <th style="color: #fff">PERIODO</th>
                                         <th style="color: #fff">DOCUMENTO</th>
+                                        <th style="color: #fff">OBSERVACIÓN</th>
                                         @can('EDITAR-VACACIONES')
                                         <th style="color: #fff" colspan="2" class="text-center">OPCIONES</th>
                                         @endcan
@@ -99,13 +99,16 @@ Vacaciones |
                     data: 'inicial'
                 },
                 {
-                    data: 'anio_periodo'
+                    data: 'periodo'
                 },
                 {
                     data: 'docsus'
                 },
                 {
-                    data: 'detalles'
+                    data: 'obs'
+                },
+                {
+                    data: 'editar'
                 },
                 {
                     data: 'borrar'
@@ -141,7 +144,5 @@ Vacaciones |
         $('#delete').modal('show');
         $('#delete').find('input[name="id"]').val(id);
     });
-
-
 </script>
 @endsection

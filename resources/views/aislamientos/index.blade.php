@@ -37,12 +37,13 @@ Aislamientos |
                                         <th style="color: #fff">DCUMENTO IDENTIDAD</th>
                                         <th style="color: #fff">NOMBRES</th>
                                         <!-- {{--                                        <th style="color: #fff">REG. LAB.</th>--}}
-{{--                                        <th style="color: #fff">UNI. ORG</th>--}} -->
+                                        {{--                                        <th style="color: #fff">UNI. ORG</th>--}} -->
                                         <th style="color: #fff">F. INICIO</th>
                                         <th style="color: #fff">F. FIN</th>
                                         <th style="color: #fff">DIAS</th>
                                         <th style="color: #fff">PERIODO</th>
                                         <th style="color: #fff">DOCUMENTO</th>
+                                        <th style="color: #fff">OBSERVACIÓN</th>
                                         @can('EDITAR-AISLAMIENTOS')
                                         <th style="color: #fff" colspan="2" class="text-center">OPCIONES</th>
                                         @endcan
@@ -99,10 +100,13 @@ Aislamientos |
                     data: 'inicial'
                 },
                 {
-                    data: 'anio_periodo'
+                    data: 'periodo'
                 },
                 {
                     data: 'docsus'
+                },
+                {
+                    data: 'obs'
                 },
                 {
                     data: 'detalles'

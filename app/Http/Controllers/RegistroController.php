@@ -172,10 +172,10 @@ class RegistroController extends Controller
                 $join->on('tipo_permisos.id', '=', 'registros.tipo_permiso_id');
             })
             ->where('codigo_persona', '=', $codigo)
+            ->where('tipo_permiso_id', '!=', $tipoper)
             ->whereDate('fecha_inicio', '<=', $ff)
             ->whereDate('fecha_fin', '>=', $fi)
             ->where('registros.estado', '>', 0)
-            ->where('tipo_permiso_id', '=', $tipoper)
             ->get();
 
         $resp->codigo_persona = $codigo;
@@ -198,7 +198,7 @@ class RegistroController extends Controller
                     $persona[$key]->codigo_persona == $codigo
                     && $persona[$key]->fecha_inicio <= $ff
                     && $persona[$key]->fecha_fin >= $fi
-                    && $persona[$key]->tipo_permiso_id == $tipoper
+                    && $persona[$key]->tipo_permiso_id != $tipoper
                     && $persona[$key]->estado != 0
                 ) {
                     $msn = "Actualmente cuenta con " . $persona[$key]->descripcion . " en el rango de fecha seleccionado";
@@ -220,6 +220,7 @@ class RegistroController extends Controller
         $resp->save();
 
         $diaPer = DiasPersonal::find($resp->id);
+        dd($diaPer);
 
         foreach ($diaPer as $key => $value) {
             // $diaPer->id_registro = $diaPer[$key]->id;
