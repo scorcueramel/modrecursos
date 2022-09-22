@@ -128,10 +128,11 @@ class RegistroController extends Controller
             $registro->estado = 0;
             $registro->deleted_at = Carbon::now()->toDateTimeString();
             $registro->ip_usuario = request()->ip();
+            $registro->comentario = $request->motivo;
             $registro->update();
             return response()->json(['code' => 1, 'msn' => $msn]);
         } else {
-            return response()->json(['code' => 0, 'msn' => 'No se elimino el registro']);
+            return response()->json(['code' => 0, 'msn' => 'No se elimino el registro por error interno']);
         }
     }
 
@@ -173,6 +174,7 @@ class RegistroController extends Controller
             ->whereDate('fecha_inicio', '<=', $ff)
             ->whereDate('fecha_fin', '>=', $fi)
             ->where('registros.estado', '>', 0)
+            ->where('tipo_permiso_id','=',$tipoper)
             ->get();
 
         $resp->codigo_persona = $codigo;
@@ -195,7 +197,7 @@ class RegistroController extends Controller
                     $persona[$key]->codigo_persona == $codigo
                     && $persona[$key]->fecha_inicio <= $ff
                     && $persona[$key]->fecha_fin >= $fi
-                    && $persona[$key]->tipo_permiso_id != $tipoper
+                    && $persona[$key]->tipo_permiso_id == $tipoper
                     && $persona[$key]->estado != 0
                 ) {
                     $msn = "Actualmente cuenta con " . $persona[$key]->descripcion . " en el rango de fecha seleccionado";
