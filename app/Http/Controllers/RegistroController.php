@@ -120,6 +120,8 @@ class RegistroController extends Controller
 
         $msn = "Se elimino el registro, ya no lo verás en la tabla";
         $id_registro = $request->id;
+        $motivo = $request->motivo;
+        dd($motivo);
 
         $registro = Registro::find($id_registro);
 
@@ -128,7 +130,7 @@ class RegistroController extends Controller
             $registro->estado = 0;
             $registro->deleted_at = Carbon::now()->toDateTimeString();
             $registro->ip_usuario = request()->ip();
-            $registro->comentario = $request->motivo;
+            $registro->comentario = $motivo;
             $registro->update();
             return response()->json(['code' => 1, 'msn' => $msn]);
         } else {
