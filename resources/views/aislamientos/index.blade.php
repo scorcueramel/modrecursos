@@ -109,7 +109,7 @@ Aislamientos |
                     data: 'obs'
                 },
                 {
-                    data: 'detalles'
+                    data: 'editar'
                 },
                 {
                     data: 'borrar'

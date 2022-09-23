@@ -120,13 +120,8 @@ class RegistroController extends Controller
 
         $msn = "Registro Eliminado Con Éxito!";
         $id_registro = $request->id;
-<<<<<<< HEAD
-        $motivo = $request->motivo;
-        dd($motivo);
-
-=======
         $motivo = $request->comentario;
->>>>>>> 529f7932aa414ad264085204df9c8e8af952c578
+
         $registro = Registro::find($id_registro);
 
         if (!is_null($registro)) {
@@ -226,7 +221,6 @@ class RegistroController extends Controller
         $resp->save();
 
         $diaPer = DiasPersonal::find($resp->id);
-        dd($diaPer);
 
         foreach ($diaPer as $key => $value) {
             // $diaPer->id_registro = $diaPer[$key]->id;

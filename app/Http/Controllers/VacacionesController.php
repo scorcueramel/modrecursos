@@ -37,37 +37,37 @@ class VacacionesController extends Controller
                         </td>';
             }
         })
-        ->addColumn('docsus',function ($row){
-            $docsus = "";
-            if($row['documento'] == "")
-            {
-                $docsus = "S/D";
-            }else{
-                $docsus = $row['documento'];
-            }
-            return $docsus;
-        })
-        ->addColumn('periodo',function ($row){
-            $docsus = "";
-            if($row['anio_periodo'] == "")
-            {
-                $docsus = "S/P";
-            }else{
-                $docsus = $row['anio_periodo'];
-            }
-            return $docsus;
-        })
-        ->addColumn('obs',function ($row){
-            $docsus = "";
-            if($row['comentario'] == "")
-            {
-                $docsus = "S/O";
-            }else{
-                $docsus = $row['comentario'];
-            }
-            return $docsus;
-        })
-        ->rawColumns(['editar','borrar','docsus','periodo','obs'])
+            ->addColumn('docsus',function ($row){
+                $docsus = "";
+                if($row['documento'] == "")
+                {
+                    $docsus = "S/D";
+                }else{
+                    $docsus = $row['documento'];
+                }
+                return $docsus;
+            })
+            ->addColumn('periodo',function ($row){
+                $docsus = "";
+                if($row['anio_periodo'] == "")
+                {
+                    $docsus = "S/P";
+                }else{
+                    $docsus = $row['anio_periodo'];
+                }
+                return $docsus;
+            })
+            ->addColumn('obs',function ($row){
+                $docsus = "";
+                if($row['comentario'] == "")
+                {
+                    $docsus = "S/O";
+                }else{
+                    $docsus = $row['comentario'];
+                }
+                return $docsus;
+            })
+            ->rawColumns(['editar','borrar','docsus','periodo','obs'])
         ->make(true);
     }
 
