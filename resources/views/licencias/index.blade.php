@@ -33,16 +33,17 @@ Licencias |
                             <div class="col-md-12">
                                 <table class="table mt-2" id="licencias">
                                     <thead class="bg-info">
-<!-- {{--                                        <th style="color: #fff">COD</th>--}} -->
+                                        <!-- {{--                                        <th style="color: #fff">COD</th>--}} -->
                                         <th style="color: #fff">DCUMENTO IDENTIDAD</th>
                                         <th style="color: #fff">NOMBRES</th>
-<!-- {{--                                        <th style="color: #fff">REG. LAB.</th>--}}
-{{--                                        <th style="color: #fff">UNI. ORG</th>--}} -->
+                                        <!-- {{--                                        <th style="color: #fff">REG. LAB.</th>--}}
+                                        {{--                                        <th style="color: #fff">UNI. ORG</th>--}} -->
                                         <th style="color: #fff">F. INICIO</th>
                                         <th style="color: #fff">F. FIN</th>
                                         <th style="color: #fff">DIAS</th>
                                         <th style="color: #fff">PERIODO</th>
                                         <th style="color: #fff">DOCUMENTO</th>
+                                        <th style="color: #fff">OBSERVACIÓN</th>
                                         @can('EDITAR-LICENCIAS')
                                         <th style="color: #fff" colspan="2" class="text-center">OPCIONES</th>
                                         @endcan
@@ -56,6 +57,7 @@ Licencias |
         </div>
     </div>
 </section>
+@include('modal-borrar.borrar-modal')
 @endsection
 
 @section('scripts')
@@ -73,18 +75,39 @@ Licencias |
                 "aLengthMenu":[[5,10,15,-1],[5,10,15,"Todos"]],
                 "ajax":"{{route('tabla.licencias')}}",
                 "columns" : [
-                    // {data:'codigo_persona'},
-                    {data: 'documento_persona'},
-                    {data: 'nombre_persona'},
-                    // {data:'reglab_persona'},
-                    // {data:'uniorg_persona'},
-                    {data: 'fecha_inicio'},
-                    {data: 'fecha_fin'},
-                    {data: 'inicial'},
-                    {data: 'anio_periodo'},
-                    {data: 'docsus'},
-                    {data: 'detalles'},
-                    {data: 'borrar'}
+                   // {data:'codigo_persona'},
+                {
+                    data: 'documento_persona'
+                },
+                {
+                    data: 'nombre_persona'
+                },
+                // {data:'reglab_persona'},
+                // {data:'uniorg_persona'},
+                {
+                    data: 'fecha_inicio'
+                },
+                {
+                    data: 'fecha_fin'
+                },
+                {
+                    data: 'inicial'
+                },
+                {
+                    data: 'periodo'
+                },
+                {
+                    data: 'docsus'
+                },
+                {
+                    data: 'obs'
+                },
+                {
+                    data: 'editar'
+                },
+                {
+                    data: 'borrar'
+                }
                 ],
                 "language": {
                     "lengthMenu": "Mostrar " +
@@ -111,46 +134,10 @@ Licencias |
 
         });
 
-        $(document).on('click', '#borrar', function() {
+    $(document).on('click', '#borrar', function() {
         var id = $(this).data('id');
-        // alert(id);
-        var url = '<?= route('desactivar.registro') ?>';
-        swal({
-                title: 'Seguro de eliminar este Registro?',
-                text: "Si eliminas este registro no podrás recuperarlo",
-                icon: "warning",
-                showCancelButton: true,
-                buttons: true,
-                buttons: {
-                    cancel: 'No, eliminar',
-                    confirm: "Si, Eliminar",
-                },
-                dangerMode: true,
-            })
-            .then((result) => {
-                if (result) {
-                    $.get(url, {
-                        id: id
-                    }, function(data) {
-                        if (data.code == 1) {
-                            swal({
-                                title: 'Eliminado!',
-                                text: "Se elimino el registro",
-                                icon: "success",
-                            })
-                            window.location.reload(true);
-                        } else if (data.code == 0) {
-                            swal({
-                                title: 'Eliminado!',
-                                text: data.msn,
-                                icon: "error",
-                                showCancelButton: true,
-                                dangerMode: true,
-                            })
-                        }
-                    }, 'json');
-                }
-            });
+        $('#delete').modal('show');
+        $('#delete').find('input[name="id"]').val(id);
     });
     </script>
 @endsection

@@ -29,7 +29,10 @@ Vacaciones |
                                 </tbody>
                             </table>
                         </div>
+<<<<<<< HEAD
 
+=======
+>>>>>>> 529f7932aa414ad264085204df9c8e8af952c578
                         <div class="row">
                             <div class="col-md-12">
                                 <table class="table mt-2" id="vacaciones">
@@ -44,6 +47,7 @@ Vacaciones |
                                         <th style="color: #fff">DIAS</th>
                                         <th style="color: #fff">PERIODO</th>
                                         <th style="color: #fff">DOCUMENTO</th>
+                                        <th style="color: #fff">OBSERVACIÓN</th>
                                         @can('EDITAR-VACACIONES')
                                         <th style="color: #fff" colspan="2" class="text-center">OPCIONES</th>
                                         @endcan
@@ -58,9 +62,15 @@ Vacaciones |
         </div>
     </div>
 </section>
+<<<<<<< HEAD
 @endsection
 @section('scripts')
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+=======
+@include('modal-borrar.borrar-modal')
+@endsection
+@section('scripts')
+>>>>>>> 529f7932aa414ad264085204df9c8e8af952c578
 <script>
     $(document).ready(function() {
         $('#vacaciones').DataTable({
@@ -99,13 +109,24 @@ Vacaciones |
                     data: 'inicial'
                 },
                 {
+<<<<<<< HEAD
                     data: 'anio_periodo'
+=======
+                    data: 'periodo'
+>>>>>>> 529f7932aa414ad264085204df9c8e8af952c578
                 },
                 {
                     data: 'docsus'
                 },
                 {
+<<<<<<< HEAD
                     data: 'detalles'
+=======
+                    data: 'obs'
+                },
+                {
+                    data: 'editar'
+>>>>>>> 529f7932aa414ad264085204df9c8e8af952c578
                 },
                 {
                     data: 'borrar'
@@ -131,6 +152,7 @@ Vacaciones |
                 "paginate": {
                     "next": "Siguiente",
                     "previous": "Anterior"
+<<<<<<< HEAD
                 }
             },
         });
@@ -174,6 +196,17 @@ Vacaciones |
                     }, 'json');
                 }
             });
+=======
+                }
+            },
+        });
+    });
+
+    $(document).on('click', '#borrar', function() {
+        var id = $(this).data('id');
+        $('#delete').modal('show');
+        $('#delete').find('input[name="id"]').val(id);
+>>>>>>> 529f7932aa414ad264085204df9c8e8af952c578
     });
 </script>
 @endsection

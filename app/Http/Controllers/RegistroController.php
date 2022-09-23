@@ -37,7 +37,7 @@ class RegistroController extends Controller
         $tipopermiso = TipoPermiso::all();
         $roles = DB::table('roles')->get();
         return response()->json([
-            'conceptos' => [$conceptos,$userRoles,$permisos,$tipopermiso,$roles]
+            'conceptos' => [$conceptos, $userRoles, $permisos, $tipopermiso, $roles]
         ]);
     }
 
@@ -118,11 +118,15 @@ class RegistroController extends Controller
     public function desactivar(Request $request)
     {
 
-        $msn = "Se elimino el registro, ya no lo verás en la tabla";
+        $msn = "Registro Eliminado Con Éxito!";
         $id_registro = $request->id;
+<<<<<<< HEAD
         $motivo = $request->motivo;
         dd($motivo);
 
+=======
+        $motivo = $request->comentario;
+>>>>>>> 529f7932aa414ad264085204df9c8e8af952c578
         $registro = Registro::find($id_registro);
 
         if (!is_null($registro)) {
@@ -132,9 +136,10 @@ class RegistroController extends Controller
             $registro->ip_usuario = request()->ip();
             $registro->comentario = $motivo;
             $registro->update();
-            return response()->json(['code' => 1, 'msn' => $msn]);
+            return back()->with('success', $msn);
         } else {
-            return response()->json(['code' => 0, 'msn' => 'No se elimino el registro por error interno']);
+            $msn = 'No Se Elimino El Registro ¡Error!';
+            return back()->with('error', $msn);
         }
     }
 
@@ -153,8 +158,8 @@ class RegistroController extends Controller
     {
         $registro = Registro::find($id);
         $tipopermiso = Registro::join('tipo_permisos', 'registros.tipo_permiso_id', '=', 'tipo_permisos.id')
-        ->where('registros.id','=',$registro->id)
-        ->get(['registros.*','tipo_permisos.descripcion']);
+            ->where('registros.id', '=', $registro->id)
+            ->get(['registros.*', 'tipo_permisos.descripcion']);
         $tp = $tipopermiso[0];
         return view('editar', compact('tp'));
     }
@@ -173,10 +178,10 @@ class RegistroController extends Controller
                 $join->on('tipo_permisos.id', '=', 'registros.tipo_permiso_id');
             })
             ->where('codigo_persona', '=', $codigo)
+            ->where('tipo_permiso_id', '!=', $tipoper)
             ->whereDate('fecha_inicio', '<=', $ff)
             ->whereDate('fecha_fin', '>=', $fi)
             ->where('registros.estado', '>', 0)
-            ->where('tipo_permiso_id','=',$tipoper)
             ->get();
 
         $resp->codigo_persona = $codigo;
@@ -199,7 +204,7 @@ class RegistroController extends Controller
                     $persona[$key]->codigo_persona == $codigo
                     && $persona[$key]->fecha_inicio <= $ff
                     && $persona[$key]->fecha_fin >= $fi
-                    && $persona[$key]->tipo_permiso_id == $tipoper
+                    && $persona[$key]->tipo_permiso_id != $tipoper
                     && $persona[$key]->estado != 0
                 ) {
                     $msn = "Actualmente cuenta con " . $persona[$key]->descripcion . " en el rango de fecha seleccionado";
@@ -221,6 +226,7 @@ class RegistroController extends Controller
         $resp->save();
 
         $diaPer = DiasPersonal::find($resp->id);
+        dd($diaPer);
 
         foreach ($diaPer as $key => $value) {
             // $diaPer->id_registro = $diaPer[$key]->id;
@@ -230,5 +236,11 @@ class RegistroController extends Controller
         }
         $msn = 'Se Actualizo El Registro Exitosamente!';
         return redirect()->route('home')->with('success', $msn);
+    }
+
+    public function descargamanual($file)
+    {
+        $pathtoFile = public_path() . '/' . $file;
+        return response()->download($pathtoFile);
     }
 }
