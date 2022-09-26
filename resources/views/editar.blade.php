@@ -80,7 +80,7 @@ Editar Registro |
                                 </div>
                                 <div class="col-md-2 mb-3">
                                     <label for="anioperiodo">Año Periodo</label>
-                                    <input type="text" class="form-control" name="anioperiodo" id="anioperiodo" value="{{ $tp->anio_periodo }}" required>
+                                    <input type="text" class="form-control" name="anioperiodo" id="anioperiodo" value="{{ $tp->anio_periodo }}">
                                 </div>
                                 <div class="col-md-5 mb-3">
                                     <label for="observaciones">Observaciones</label>
@@ -119,6 +119,20 @@ Editar Registro |
         t = r2 - r1;
         tf = Math.floor(t / anio);
         resp = tf + 1;
+
+        $('#fecinicio').change(function() {
+            f1 = new Date($('#fecinicio').val());
+            r1 = f1.getTime();
+        });
+
+        $('#fecfin').change(function() {
+            f2 = new Date($('#fecfin').val());
+            r2 = f2.getTime();
+            t = r2 - r1;
+            tf = Math.floor(t / anio);
+            resp = tf + 1;
+            $('#diaspersonal').val(resp);
+        });
 
         $.ajax({
             type: 'GET',
@@ -171,47 +185,35 @@ Editar Registro |
                         $('#tpermiso').append('<option value="' + data.conceptos[3][i]['id'] + '">' + data.conceptos[3][i]['descripcion'] + '</option>');
 
                     }
-                    // if (data.conceptos[1][0] == 'Técnico Aislamientos') {
-                    //     // console.log(data.conceptos[3][3]['descripcion']);
-                    //     $('#tpermiso').append('<option value="' + data.conceptos[3][3]['id'] + '">' + data.conceptos[3][3]['descripcion'] + '</option>');
-                    //     break;
-                    // }
-                    // if (data.conceptos[1][0] == 'Técnico Descansos Médicos') {
-                    //     // console.log(data.conceptos[3][1]['descripcion']);
-                    //     $('#tpermiso').append('<option value="' + data.conceptos[3][1]['id'] + '">' + data.conceptos[3][1]['descripcion'] + '</option>');
-                    //     break;
-                    // }
-                    // if (data.conceptos[1][0] == 'Técnico Licencias') {
-                    //     // console.log(data.conceptos[3][2]['descripcion']);
-                    //     $('#tpermiso').append('<option value="' + data.conceptos[3][2]['id'] + '">' + data.conceptos[3][2]['descripcion'] + '</option>');
-                    //     break;
-                    // }
-                    // if (data.conceptos[1][0] == 'Técnico Suspensiones') {
-                    //     // console.log(data.conceptos[3][4]['descripcion']);
-                    //     $('#tpermiso').append('<option value="' + data.conceptos[3][4]['id'] + '">' + data.conceptos[3][4]['descripcion'] + '</option>');
-                    //     break;
-                    // }
-                    // if (data.conceptos[1][0] == 'Técnico Vacaciones') {
-                    //     // console.log(data.conceptos[3][0]['descripcion']);
-                    //     $('#tpermiso').append('<option value="' + data.conceptos[3][0]['id'] + '">' + data.conceptos[3][0]['descripcion'] + '</option>');
-                    //     break;
-                    // }
+                    if (data.conceptos[1][0] == 'Técnico Aislamientos') {
+                        // console.log(data.conceptos[3][3]['descripcion']);
+                        $('#tpermiso').append('<option value="' + data.conceptos[3][3]['id'] + '">' + data.conceptos[3][3]['descripcion'] + '</option>');
+                        break;
+                    }
+                    if (data.conceptos[1][0] == 'Técnico Descansos Médicos') {
+                        // console.log(data.conceptos[3][1]['descripcion']);
+                        $('#tpermiso').append('<option value="' + data.conceptos[3][1]['id'] + '">' + data.conceptos[3][1]['descripcion'] + '</option>');
+                        break;
+                    }
+                    if (data.conceptos[1][0] == 'Técnico Licencias') {
+                        // console.log(data.conceptos[3][2]['descripcion']);
+                        $('#tpermiso').append('<option value="' + data.conceptos[3][2]['id'] + '">' + data.conceptos[3][2]['descripcion'] + '</option>');
+                        break;
+                    }
+                    if (data.conceptos[1][0] == 'Técnico Suspensiones') {
+                        // console.log(data.conceptos[3][4]['descripcion']);
+                        $('#tpermiso').append('<option value="' + data.conceptos[3][4]['id'] + '">' + data.conceptos[3][4]['descripcion'] + '</option>');
+                        break;
+                    }
+                    if (data.conceptos[1][0] == 'Técnico Vacaciones') {
+                        // console.log(data.conceptos[3][0]['descripcion']);
+                        $('#tpermiso').append('<option value="' + data.conceptos[3][0]['id'] + '">' + data.conceptos[3][0]['descripcion'] + '</option>');
+                        break;
+                    }
                 }
             }
         });
-        // //Bloquear las fechas anteriores a la actual
-        // var fecha = new Date();
-        // var anio = fecha.getFullYear();
-        // var dia = fecha.getDate();
-        // var _mes = fecha.getMonth();//viene con valores de 0 al 11
-        // _mes = _mes + 1;//ahora lo tienes de 1 al 12
-        // if (_mes < 10)//ahora le agregas un 0 para el formato date
-        // { var mes = "0" + _mes;}
-        // else
-        // { var mes = _mes.toString;}
-        // document.getElementById("fecinicio").min = anio+'-'+mes+'-'+dia;
-        // document.getElementById("fecfin").min = anio+'-'+mes+'-'+dia;
-        //cargar conceptos segun permiso
+
         $("#tpermiso").change(function() {
             var tipoconcepto_id = $(this).val();
             if (tipoconcepto_id) {

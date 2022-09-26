@@ -17,11 +17,11 @@ class VacacionesController extends Controller
     public function tablavacaciones(Request $request)
     {
         $tblvacaciones = Registro::join('dias_personals','registros.id','=','dias_personals.id_registro')
-        ->select('registros.id','registros.codigo_persona','registros.documento_persona','registros.nombre_persona','registros.reglab_persona','registros.uniorg_persona','registros.fecha_inicio','registros.fecha_fin','registros.anio_periodo','registros.documento','dias_personals.inicial as inicial')
+        ->select('registros.id','registros.codigo_persona','registros.documento_persona','registros.nombre_persona','registros.reglab_persona','registros.uniorg_persona','registros.fecha_inicio','registros.fecha_fin','registros.anio_periodo','registros.documento','registros.comentario','dias_personals.inicial as inicial')
         ->where('tipo_permiso_id','=',1);
 
         return datatables()->of($tblvacaciones)
-        ->addColumn('detalles',function ($row){
+        ->addColumn('editar',function ($row){
             if (auth()->user()->can('EDITAR-VACACIONES'))
             {
                 return '<td>
@@ -37,17 +37,37 @@ class VacacionesController extends Controller
                         </td>';
             }
         })
-        ->addColumn('docsus',function ($row){
-            $docsus = "";
-            if($row['documento'] == "")
-            {
-                $docsus = "Sin Documento";
-            }else{
-                $docsus = $row['documento'];
-            }
-            return $docsus;
-        })
-        ->rawColumns(['detalles','borrar','docsus'])
+            ->addColumn('docsus',function ($row){
+                $docsus = "";
+                if($row['documento'] == "")
+                {
+                    $docsus = "S/D";
+                }else{
+                    $docsus = $row['documento'];
+                }
+                return $docsus;
+            })
+            ->addColumn('periodo',function ($row){
+                $docsus = "";
+                if($row['anio_periodo'] == "")
+                {
+                    $docsus = "S/P";
+                }else{
+                    $docsus = $row['anio_periodo'];
+                }
+                return $docsus;
+            })
+            ->addColumn('obs',function ($row){
+                $docsus = "";
+                if($row['comentario'] == "")
+                {
+                    $docsus = "S/O";
+                }else{
+                    $docsus = $row['comentario'];
+                }
+                return $docsus;
+            })
+            ->rawColumns(['editar','borrar','docsus','periodo','obs'])
         ->make(true);
     }
 
