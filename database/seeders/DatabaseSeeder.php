@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
             SeederTablaPermisos::class,
             SeederTablaTipoPermiso::class,
             SeederTablaConceptos::class,
+            SeederTablaRoles::class,
         ]);
     }
 }

@@ -214,6 +214,8 @@ Nuevo Registro |
             }
         });
 
+        //meterlo en un funcion para que cambie los dias
+
         //Calculo de días automatico
         var f1, f2, r1, r2, t, tf, resp;
         const anio = 1000 * 60 * 60 * 24;

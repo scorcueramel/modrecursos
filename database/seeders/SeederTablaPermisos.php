@@ -9,11 +9,6 @@ use Spatie\Permission\Models\Permission;
 
 class SeederTablaPermisos extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
     public function run()
     {
         $permisos = [
