@@ -7,11 +7,12 @@ use App\Models\Registro;
 use App\Models\ResponseDTO;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\Importable;
+use Maatwebsite\Excel\Concerns\WithCalculatedFormulas;
 use Maatwebsite\Excel\Concerns\WithStartRow;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
-class RegistrosImport implements ToModel, WithStartRow
+class RegistrosImport implements ToModel, WithStartRow, WithCalculatedFormulas
 {
     use Importable;
     /**
