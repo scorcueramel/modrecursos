@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\ExportarTodo;
 use Auth;
 
 use App\Imports\RegistrosImport;
@@ -237,5 +238,10 @@ class RegistroController extends Controller
     {
         $pathtoFile = public_path() . '/' . $file;
         return response()->download($pathtoFile);
+    }
+
+    public function exportall()
+    {
+        return Excel::download(new ExportarTodo, "RegistrosTodos.xlsx");
     }
 }

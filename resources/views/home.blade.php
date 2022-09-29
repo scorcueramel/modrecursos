@@ -18,7 +18,7 @@
                                     <h4>Campos de Búsqueda</h4>
                                 </div>
                                 <div class="col-md-3 mb-3 d-flex justify-content-end">
-                                        <a class="btn btn-success" href="{{route('aislamientos.export')}}">Exportación General</a>
+                                        <a class="btn btn-success" href="{{route('exportar.todos')}}">Exportación General</a>
                                 </div>
                                 <!--<div class="col-md-3 mb-3 d-flex justify-content-end">
                                     <a href="{{route('cargamasiva')}}" class="btn btn-success">
