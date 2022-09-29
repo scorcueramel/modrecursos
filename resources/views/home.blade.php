@@ -112,7 +112,7 @@
                                                 </td>
                                                 <td>
                                                     <a class="btn btn-primary btn-sm"
-                                                       href="{{route('registro.edit',$resp['CODIGO'])}}">Registrar</a>
+                                                       href="{{route('registro.edit',$resp['CODIGO'])}}"><i class="fas fa-share"></i> Registrar</a>
                                                 </td>
                                             @endif
                                         </tr>
