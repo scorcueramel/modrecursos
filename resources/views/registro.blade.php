@@ -121,69 +121,54 @@ Nuevo Registro |
             dataType: 'json',
             success: function(data) {
                 console.log(data.conceptos);
-                // console.log(data.conceptos[4]);
-                // console.log(data.conceptos[3]);
-                // console.log(data.conceptos[1][0]);
-                // for (let i = 0; i < data.conceptos[3].length; i++) {
-                //     for (let j = 0; j <= data.conceptos[3].length; ++j) {
-                //         console.log(data.conceptos[4][j]['name']);
-                //         if (data.conceptos[1][0] == data.conceptos[4][j]['name']) {
-                //             $('#tpermiso').append('<option value="' + data.conceptos[3][j]['id'] + '">' + data.conceptos[3][j]['descripcion'] + '</option>');
-                //         }
-                //     }
-                // }
+                if ('Técnico Aislamientos' === data.conceptos[1][0]) {
+                    console.log('Aislamientos')
+                }
+
                 for (let i = 0; i < 5; ++i) {
-                        if (data.conceptos[1][0] == 'superadmin') {
-                            // console.log(data.conceptos[2][i]['descripcion']);
-                            // console.log(data.conceptos[3][i]['descripcion']);
-                            $('#tpermiso').append('<option value="' + data.conceptos[3][i]['id'] + '">' + data.conceptos[3][i]['descripcion'] + '</option>');
-                        }
-                        if (data.conceptos[1][0] == 'Técnico Aislamientos')
-                        {
-                            // console.log(data.conceptos[3][3]['descripcion']);
-                            $('#tpermiso').append('<option value="' + data.conceptos[3][i]['id'] + '">' + data.conceptos[3][i]['descripcion'] + '</option>');
-                            break;
-                        }
-                        if (data.conceptos[1][0] == 'Técnico Descansos Médicos')
-                        {
-                            // console.log(data.conceptos[3][1]['descripcion']);
-                            $('#tpermiso').append('<option value="' + data.conceptos[3][i]['id'] + '">' + data.conceptos[3][i]['descripcion'] + '</option>');
-                            break;
-                        }
-                        if (data.conceptos[1][0] == 'Técnico Licencias')
-                        {
-                            // console.log(data.conceptos[3][2]['descripcion']);
-                            $('#tpermiso').append('<option value="' + data.conceptos[3][i]['id'] + '">' + data.conceptos[3][i]['descripcion'] + '</option>');
-                            break;
-                        }
-                        if (data.conceptos[1][0] == 'Técnico Suspensiones')
-                        {
-                            console.log(data.conceptos[3][4]['descripcion']);
-                            $('#tpermiso').append('<option value="' + data.conceptos[3][i]['id'] + '">' + data.conceptos[3][i]['descripcion'] + '</option>');
-                            break;
-                        }
-                        if (data.conceptos[1][0] == 'Técnico Vacaciones')
-                        {
-                            // console.log(data.conceptos[3][0]['descripcion']);
-                            $('#tpermiso').append('<option value="' + data.conceptos[3][i]['id'] + '">' + data.conceptos[3][i]['descripcion'] + '</option>');
-                            break;
-                        }
+                    if (data.conceptos[1][0] == 'superadmin') {
+                        // console.log(data.conceptos[2][i]['descripcion']);
+                        // console.log(data.conceptos[3][i]['descripcion']);
+                        $('#tpermiso').append('<option value="' + data.conceptos[3][i]['id'] + '">' + data.conceptos[3][i]['descripcion'] + '</option>');
                     }
+                    if (data.conceptos[1][0] == 'Técnico Aislamientos') {
+                        console.log(data.conceptos[3][3]['descripcion']);
+                        $('#tpermiso').append('<option value="' + data.conceptos[3][3]['id'] + '">' + data.conceptos[3][3]['descripcion'] + '</option>');
+                        break;
+                    }
+                    if (data.conceptos[1][0] == 'Técnico Descansos Médicos') {
+                        $('#tpermiso').append('<option value="' + data.conceptos[3][1]['id'] + '">' + data.conceptos[3][3]['descripcion'] + '</option>');
+                        break;
+                    }
+                    if (data.conceptos[1][0] == 'Técnico Licencias') {
+                        // console.log(data.conceptos[3][2]['descripcion']);
+                        $('#tpermiso').append('<option value="' + data.conceptos[3][2]['id'] + '">' + data.conceptos[3][2]['descripcion'] + '</option>');
+                        break;
+                    }
+                    if (data.conceptos[1][0] == 'Técnico Suspensiones') {
+                        $('#tpermiso').append('<option value="' + data.conceptos[3][4]['id'] + '">' + data.conceptos[3][4]['descripcion'] + '</option>');
+                        break;
+                    }
+                    if (data.conceptos[1][0] == 'Técnico Vacaciones') {
+                        $('#tpermiso').append('<option value="' + data.conceptos[3][0]['id'] + '">' + data.conceptos[3][0]['descripcion'] + '</option>');
+                        break;
+                    }
+                }
             }
         });
-
+        function limpiarConceptos () {
+            $('#concepto').empty();
+         }
         //cargar conceptos segun permiso
         $("#tpermiso").change(function() {
             var tipoconcepto_id = $(this).val();
+            limpiarConceptos();
             if (tipoconcepto_id) {
                 $.ajax({
                     type: 'GET',
                     url: '{{ route("conceptos.todos") }}',
                     dataType: 'json',
                     success: function(data) {
-                        $('#tpermiso').on('click', () => {
-                            $("#concepto").empty();
-                        })
                         if ($('#tpermiso').val() == 1) {
                             $.each(data, (key, value) => {
                                 $("#concepto").append('<option value="' + value[0][11].id + '">' + value[0][11].descripcion + '</option>');

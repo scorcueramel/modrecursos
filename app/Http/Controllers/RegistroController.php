@@ -90,7 +90,7 @@ class RegistroController extends Controller
             $resp->fecha_inicio = $fi;
             $resp->fecha_fin = $ff;
         }
-        $resp->fecha_inicio_persona = Carbon::parse($request->ingreso);
+        $resp->fecha_inicio_persona = Carbon::createFromFormat('d/m/Y',$request->ingreso)->format('Y-m-d');
         $resp->concepto_id = $request->concepto;
         $resp->anio_periodo = $request->anioperiodo;
         $resp->documento = $request->documento_ref;
@@ -210,7 +210,7 @@ class RegistroController extends Controller
             $resp->fecha_inicio = $fi;
             $resp->fecha_fin = $ff;
         }
-        $resp->fecha_inicio_persona = Carbon::parse($request->ingreso);
+        $resp->fecha_inicio_persona = Carbon::createFromFormat('d/m/Y',$request->ingreso)->format('Y-m-d');
         $resp->concepto_id = $request->concepto;
         $resp->anio_periodo = $request->anioperiodo;
         $resp->documento = $request->documento_ref;
