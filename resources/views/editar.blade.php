@@ -92,7 +92,10 @@ Editar Registro |
                                 </div>
                             </div>
                             <div class="form-row">
-                                <div class="col-md-12 d-flex justify-content-end">
+                                <div class="col-md-6">
+                                    <a href="{{route('general')}}" class="btn btn-danger" style="padding-bottom: -40px;"><i class="fas fa-undo-alt"></i> Volver</a>
+                                </div>
+                                <div class="col-md-6 d-flex justify-content-end">
                                     <button class="btn btn-primary mt-2" type="submit"><i class="fas fa-save"></i> Editar Registro
                                     </button>
                                 </div>

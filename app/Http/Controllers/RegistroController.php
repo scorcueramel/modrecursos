@@ -210,7 +210,8 @@ class RegistroController extends Controller
             $resp->fecha_inicio = $fi;
             $resp->fecha_fin = $ff;
         }
-        $resp->fecha_inicio_persona = Carbon::createFromFormat('d/m/Y',$request->ingreso)->format('Y-m-d');
+        // $resp->fecha_inicio_persona = Carbon::createFromFormat('d/m/Y',$request->ingreso)->format('Y-m-d');
+        $resp->fecha_inicio_persona = $request->ingreso;
         $resp->concepto_id = $request->concepto;
         $resp->anio_periodo = $request->anioperiodo;
         $resp->documento = $request->documento_ref;
