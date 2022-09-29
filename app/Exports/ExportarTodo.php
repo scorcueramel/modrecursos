@@ -18,8 +18,6 @@ class ExportarTodo implements FromCollection, WithHeadings
         ->where('registros.estado','=',1)
         ->get(['registros.codigo_persona','registros.tipo_documento_persona','registros.documento_persona','registros.nombre_persona','registros.reglab_persona','registros.uniorg_persona','registros.fecha_inicio_persona','registros.estado_persona','conceptos.descripcion','registros.fecha_inicio','registros.fecha_fin','registros.documento','registros.anio_periodo','registros.comentario']);
 
-        // dd($registers);
-
         return $registers;
     }
 
