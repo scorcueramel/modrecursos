@@ -76,11 +76,6 @@ Route::group(['middleware'=>['auth']],function () {
     Route::get('editar/{id}', [RegistroController::class, 'update'])->name('update');
 
     Route::get('manual/{file}', [RegistroController::class, 'descargamanual'])->name('descargar.manual');
-<<<<<<< HEAD
 
-    //exportarTodo
-    Route::get('exportar/registros',[RegistroController::class,'exportarExcel'])->name('descargar.registros');
-=======
     Route::get('export/all', [RegistroController::class,'exportall'])->name('exportar.todos');
->>>>>>> 2e97be519b30cc29327edab9fd2b88527dc1729f
 });

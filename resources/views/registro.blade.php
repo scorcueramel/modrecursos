@@ -89,11 +89,7 @@ Nuevo Registro |
                                 </div>
                                 <div class="col-md-5 mb-3">
                                     <label for="observaciones">Observaciones</label>
-<<<<<<< HEAD
                                     <input type="text" class="form-control" name="observaciones" id="observaciones" maxlength="60">
-=======
-                                    <input type="text" class="form-control" name="observaciones" id="observaciones" maxlength="150">
->>>>>>> 2e97be519b30cc29327edab9fd2b88527dc1729f
                                 </div>
                                 <div class="col-md-3 mb-3">
                                     <label for="documento_ref">Documento Sustentario</label>
@@ -128,69 +124,29 @@ Nuevo Registro |
             dataType: 'json',
             success: function(data) {
                 console.log(data.conceptos);
-<<<<<<< HEAD
-                for (let i = 0; i < 5; ++i) {
-                        if (data.conceptos[1][0] == 'superadmin') {
-                            $('#tpermiso').append('<option value="' + data.conceptos[3][i]['id'] + '">' + data.conceptos[3][i]['descripcion'] + '</option>');
-                        }
-                        if (data.conceptos[1][0] == 'Técnico Aislamientos')
-                        {
-                            console.log(data.conceptos[1][0]);
-                            $('#tpermiso').append('<option value="' + data.conceptos[3][i]['id'] + '">' + data.conceptos[3][i]['descripcion'] + '</option>');
-                            break;
-                        }
-                        if (data.conceptos[1][0] == 'Técnico Descansos Médicos')
-                        {
-                            $('#tpermiso').append('<option value="' + data.conceptos[3][i]['id'] + '">' + data.conceptos[3][i]['descripcion'] + '</option>');
-                            break;
-                        }
-                        if (data.conceptos[1][0] == 'Técnico Licencias')
-                        {
-                            $('#tpermiso').append('<option value="' + data.conceptos[3][i]['id'] + '">' + data.conceptos[3][i]['descripcion'] + '</option>');
-                            break;
-                        }
-                        if (data.conceptos[1][0] == 'Técnico Suspensiones')
-                        {
-                            console.log(data.conceptos[3][4]['descripcion']);
-                            $('#tpermiso').append('<option value="' + data.conceptos[3][i]['id'] + '">' + data.conceptos[3][i]['descripcion'] + '</option>');
-                            break;
-                        }
-                        if (data.conceptos[1][0] == 'Técnico Vacaciones')
-                        {
-                            $('#tpermiso').append('<option value="' + data.conceptos[3][i]['id'] + '">' + data.conceptos[3][i]['descripcion'] + '</option>');
-                            break;
-                        }
-=======
-                if ('Técnico Aislamientos' === data.conceptos[1][0]) {
-                    console.log('Aislamientos')
-                }
-
                 for (let i = 0; i < 5; ++i) {
                     if (data.conceptos[1][0] == 'superadmin') {
-                        // console.log(data.conceptos[2][i]['descripcion']);
-                        // console.log(data.conceptos[3][i]['descripcion']);
                         $('#tpermiso').append('<option value="' + data.conceptos[3][i]['id'] + '">' + data.conceptos[3][i]['descripcion'] + '</option>');
->>>>>>> 2e97be519b30cc29327edab9fd2b88527dc1729f
                     }
-                    if (data.conceptos[1][0] == 'Técnico Aislamientos') {
+                    if (data.conceptos[1][0] == 'Tecnico Aislamientos') {
                         console.log(data.conceptos[3][3]['descripcion']);
                         $('#tpermiso').append('<option value="' + data.conceptos[3][3]['id'] + '">' + data.conceptos[3][3]['descripcion'] + '</option>');
                         break;
                     }
-                    if (data.conceptos[1][0] == 'Técnico Descansos Médicos') {
+                    if (data.conceptos[1][0] == 'Tecnico Descansos Medicos') {
                         $('#tpermiso').append('<option value="' + data.conceptos[3][1]['id'] + '">' + data.conceptos[3][3]['descripcion'] + '</option>');
                         break;
                     }
-                    if (data.conceptos[1][0] == 'Técnico Licencias') {
+                    if (data.conceptos[1][0] == 'Tecnico Licencias') {
                         // console.log(data.conceptos[3][2]['descripcion']);
                         $('#tpermiso').append('<option value="' + data.conceptos[3][2]['id'] + '">' + data.conceptos[3][2]['descripcion'] + '</option>');
                         break;
                     }
-                    if (data.conceptos[1][0] == 'Técnico Suspensiones') {
+                    if (data.conceptos[1][0] == 'Tecnico Suspensiones') {
                         $('#tpermiso').append('<option value="' + data.conceptos[3][4]['id'] + '">' + data.conceptos[3][4]['descripcion'] + '</option>');
                         break;
                     }
-                    if (data.conceptos[1][0] == 'Técnico Vacaciones') {
+                    if (data.conceptos[1][0] == 'Tecnico Vacaciones') {
                         $('#tpermiso').append('<option value="' + data.conceptos[3][0]['id'] + '">' + data.conceptos[3][0]['descripcion'] + '</option>');
                         break;
                     }

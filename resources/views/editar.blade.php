@@ -84,7 +84,7 @@ Editar Registro |
                                 </div>
                                 <div class="col-md-5 mb-3">
                                     <label for="observaciones">Observaciones</label>
-                                    <input type="text" class="form-control" name="observaciones" id="observaciones" value="{{ $tp->comentario }}">
+                                    <input type="text" class="form-control" name="observaciones" id="observaciones" value="{{ $tp->comentario }}" maxlength="60">
                                 </div>
                                 <div class="col-md-3 mb-3">
                                     <label for="documento_ref">Documento Sustentario</label>

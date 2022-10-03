@@ -18,18 +18,14 @@
                                     <h4>Campos de Búsqueda</h4>
                                 </div>
                                 <div class="col-md-3 mb-3 d-flex justify-content-end">
-<<<<<<< HEAD
-                                    <a href="{{route('descargar.registros')}}" class="btn btn-success">
-                                        <i class="fas fa-file-upload"></i> Exportar Registros</a>
-                                </div>
-=======
-                                        <a class="btn btn-success" href="{{route('exportar.todos')}}">Exportación General</a>
+                                    <a class="btn btn-success" href="{{route('exportar.todos')}}"><i class="fas fa-file-excel"></i> Exportación
+                                        General</a>
                                 </div>
                                 <!--<div class="col-md-3 mb-3 d-flex justify-content-end">
                                     <a href="{{route('cargamasiva')}}" class="btn btn-success">
                                         <i class="fas fa-file-upload"></i> Carga Masiva</a>
                                 </div>-->
->>>>>>> 2e97be519b30cc29327edab9fd2b88527dc1729f
+
                             </div>
                             <form class="my-4" method="POST" action="{{ route('general.consultar') }}">
                                 @csrf
@@ -58,7 +54,8 @@
                                     </div>
                                     <div class="col-md-2 mt-2 d-flex justify-content-end">
                                         <button type="submit" class="btn btn-warning my-4"
-                                                onclick="validarNumericos();"><i class="fas fa-search"></i> Buscar </button>
+                                                onclick="validarNumericos();"><i class="fas fa-search"></i> Buscar
+                                        </button>
                                     </div>
                                 </div>
                             </form>
@@ -121,7 +118,8 @@
                                                 </td>
                                                 <td>
                                                     <a class="btn btn-primary btn-sm"
-                                                       href="{{route('registro.edit',$resp['CODIGO'])}}"><i class="fas fa-share"></i> Registrar</a>
+                                                       href="{{route('registro.edit',$resp['CODIGO'])}}"><i
+                                                            class="fas fa-share"></i> Registrar</a>
                                                 </td>
                                             @endif
                                         </tr>

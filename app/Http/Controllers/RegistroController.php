@@ -45,76 +45,83 @@ class RegistroController extends Controller
 
     public function store(Request $request)
     {
-        $msn = "";
-        $codigo = $request->codigo;
-        $fi = $request->fecinicio;
-        $ff = $request->fecfin;
+        $comprobarDiasPer = $request->diaspersonal;
 
-        $persona = DB::table('registros')
-            ->join('tipo_permisos', function ($join) {
-                $join->on('tipo_permisos.id', '=', 'registros.tipo_permiso_id');
-            })
-            ->where('codigo_persona', '=', $codigo)
-            ->whereDate('fecha_inicio', '<=', $ff)
-            ->whereDate('fecha_fin', '>=', $fi)
-            ->where('registros.estado', '>', 0)
-            ->get();
-
-        $resp = new Registro();
-        $resp->usuario_creador = Auth::user()->name;
-        $resp->codigo_persona = $codigo;
-        $resp->tipo_documento_persona = $request->tipo_documento_persona;
-        $resp->documento_persona = $request->documento_persona;
-        $resp->nombre_persona = $request->nombres;
-        $resp->reglab_persona = $request->reglaboral;
-        $resp->uniorg_persona = $request->uniorg;
-        $resp->estado_persona = $request->estado;
-        if ($request->tpermiso == "SELECCIONAR") {
-            $msn = "No Elegiste un tipo de permiso, vuelve a intentarlo!";
+        if ($comprobarDiasPer < 0) {
+            $msn = 'La Fecha de Fin es Menor a la de Inicio!';
             return back()->with('error', $msn);
         } else {
-            $resp->tipo_permiso_id = $request->tpermiso;
-        }
+            $msn = "";
+            $codigo = $request->codigo;
+            $fi = $request->fecinicio;
+            $ff = $request->fecfin;
 
-        if (count($persona) > 0) {
-            foreach ($persona as $key => $value) {
-                if (
-                    $persona[$key]->codigo_persona == $codigo
-                    && $persona[$key]->fecha_inicio <= $ff
-                    && $persona[$key]->fecha_fin >= $fi
-                    && $persona[$key]->estado != 0
-                ) {
-                    $msn = "Actualmente cuenta con " . $persona[$key]->descripcion . " en el rango de fecha seleccionado";
-                    return back()->with('error', $msn);
-                }
+            $persona = DB::table('registros')
+                ->join('tipo_permisos', function ($join) {
+                    $join->on('tipo_permisos.id', '=', 'registros.tipo_permiso_id');
+                })
+                ->where('codigo_persona', '=', $codigo)
+                ->whereDate('fecha_inicio', '<=', $ff)
+                ->whereDate('fecha_fin', '>=', $fi)
+                ->where('registros.estado', '>', 0)
+                ->get();
+
+            $resp = new Registro();
+            $resp->usuario_creador = Auth::user()->name;
+            $resp->codigo_persona = $codigo;
+            $resp->tipo_documento_persona = $request->tipo_documento_persona;
+            $resp->documento_persona = $request->documento_persona;
+            $resp->nombre_persona = $request->nombres;
+            $resp->reglab_persona = $request->reglaboral;
+            $resp->uniorg_persona = $request->uniorg;
+            $resp->estado_persona = $request->estado;
+            if ($request->tpermiso == "SELECCIONAR") {
+                $msn = "No Elegiste un tipo de permiso, vuelve a intentarlo!";
+                return back()->with('error', $msn);
+            } else {
+                $resp->tipo_permiso_id = $request->tpermiso;
             }
-        } else {
-            $resp->fecha_inicio = $fi;
-            $resp->fecha_fin = $ff;
+
+            if (count($persona) > 0) {
+                foreach ($persona as $key => $value) {
+                    if (
+                        $persona[$key]->codigo_persona == $codigo
+                        && $persona[$key]->fecha_inicio <= $ff
+                        && $persona[$key]->fecha_fin >= $fi
+                        && $persona[$key]->estado != 0
+                    ) {
+                        $msn = "Actualmente cuenta con " . $persona[$key]->descripcion . " en el rango de fecha seleccionado";
+                        return back()->with('error', $msn);
+                    }
+                }
+            } else {
+                $resp->fecha_inicio = $fi;
+                $resp->fecha_fin = $ff;
+            }
+            $resp->fecha_inicio_persona = Carbon::createFromFormat('d/m/Y', $request->ingreso)->format('Y-m-d');
+            $resp->concepto_id = $request->concepto;
+            $resp->anio_periodo = $request->anioperiodo;
+            $resp->documento = $request->documento_ref;
+            $resp->comentario = $request->observaciones;
+            $resp->ip_usuario = request()->ip();
+            $resp->usuario_editor = null;
+            $resp->estado = 1;
+            $resp->save();
+
+            $per = DB::table('registros')
+                ->where('codigo_persona', '=', $request->codigo)->get();
+
+            $diaPer = new DiasPersonal();
+
+            foreach ($per as $key => $value) {
+                $diaPer->id_registro = $per[$key]->id;
+                $diaPer->inicial = $request->diaspersonal;
+                $diaPer->saldo = $request->diaspersonal;
+                $diaPer->save();
+            }
+            $msn = 'Se Generó El Registro Exitosamente!';
+            return redirect()->route('home')->with('success', $msn);
         }
-        $resp->fecha_inicio_persona = Carbon::createFromFormat('d/m/Y',$request->ingreso)->format('Y-m-d');
-        $resp->concepto_id = $request->concepto;
-        $resp->anio_periodo = $request->anioperiodo;
-        $resp->documento = $request->documento_ref;
-        $resp->comentario = $request->observaciones;
-        $resp->ip_usuario = request()->ip();
-        $resp->usuario_editor = null;
-        $resp->estado = 1;
-        $resp->save();
-
-        $per = DB::table('registros')
-            ->where('codigo_persona', '=', $request->codigo)->get();
-
-        $diaPer = new DiasPersonal();
-
-        foreach ($per as $key => $value) {
-            $diaPer->id_registro = $per[$key]->id;
-            $diaPer->inicial = $request->diaspersonal;
-            $diaPer->saldo = $request->diaspersonal;
-            $diaPer->save();
-        }
-        $msn = 'Se Generó El Registro Exitosamente!';
-        return redirect()->route('home')->with('success', $msn);
     }
 
     public function desactivar(Request $request)
@@ -170,69 +177,77 @@ class RegistroController extends Controller
         $ff = $request->fecfin;
         $tipoper = $request->tpermiso;
 
-        $persona = DB::table('registros')
-            ->join('tipo_permisos', function ($join) {
-                $join->on('tipo_permisos.id', '=', 'registros.tipo_permiso_id');
-            })
-            ->where('codigo_persona', '=', $codigo)
-            ->where('tipo_permiso_id', '!=', $tipoper)
-            ->whereDate('fecha_inicio', '<=', $ff)
-            ->whereDate('fecha_fin', '>=', $fi)
-            ->where('registros.estado', '>', 0)
-            ->get();
+        $comprobarDiasPer = $request->diaspersonal;
 
-        $resp->codigo_persona = $codigo;
-        // $resp->tipo_documento_persona = $request->tipo_documento_persona;
-        $resp->documento_persona = $request->documento_persona;
-        $resp->nombre_persona = $request->nombres;
-        $resp->reglab_persona = $request->reglaboral;
-        $resp->uniorg_persona = $request->uniorg;
-        $resp->estado_persona = $request->estado;
-        if ($request->tpermiso == "SELECCIONAR") {
-            $msn = "No Elegiste un tipo de permiso, vuelve a intentarlo!";
-            return back()->with('error', $msn);
+        if ($comprobarDiasPer < 0) {
+            $msn = 'Las fechas ingresadas no son correctas!';
+            return redirect()->route('home')->with('error', $msn);
         } else {
-            $resp->tipo_permiso_id = $tipoper;
-        }
 
-        if (count($persona) > 0) {
-            foreach ($persona as $key => $value) {
-                if (
-                    $persona[$key]->codigo_persona == $codigo
-                    && $persona[$key]->fecha_inicio <= $ff
-                    && $persona[$key]->fecha_fin >= $fi
-                    && $persona[$key]->tipo_permiso_id != $tipoper
-                    && $persona[$key]->estado != 0
-                ) {
-                    $msn = "Actualmente cuenta con " . $persona[$key]->descripcion . " en el rango de fecha seleccionado";
-                    return back()->with('error', $msn);
-                }
+            $persona = DB::table('registros')
+                ->join('tipo_permisos', function ($join) {
+                    $join->on('tipo_permisos.id', '=', 'registros.tipo_permiso_id');
+                })
+                ->where('codigo_persona', '=', $codigo)
+                ->where('tipo_permiso_id', '!=', $tipoper)
+                ->whereDate('fecha_inicio', '<=', $ff)
+                ->whereDate('fecha_fin', '>=', $fi)
+                ->where('registros.estado', '>', 0)
+                ->get();
+
+            $resp->codigo_persona = $codigo;
+            // $resp->tipo_documento_persona = $request->tipo_documento_persona;
+            $resp->documento_persona = $request->documento_persona;
+            $resp->nombre_persona = $request->nombres;
+            $resp->reglab_persona = $request->reglaboral;
+            $resp->uniorg_persona = $request->uniorg;
+            $resp->estado_persona = $request->estado;
+            if ($request->tpermiso == "SELECCIONAR") {
+                $msn = "No Elegiste un tipo de permiso, vuelve a intentarlo!";
+                return back()->with('error', $msn);
+            } else {
+                $resp->tipo_permiso_id = $tipoper;
             }
-        } else {
-            $resp->fecha_inicio = $fi;
-            $resp->fecha_fin = $ff;
-        }
-        // $resp->fecha_inicio_persona = Carbon::createFromFormat('d/m/Y',$request->ingreso)->format('Y-m-d');
-        $resp->fecha_inicio_persona = $request->ingreso;
-        $resp->concepto_id = $request->concepto;
-        $resp->anio_periodo = $request->anioperiodo;
-        $resp->documento = $request->documento_ref;
-        $resp->comentario = $request->observaciones;
-        $resp->ip_usuario = request()->ip();
-        $resp->usuario_editor = Auth::user()->name;
-        $resp->estado = 1;
-        $resp->save();
 
-        $diaPer = DiasPersonal::find($resp->id);
+            if (count($persona) > 0) {
+                foreach ($persona as $key => $value) {
+                    if (
+                        $persona[$key]->codigo_persona == $codigo
+                        && $persona[$key]->fecha_inicio <= $ff
+                        && $persona[$key]->fecha_fin >= $fi
+                        && $persona[$key]->tipo_permiso_id != $tipoper
+                        && $persona[$key]->estado != 0
+                    ) {
+                        $msn = "Actualmente cuenta con " . $persona[$key]->descripcion . " en el rango de fecha seleccionado";
+                        return back()->with('error', $msn);
+                    }
+                }
+            } else {
+                $resp->fecha_inicio = $fi;
+                $resp->fecha_fin = $ff;
+            }
+            // $resp->fecha_inicio_persona = Carbon::createFromFormat('d/m/Y',$request->ingreso)->format('Y-m-d');
+            $resp->fecha_inicio_persona = $request->ingreso;
+            $resp->concepto_id = $request->concepto;
+            $resp->anio_periodo = $request->anioperiodo;
+            $resp->documento = $request->documento_ref;
+            $resp->comentario = $request->observaciones;
+            $resp->ip_usuario = request()->ip();
+            $resp->usuario_editor = Auth::user()->name;
+            $resp->estado = 1;
+            $resp->save();
 
-        foreach ($diaPer as $key => $value) {
-            // $diaPer->id_registro = $diaPer[$key]->id;
-            $diaPer->inicial = $request->diaspersonal;
-            $diaPer->saldo = $request->diaspersonal;
-            $diaPer->save();
+            $diaPer = DiasPersonal::find($resp->id);
+
+            foreach ($diaPer as $key => $value) {
+                // $diaPer->id_registro = $diaPer[$key]->id;
+                $diaPer->inicial = $request->diaspersonal;
+                $diaPer->saldo = $request->diaspersonal;
+                $diaPer->save();
+            }
+            $msn = 'Se Actualizo El Registro Exitosamente!';
+            return redirect()->route('home')->with('success', $msn);
         }
-        $msn = 'Se Actualizo El Registro Exitosamente!';
-        return redirect()->route('home')->with('success', $msn);
     }
 
     public function descargamanual($file)
@@ -241,14 +256,9 @@ class RegistroController extends Controller
         return response()->download($pathtoFile);
     }
 
-<<<<<<< HEAD
-    public function exportarExcel()
-    {
-        return Excel::download(new RegistrosTodos, 'Registros.xlsx');
-=======
     public function exportall()
     {
         return Excel::download(new ExportarTodo, "RegistrosTodos.xlsx");
->>>>>>> 2e97be519b30cc29327edab9fd2b88527dc1729f
+
     }
 }
