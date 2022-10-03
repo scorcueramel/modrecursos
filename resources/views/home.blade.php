@@ -18,8 +18,8 @@
                                     <h4>Campos de Búsqueda</h4>
                                 </div>
                                 <div class="col-md-3 mb-3 d-flex justify-content-end">
-                                    <a href="{{route('cargamasiva')}}" class="btn btn-success">
-                                        <i class="fas fa-file-upload"></i> Carga Masiva</a>
+                                    <a href="{{route('descargar.registros')}}" class="btn btn-success">
+                                        <i class="fas fa-file-upload"></i> Exportar Registros</a>
                                 </div>
                             </div>
                             <form class="my-4" method="POST" action="{{ route('general.consultar') }}">

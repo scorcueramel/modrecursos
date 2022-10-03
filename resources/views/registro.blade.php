@@ -89,7 +89,7 @@ Nuevo Registro |
                                 </div>
                                 <div class="col-md-5 mb-3">
                                     <label for="observaciones">Observaciones</label>
-                                    <input type="text" class="form-control" name="observaciones" id="observaciones">
+                                    <input type="text" class="form-control" name="observaciones" id="observaciones" maxlength="60">
                                 </div>
                                 <div class="col-md-3 mb-3">
                                     <label for="documento_ref">Documento Sustentario</label>
@@ -121,38 +121,23 @@ Nuevo Registro |
             dataType: 'json',
             success: function(data) {
                 console.log(data.conceptos);
-                // console.log(data.conceptos[4]);
-                // console.log(data.conceptos[3]);
-                // console.log(data.conceptos[1][0]);
-                // for (let i = 0; i < data.conceptos[3].length; i++) {
-                //     for (let j = 0; j <= data.conceptos[3].length; ++j) {
-                //         console.log(data.conceptos[4][j]['name']);
-                //         if (data.conceptos[1][0] == data.conceptos[4][j]['name']) {
-                //             $('#tpermiso').append('<option value="' + data.conceptos[3][j]['id'] + '">' + data.conceptos[3][j]['descripcion'] + '</option>');
-                //         }
-                //     }
-                // }
                 for (let i = 0; i < 5; ++i) {
                         if (data.conceptos[1][0] == 'superadmin') {
-                            // console.log(data.conceptos[2][i]['descripcion']);
-                            // console.log(data.conceptos[3][i]['descripcion']);
                             $('#tpermiso').append('<option value="' + data.conceptos[3][i]['id'] + '">' + data.conceptos[3][i]['descripcion'] + '</option>');
                         }
                         if (data.conceptos[1][0] == 'Técnico Aislamientos')
                         {
-                            // console.log(data.conceptos[3][3]['descripcion']);
+                            console.log(data.conceptos[1][0]);
                             $('#tpermiso').append('<option value="' + data.conceptos[3][i]['id'] + '">' + data.conceptos[3][i]['descripcion'] + '</option>');
                             break;
                         }
                         if (data.conceptos[1][0] == 'Técnico Descansos Médicos')
                         {
-                            // console.log(data.conceptos[3][1]['descripcion']);
                             $('#tpermiso').append('<option value="' + data.conceptos[3][i]['id'] + '">' + data.conceptos[3][i]['descripcion'] + '</option>');
                             break;
                         }
                         if (data.conceptos[1][0] == 'Técnico Licencias')
                         {
-                            // console.log(data.conceptos[3][2]['descripcion']);
                             $('#tpermiso').append('<option value="' + data.conceptos[3][i]['id'] + '">' + data.conceptos[3][i]['descripcion'] + '</option>');
                             break;
                         }
@@ -164,7 +149,6 @@ Nuevo Registro |
                         }
                         if (data.conceptos[1][0] == 'Técnico Vacaciones')
                         {
-                            // console.log(data.conceptos[3][0]['descripcion']);
                             $('#tpermiso').append('<option value="' + data.conceptos[3][i]['id'] + '">' + data.conceptos[3][i]['descripcion'] + '</option>');
                             break;
                         }
@@ -213,8 +197,6 @@ Nuevo Registro |
                 });
             }
         });
-
-        //meterlo en un funcion para que cambie los dias
 
         //Calculo de días automatico
         var f1, f2, r1, r2, t, tf, resp;

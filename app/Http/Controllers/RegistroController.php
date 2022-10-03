@@ -14,6 +14,7 @@ use App\Models\Conceptos;
 use App\Models\DiasPersonal;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use App\Exports\RegistrosTodos;
 
 class RegistroController extends Controller
 {
@@ -236,5 +237,10 @@ class RegistroController extends Controller
     {
         $pathtoFile = public_path() . '/' . $file;
         return response()->download($pathtoFile);
+    }
+
+    public function exportarExcel()
+    {
+        return Excel::download(new RegistrosTodos, 'Registros.xlsx');
     }
 }
