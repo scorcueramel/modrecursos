@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\ExportarTodo;
 use Auth;
 
 use App\Imports\RegistrosImport;
@@ -91,7 +92,7 @@ class RegistroController extends Controller
             $resp->fecha_inicio = $fi;
             $resp->fecha_fin = $ff;
         }
-        $resp->fecha_inicio_persona = Carbon::parse($request->ingreso);
+        $resp->fecha_inicio_persona = Carbon::createFromFormat('d/m/Y',$request->ingreso)->format('Y-m-d');
         $resp->concepto_id = $request->concepto;
         $resp->anio_periodo = $request->anioperiodo;
         $resp->documento = $request->documento_ref;
@@ -211,7 +212,8 @@ class RegistroController extends Controller
             $resp->fecha_inicio = $fi;
             $resp->fecha_fin = $ff;
         }
-        $resp->fecha_inicio_persona = Carbon::parse($request->ingreso);
+        // $resp->fecha_inicio_persona = Carbon::createFromFormat('d/m/Y',$request->ingreso)->format('Y-m-d');
+        $resp->fecha_inicio_persona = $request->ingreso;
         $resp->concepto_id = $request->concepto;
         $resp->anio_periodo = $request->anioperiodo;
         $resp->documento = $request->documento_ref;
@@ -239,8 +241,14 @@ class RegistroController extends Controller
         return response()->download($pathtoFile);
     }
 
+<<<<<<< HEAD
     public function exportarExcel()
     {
         return Excel::download(new RegistrosTodos, 'Registros.xlsx');
+=======
+    public function exportall()
+    {
+        return Excel::download(new ExportarTodo, "RegistrosTodos.xlsx");
+>>>>>>> 2e97be519b30cc29327edab9fd2b88527dc1729f
     }
 }

@@ -17,7 +17,7 @@ class SuspensionesController extends Controller
     public function tablasuspensiones()
     {
         $tblsuspensiones = Registro::join('dias_personals','registros.id','=','dias_personals.id_registro')
-            ->select('registros.id','registros.codigo_persona','registros.documento_persona','registros.nombre_persona','registros.reglab_persona','registros.uniorg_persona','registros.fecha_inicio','registros.fecha_fin','registros.anio_periodo','registros.documento','dias_personals.inicial as inicial')
+            ->select('registros.id','registros.codigo_persona','registros.documento_persona','registros.nombre_persona','registros.reglab_persona','registros.uniorg_persona','registros.fecha_inicio','registros.fecha_fin','registros.anio_periodo','registros.documento','registros.comentario','dias_personals.inicial as inicial')
             ->where('tipo_permiso_id','=',5);
         return datatables()->of($tblsuspensiones)
         ->addColumn('editar',function ($row){
@@ -47,24 +47,24 @@ class SuspensionesController extends Controller
             return $docsus;
         })
         ->addColumn('periodo',function ($row){
-            $docsus = "";
+            $periodo = "";
             if($row['anio_periodo'] == "")
             {
-                $docsus = "S/P";
+                $periodo = "S/P";
             }else{
-                $docsus = $row['anio_periodo'];
+                $periodo = $row['anio_periodo'];
             }
-            return $docsus;
+            return $periodo;
         })
         ->addColumn('obs',function ($row){
-            $docsus = "";
+            $obs = "";
             if($row['comentario'] == "")
             {
-                $docsus = "S/O";
+                $obs = "S/O";
             }else{
-                $docsus = $row['comentario'];
+                $obs = $row['comentario'];
             }
-            return $docsus;
+            return $obs;
         })
         ->rawColumns(['editar','borrar','docsus','periodo','obs'])
         ->make(true);

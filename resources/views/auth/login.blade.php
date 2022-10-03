@@ -32,7 +32,7 @@
 
                 <div class="form-group">
                     <div class="d-block">
-                        <label for="password" class="control-label">Contaseña</label>
+                        <label for="password" class="control-label">Contraseña</label>
                         {{-- <div class="float-right">
                             <a href="{{ route('password.request') }}" class="text-small">
                                 Forgot Password?

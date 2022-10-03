@@ -24,7 +24,7 @@ Licencias |
                                         <td><input type="date" id="max" name="max" class="form-control"></td>
                                     </tr>
                                     <tr>
-                                        <td><a href="{{route('licencias.export')}}">Exportar</a></td>
+                                        <td colspan="2"><a class="btn btn-success btn-block" href="{{route('licencias.export')}}">Exportar</a></td>
                                     </tr>
                                 </tbody>
                             </table>

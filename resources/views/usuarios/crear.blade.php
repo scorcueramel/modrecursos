@@ -62,7 +62,10 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-xs-12 col-sm-12 col-md-12 d-flex justify-content-end">
+                                <div class="col-md-6">
+                                    <a href="{{route('usuarios.index')}}" class="btn btn-danger" style="padding-bottom: -40px;"><i class="fas fa-undo-alt"></i> Volver</a>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-6 d-flex justify-content-end">
                                     <button type="submit" class="btn btn-success">Guardar</button>
                                 </div>
                             </div>
