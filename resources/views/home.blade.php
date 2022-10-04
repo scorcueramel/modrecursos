@@ -72,15 +72,15 @@
                             @endif
                             <table class="table table-bordered table-hover" id="personal">
                                 <thead class="bg-info">
-                                <th style="color: #fff">COD</th>
-                                <th style="color: #fff">DOC.</th>
-                                <th style="color: #fff">NOMBRES</th>
-                                <th style="color: #fff">REG. LAB.</th>
-                                <th style="color: #fff">UNI. ORG</th>
-                                <th style="color: #fff">I. LABORES</th>
-                                <th style="color: #fff">C. LABORES</th>
-                                <th style="color: #fff">ESTADO</th>
-                                <th style="color: #fff">OPCIONES</th>
+                                    <th style="color: #fff">COD</th>
+                                    <th style="color: #fff">DOC.</th>
+                                    <th style="color: #fff">NOMBRES</th>
+                                    <th style="color: #fff">REG. LAB.</th>
+                                    <th style="color: #fff">UNI. ORG</th>
+                                    <th style="color: #fff">I. LABORES</th>
+                                    <th style="color: #fff">C. LABORES</th>
+                                    <th style="color: #fff">ESTADO</th>
+                                    <th style="color: #fff">OPCIONES</th>
                                 </thead>
                                 <tbody>
                                 @if ($respuesta = Session::get('resp'))

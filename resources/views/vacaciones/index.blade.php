@@ -31,7 +31,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <table class="table mt-2" id="vacaciones">
+                                    <table class="table table-responsive-sm table-responsive-md mt-2" id="vacaciones">
                                         <thead class="bg-info">
                                         <!-- {{--                                        <th style="color: #fff">COD</th>--}} -->
                                         <th style="color: #fff">DCUMENTO IDENTIDAD</th>
