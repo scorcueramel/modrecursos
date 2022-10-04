@@ -179,7 +179,7 @@ return [
         //maatWebsite
         Maatwebsite\Excel\ExcelServiceProvider::class,
         //datatables
-        Yajra\DataTables\DataTablesServiceProvider::class,
+        // Yajra\DataTables\DataTablesServiceProvider::class,
         //toastr
         Yoeunes\Toastr\ToastrServiceProvider::class,
     ],
@@ -235,7 +235,7 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-        'DataTables' => Yajra\DataTables\Facades\DataTables::class,
+        // 'DataTables' => Yajra\DataTables\Facades\DataTables::class,
 
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
     ],

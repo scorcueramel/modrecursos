@@ -126,6 +126,8 @@ Nuevo Registro |
                 console.log(data.conceptos);
                 for (let i = 0; i < 5; ++i) {
                     if (data.conceptos[1][0] == 'superadmin') {
+                        console.log(data.conceptos[1][0]);
+                        console.log(data.conceptos[2].length);
                         $('#tpermiso').append('<option value="' + data.conceptos[3][i]['id'] + '">' + data.conceptos[3][i]['descripcion'] + '</option>');
                     }
                     if (data.conceptos[1][0] == 'Tecnico Aislamientos') {
@@ -138,7 +140,6 @@ Nuevo Registro |
                         break;
                     }
                     if (data.conceptos[1][0] == 'Tecnico Licencias') {
-                        // console.log(data.conceptos[3][2]['descripcion']);
                         $('#tpermiso').append('<option value="' + data.conceptos[3][2]['id'] + '">' + data.conceptos[3][2]['descripcion'] + '</option>');
                         break;
                     }
