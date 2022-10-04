@@ -4,7 +4,6 @@ namespace App\Imports;
 
 use App\Models\DiasPersonal;
 use App\Models\Registro;
-use App\Models\ResponseDTO;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\Importable;
 use Maatwebsite\Excel\Concerns\WithCalculatedFormulas;

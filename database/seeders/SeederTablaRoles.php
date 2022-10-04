@@ -16,10 +16,10 @@ class SeederTablaRoles extends Seeder
     {
         $roles = [
             'superadmin',
-            'Técnico Vacaciones',
-            'Técnico Descansos Médicos',
-            'Técnico Licencias',
-            'Técnico Aislamientos'
+            'Tecnico Vacaciones',
+            'Tecnico Descansos Medicos',
+            'Tecnico Licencias',
+            'Tecnico Aislamientos'
         ];
         foreach($roles as $r){
             DB::insert('insert into roles (name, guard_name) values (?,?)', [$r,'web']);

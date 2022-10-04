@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Exports\ExportarTodo;
 use Auth;
-
 use App\Imports\RegistrosImport;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
@@ -15,7 +13,7 @@ use App\Models\Conceptos;
 use App\Models\DiasPersonal;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
-use App\Exports\RegistrosTodos;
+use App\Exports\ExportarTodo;
 
 class RegistroController extends Controller
 {
@@ -146,18 +144,6 @@ class RegistroController extends Controller
             return back()->with('error', $msn);
         }
     }
-
-    public function cargamasiva()
-    {
-        return view('cargamasiva');
-    }
-
-    public function import(Request $request)
-    {
-        Excel::import(new RegistrosImport, $request->file);
-        return redirect()->back();
-    }
-
     public function edit($id)
     {
         $registro = Registro::find($id);
@@ -260,5 +246,16 @@ class RegistroController extends Controller
     {
         return Excel::download(new ExportarTodo, "RegistrosTodos.xlsx");
 
+    }
+
+    public function cargamasiva()
+    {
+        return view('cargamasiva');
+    }
+
+    public function import(Request $request)
+    {
+        Excel::import(new RegistrosImport, $request->file);
+        return redirect()->back();
     }
 }
