@@ -9,8 +9,6 @@ use App\Models\Registro;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
-use function PHPSTORM_META\map;
-
 class AislamientosController extends Controller
 {
     public function index()

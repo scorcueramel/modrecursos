@@ -17,7 +17,6 @@ use App\Exports\ExportarTodo;
 
 class RegistroController extends Controller
 {
-
     public function registrar($codigo)
     {
         $response = Http::acceptJson()->get('http://sistemas.munisurco.gob.pe/pidemss/servicios/siam/dat?P_APEPATERNO=&P_APEMATERNO=&P_CODIGO=' . $codigo . '&P_VCHTIDCODIGO=&P_NUMDOCUMENTO=&entidad=201&sistema=603&key=400');
