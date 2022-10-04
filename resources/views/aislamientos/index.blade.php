@@ -33,11 +33,8 @@ Aislamientos |
                             <div class="col-md-12">
                                 <table class="table mt-2" id="aislamientos">
                                     <thead class="bg-info">
-                                        <!-- {{--                                        <th style="color: #fff">COD</th>--}} -->
-                                        <th style="color: #fff">DCUMENTO IDENTIDAD</th>
+                                        <th style="color: #fff">DOCUMENTO IDENTIDAD</th>
                                         <th style="color: #fff">NOMBRES</th>
-                                        <!-- {{--                                        <th style="color: #fff">REG. LAB.</th>--}}
-                                        {{--                                        <th style="color: #fff">UNI. ORG</th>--}} -->
                                         <th style="color: #fff">F. INICIO</th>
                                         <th style="color: #fff">F. FIN</th>
                                         <th style="color: #fff">DIAS</th>
@@ -81,15 +78,12 @@ Aislamientos |
             ],
             "ajax": "{{route('tabla.aislamientos')}}",
             "columns": [
-                // {data:'codigo_persona'},
                 {
                     data: 'documento_persona'
                 },
                 {
                     data: 'nombre_persona'
                 },
-                // {data:'reglab_persona'},
-                // {data:'uniorg_persona'},
                 {
                     data: 'fecha_inicio'
                 },
