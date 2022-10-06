@@ -117,9 +117,8 @@
                                         </span>
                                                 </td>
                                                 <td>
-                                                    <a class="btn btn-primary btn-sm"
-                                                       href="{{route('registro.edit',$resp['CODIGO'])}}"><i
-                                                            class="fas fa-share"></i> Registrar</a>
+                                                    <a class="btn btn-primary"
+                                                       href="{{route('registro.edit',$resp['CODIGO'])}}"><i class="fas fa-user-plus"></i></a>
                                                 </td>
                                             @endif
                                         </tr>
