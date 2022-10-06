@@ -27,7 +27,7 @@ Aislamientos |
                                             <input type="date" id="max" name="max" class="form-control">
                                         </div>
                                         <div class="col mt-1">
-                                            <button type="submit" class="btn btn-success" id="btnexportar" disabled="disabled">Exportar</button>
+                                            <button type="submit" class="btn btn-success" id="btnexportar" disabled="disabled"><i class="fas fa-file-excel"></i> Exportar</button>
                                         </div>
                                     </div>
                                 </form>

@@ -24,7 +24,7 @@
                                         <td><input type="date" id="max" name="max" class="form-control"></td>
                                     </tr>
                                     <tr>
-                                        <td colspan="2"><a class="btn btn-success btn-block" href="{{route('vacaciones.export')}}">Exportar</a></td>
+                                        <td colspan="2"><i class="fas fa-file-excel"></i><a class="btn btn-success btn-block" href="{{route('vacaciones.export')}}">Exportar</a></td>
                                     </tr>
                                     </tbody>
                                 </table>

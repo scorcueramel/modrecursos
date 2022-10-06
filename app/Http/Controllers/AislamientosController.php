@@ -73,22 +73,22 @@ class AislamientosController extends Controller
         $min = Carbon::parse($request->min);
         $max = Carbon::parse($request->max);
 
-        $diferencia = $min->diffInDays($max);
-        $residuo = $diferencia;
+        // $diferencia = $min->diffInDays($max);
+        // $residuo = $diferencia;
 
-        $query1 = DiasPersonal::select('codigo_persona', 'saldo', 'total')
-            ->join('registros', 'registros.id', '=', 'dias_personals.id_registro')
-            ->where('dias_personals.saldo', '>', 0)
-            ->where('registros.tipo_permiso_id', 4)
-            ->where('registros.estado', '>', 0)
-            ->get();
+        // $query1 = DiasPersonal::select('codigo_persona', 'saldo', 'total')
+        //     ->join('registros', 'registros.id', '=', 'dias_personals.id_registro')
+        //     ->where('dias_personals.saldo', '>', 0)
+        //     ->where('registros.tipo_permiso_id', 4)
+        //     ->where('registros.estado', '>', 0)
+        //     ->get();
 
-        foreach ($query1 as $key => $value) {
-            $saldo = $query1[$key]["saldo"];
-            $total = $saldo - $residuo;
-            $query1->total = $total;
-            dd($saldo);
-        }
+        // foreach ($query1 as $key => $value) {
+        //     $saldo = $query1[$key]["saldo"];
+        //     $total = $saldo - $residuo;
+        //     $query1->total = $total;
+        //     dd($saldo);
+        // }
 
         $query = Registro::select('tipo_documento_persona', 'documento_persona', 'codigo_pdt', 'inicial')
             ->join('conceptos', 'registros.concepto_id', '=', 'conceptos.id')
@@ -98,9 +98,6 @@ class AislamientosController extends Controller
             ->where('registros.estado', '>', 0)
             ->where('registros.tipo_permiso_id', 4)
             ->get();
-
-        dd($query);
-
         return Excel::download(new AislamientosExport($min, $max), 'aislamientos.csv');
     }
 }
