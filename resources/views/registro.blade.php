@@ -128,7 +128,7 @@ Nuevo Registro |
             url: '{{ route("conceptos.todos") }}',
             dataType: 'json',
             success: function(data) {
-                // console.log(data.conceptos);
+                console.log(data.conceptos);
                 for (let i = 0; i < 5; ++i) {
                     if (data.conceptos[1][0] == 'superadmin') {
                         $('#tpermiso').append('<option value="' + data.conceptos[3][i]['id'] + '">' + data.conceptos[3][i]['descripcion'] + '</option>');
@@ -139,7 +139,7 @@ Nuevo Registro |
                         break;
                     }
                     if (data.conceptos[1][0] == 'Tecnico Descansos Medicos') {
-                        $('#tpermiso').append('<option value="' + data.conceptos[3][1]['id'] + '">' + data.conceptos[3][3]['descripcion'] + '</option>');
+                        $('#tpermiso').append('<option value="' + data.conceptos[3][1]['id'] + '">' + data.conceptos[3][1]['descripcion'] + '</option>');
                         break;
                     }
                     if (data.conceptos[1][0] == 'Tecnico Licencias') {
