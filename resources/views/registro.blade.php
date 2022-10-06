@@ -118,11 +118,11 @@ Nuevo Registro |
 <script>
     $(document).ready(() => {
 
-        // var usuario = {!! auth()->user()->can('EDITAR-VACACIONES') !!};
+        var usuario = {!! auth()->user()->can('EDITAR-VACACIONES') !!};
 
-        // console.log(usuario);
+        console.log(usuario);
 
-        //cargar tipos de permiso en base al rol del usuario
+        // cargar tipos de permiso en base al rol del usuario
         $.ajax({
             type: 'GET',
             url: '{{ route("conceptos.todos") }}',
