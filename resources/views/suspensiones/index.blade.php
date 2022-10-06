@@ -67,6 +67,21 @@ Suspensiones |
 @section('scripts')
 <script>
     $(document).ready(function() {
+
+        $('#max').on('change', function () {
+            if(minimo = $('#min').val() != "")
+            {
+                $('#btnexportar').removeAttr("disabled");
+            }
+         });
+
+         $('#min').on('change', function () {
+            if(minimo = $('#max').val() != "")
+            {
+                $('#btnexportar').removeAttr("disabled");
+            }
+         });
+
         $('#suspensiones').DataTable({
             proccesing: true,
             info: true,
