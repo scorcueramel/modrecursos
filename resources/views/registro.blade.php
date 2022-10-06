@@ -117,17 +117,20 @@ Nuevo Registro |
 @section('scripts')
 <script>
     $(document).ready(() => {
+
+        // var usuario = {!! auth()->user()->can('EDITAR-VACACIONES') !!};
+
+        // console.log(usuario);
+
         //cargar tipos de permiso en base al rol del usuario
         $.ajax({
             type: 'GET',
             url: '{{ route("conceptos.todos") }}',
             dataType: 'json',
             success: function(data) {
-                console.log(data.conceptos);
+                // console.log(data.conceptos);
                 for (let i = 0; i < 5; ++i) {
                     if (data.conceptos[1][0] == 'superadmin') {
-                        console.log(data.conceptos[1][0]);
-                        console.log(data.conceptos[2].length);
                         $('#tpermiso').append('<option value="' + data.conceptos[3][i]['id'] + '">' + data.conceptos[3][i]['descripcion'] + '</option>');
                     }
                     if (data.conceptos[1][0] == 'Tecnico Aislamientos') {
