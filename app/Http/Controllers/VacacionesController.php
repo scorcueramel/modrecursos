@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Exports\VacacionesExport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Models\Registro;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class VacacionesController extends Controller
@@ -71,8 +72,12 @@ class VacacionesController extends Controller
         ->make(true);
     }
 
-    public function export()
+    public function export(Request $request)
     {
-        return Excel::download(new VacacionesExport, 'vacaciones.csv');
+        //fechas para filtro
+        $min = Carbon::parse($request->min);
+        $max = Carbon::parse($request->max);
+
+        return Excel::download(new VacacionesExport($min, $max), 'vacaciones.csv');
     }
 }

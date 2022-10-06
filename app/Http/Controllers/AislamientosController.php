@@ -73,8 +73,20 @@ class AislamientosController extends Controller
         $min = Carbon::parse($request->min);
         $max = Carbon::parse($request->max);
 
-        // $diferencia = $min->diffInDays($max);
-        // $residuo = $diferencia;
+        // $query = Registro::select('tipo_documento_persona', 'documento_persona', 'codigo_pdt', 'saldo', 'fecha_fin')
+        //     ->join('conceptos', 'registros.concepto_id', '=', 'conceptos.id')
+        //     ->join('dias_personals', 'registros.id', '=', 'dias_personals.id_registro')
+        //     ->whereDate('fecha_inicio', '<=', $max)
+        //     ->whereDate('fecha_fin', '>=', $min)
+        //     ->where('registros.estado', '>', 0)
+        //     ->where('registros.tipo_permiso_id', 4)
+        //     ->get();
+
+        // foreach ($query as $key => $value)
+        // {
+        //     $ffr = Carbon::parse($query[$key]['fecha_fin']); //fecha fin del registro
+        //     $diferencia = $ffr->diffInDays($max);
+        // }
 
         // $query1 = DiasPersonal::select('codigo_persona', 'saldo', 'total')
         //     ->join('registros', 'registros.id', '=', 'dias_personals.id_registro')
@@ -84,20 +96,10 @@ class AislamientosController extends Controller
         //     ->get();
 
         // foreach ($query1 as $key => $value) {
-        //     $saldo = $query1[$key]["saldo"];
-        //     $total = $saldo - $residuo;
-        //     $query1->total = $total;
-        //     dd($saldo);
+        //     $dp = $query1[$key]["saldo"] - $diferencia;
+        //     $query1->total = $dp;
         // }
 
-        $query = Registro::select('tipo_documento_persona', 'documento_persona', 'codigo_pdt', 'inicial')
-            ->join('conceptos', 'registros.concepto_id', '=', 'conceptos.id')
-            ->join('dias_personals', 'registros.id', '=', 'dias_personals.id_registro')
-            ->whereDate('fecha_inicio', '<=', $max)
-            ->whereDate('fecha_fin', '>=', $min)
-            ->where('registros.estado', '>', 0)
-            ->where('registros.tipo_permiso_id', 4)
-            ->get();
         return Excel::download(new AislamientosExport($min, $max), 'aislamientos.csv');
     }
 }

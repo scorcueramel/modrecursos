@@ -9,17 +9,28 @@ use Maatwebsite\Excel\Concerns\WithCustomCsvSettings;
 
 class DescansosMedicosExport implements FromCollection, WithCustomCsvSettings
 {
-    /**
-    * @return \Illuminate\Support\Collection
-    */
-    public function collection()
+    public $fi;
+    public $ff;
+
+    public function __construct($fi, $ff)
     {
-        return Registro::select('tipo_documento_persona','documento_persona','codigo_pdt','inicial')
-        ->join('conceptos', 'registros.concepto_id', '=', 'conceptos.id')
-        ->join('dias_personals', 'registros.id', '=', 'dias_personals.id_registro')
-        ->where('registros.tipo_permiso_id', 2)->get();
+        $this->fi = $fi;
+        $this->ff = $ff;
     }
 
+    public function collection()
+    {
+        $query = Registro::select('tipo_documento_persona', 'documento_persona', 'codigo_pdt', 'saldo')
+            ->join('conceptos', 'registros.concepto_id', '=', 'conceptos.id')
+            ->join('dias_personals', 'registros.id', '=', 'dias_personals.id_registro')
+            ->whereDate('fecha_inicio', '<=', $this->ff)
+            ->whereDate('fecha_fin', '>=', $this->fi)
+            ->where('registros.estado', '>', 0)
+            ->where('registros.tipo_permiso_id', 2)
+            ->get();
+
+        return $query;
+    }
     public function getCsvSettings(): array
     {
         return [

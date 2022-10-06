@@ -13,21 +13,25 @@ Suspensiones |
                 <div class="card">
                     <div class="card-body">
                         <div class="row mb-4">
-                            <table border="0" cellspacing="5" cellpadding="5" class="ml-3">
-                                <tbody>
-                                    <tr>
-                                        <td>Desde:</td>
-                                        <td><input type="date" id="min" name="min" class="form-control"></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Hasta:</td>
-                                        <td><input type="date" id="max" name="max" class="form-control"></td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="2"><a class="btn btn-success btn-block" href="{{route('suspensiones.export')}}">Exportar</a></td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                            <div class="col-2 mt-2">
+                                <h4>Exportar Por Fechas</h6>
+                            </div>
+                            <div class="col-6">
+                                <form action="{{route('suspensiones.export')}}" method="post">
+                                    @csrf
+                                    <div class="row">
+                                        <div class="col">
+                                            <input type="date" id="min" name="min" class="form-control">
+                                        </div>
+                                        <div class="col">
+                                            <input type="date" id="max" name="max" class="form-control">
+                                        </div>
+                                        <div class="col mt-1">
+                                            <button type="submit" class="btn btn-success" id="btnexportar" disabled="disabled"><i class="fas fa-file-excel"></i> Exportar</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12">
@@ -80,8 +84,8 @@ Suspensiones |
             ],
             "ajax": "{{route('tabla.suspensiones')}}",
             "columns": [
-              // {data:'codigo_persona'},
-              {
+                // {data:'codigo_persona'},
+                {
                     data: 'documento_persona'
                 },
                 {

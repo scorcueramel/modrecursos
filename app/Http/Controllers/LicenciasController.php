@@ -6,6 +6,7 @@ use App\Exports\LicenciasExport;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
 use App\Models\Registro;
+use Carbon\Carbon;
 
 class LicenciasController extends Controller
 {
@@ -70,8 +71,12 @@ class LicenciasController extends Controller
         ->make(true);
     }
 
-    public function export()
+    public function export(Request $request)
     {
-        return Excel::download(new LicenciasExport, 'licencias.csv');
+        //fechas para filtro
+        $min = Carbon::parse($request->min);
+        $max = Carbon::parse($request->max);
+
+        return Excel::download(new LicenciasExport($min,$max), 'licencias.csv');
     }
 }

@@ -6,6 +6,7 @@ use App\Exports\SuspensionesExport;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
 use App\Models\Registro;
+use Carbon\Carbon;
 
 class SuspensionesController extends Controller
 {
@@ -70,8 +71,12 @@ class SuspensionesController extends Controller
         ->make(true);
     }
 
-    public function export()
+    public function export(Request $request)
     {
-        return Excel::download(new SuspensionesExport, 'suspensiones.csv');
+        //fechas para filtro
+        $min = Carbon::parse($request->min);
+        $max = Carbon::parse($request->max);
+
+        return Excel::download(new SuspensionesExport($min, $max), 'suspensiones.csv');
     }
 }

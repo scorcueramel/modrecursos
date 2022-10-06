@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Exports\DescansosMedicosExport;
 use Maatwebsite\Excel\Facades\Excel;
-use Illuminate\Http\Request;
 use App\Models\Registro;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
 
 class DescansosMedicosController extends Controller
 {
@@ -69,8 +70,12 @@ class DescansosMedicosController extends Controller
         ->make(true);
     }
 
-    public function export()
+    public function export(Request $request)
     {
-        return Excel::download(new DescansosMedicosExport, 'descansosmedicos.csv');
+        //fechas para filtro
+        $min = Carbon::parse($request->min);
+        $max = Carbon::parse($request->max);
+
+        return Excel::download(new DescansosMedicosExport($min,$max), 'descansosmedicos.csv');
     }
 }
