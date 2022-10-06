@@ -61,10 +61,10 @@ Route::group(['middleware'=>['auth']],function () {
     Route::post('store', [RegistroController::class, 'store'])->name('store');
     Route::get('detalle/conceptos', [RegistroController::class, 'conceptos'])->name('conceptos.todos');
 
-    Route::get('vacaciones/export/', [VacacionesController::class, 'export'])->name('vacaciones.export');
-    Route::get('suspensiones/export/', [SuspensionesController::class, 'export'])->name('suspensiones.export');
-    Route::get('descansosmedicos/export/', [DescansosMedicosController::class, 'export'])->name('descansosmedicos.export');
-    Route::get('licencias/export/', [LicenciasController::class, 'export'])->name('licencias.export');
+    Route::post('vacaciones/export/', [VacacionesController::class, 'export'])->name('vacaciones.export');
+    Route::post('suspensiones/export/', [SuspensionesController::class, 'export'])->name('suspensiones.export');
+    Route::post('descansosmedicos/export/', [DescansosMedicosController::class, 'export'])->name('descansosmedicos.export');
+    Route::post('licencias/export/', [LicenciasController::class, 'export'])->name('licencias.export');
     Route::post('aislamientos/export/', [AislamientosController::class, 'export'])->name('aislamientos.export');
 
     Route::get('cargamasiva', [RegistroController::class, 'cargamasiva'])->name('cargamasiva');
