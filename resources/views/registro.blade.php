@@ -93,7 +93,7 @@ Nuevo Registro |
                                 </div>
                                 <div class="col-md-3 mb-3">
                                     <label for="documento_ref">Documento Sustentario</label>
-                                    <input type="text" class="form-control" name="documento_ref" id="documento_ref" maxlength="60">
+                                    <input type="text" class="form-control" name="documento_ref" id="documento_ref" maxlength="40">
                                 </div>
                             </div>
                             <div class="form-row">
