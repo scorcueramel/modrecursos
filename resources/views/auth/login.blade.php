@@ -66,3 +66,38 @@
         </div>
     </div>
 @endsection
+<script>
+      function detectIEEdge() {
+        var ua = window.navigator.userAgent;
+        var mensaje = "Estás Utilizando Internet Explorer, En Este Navegador No Estan Activas Todas Las Fucnionalidades, ¡Por Favor Utiliza GOOGLE CHROME!";
+
+        var msie = ua.indexOf("MSIE ");
+        if (msie > 0) {
+          // IE 10 o anteriores
+          return mensaje;
+        }
+
+        var trident = ua.indexOf("Trident/");
+        if (trident > 0) {
+          // IE 11
+          return mensaje;
+        }
+
+        var edge = ua.indexOf("Edge/");
+        if (edge > 0) {
+          // Edge
+          return mensaje;
+        }
+
+        // otros buscadores
+        return false;
+      }
+      var result = detectIEEdge();
+      if(result === false)
+      {
+        console.log('');
+      }else{
+          alert(result);
+          window.close();
+      }
+</script>
