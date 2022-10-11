@@ -223,7 +223,7 @@ class RegistroController extends Controller
             $resp->estado = 1;
             $resp->save();
 
-            $diaPer = DiasPersonal::find($resp->id);
+            $diaPer = DiasPersonal::find($id);
 
             foreach ($diaPer as $key => $value) {
                 // $diaPer->id_registro = $diaPer[$key]->id;
