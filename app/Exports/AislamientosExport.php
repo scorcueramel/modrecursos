@@ -2,9 +2,7 @@
 
 namespace App\Exports;
 
-use App\Models\DiasPersonal;
-use App\Models\Registro;
-use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithCustomCsvSettings;
 
@@ -21,31 +19,29 @@ class AislamientosExport implements FromCollection, WithCustomCsvSettings
 
     public function collection()
     {
-        $query = Registro::select('tipo_documento_persona', 'documento_persona', 'codigo_pdt', 'saldo')
-            ->join('conceptos', 'registros.concepto_id', '=', 'conceptos.id')
-            ->join('dias_personals', 'registros.id', '=', 'dias_personals.id_registro')
-            ->whereDate('fecha_inicio', '<=', $this->ff)
-            ->whereDate('fecha_fin', '>=', $this->fi)
-            ->where('registros.estado', '>', 0)
-            ->where('registros.tipo_permiso_id', 4)
-            ->get();
 
-        // $q2 = Registro::select('inicial','saldo','adicional','total')
-        // ->join('dias_personals', 'registros.id', '=', 'dias_personals.id_registro')
-        // ->where('registros.tipo_permiso_id', 4)
-        // ->get();
-
-        // $temporal = $this->ff->diffInDays($this->fi);
-
-        // $arreglo = array();
-
-        // foreach($q2 as $key => $value)
-        // {
-        //     $saldo = $q2[$key]["saldo"] - ($temporal + 1);
-        //     array_push($arreglo,$saldo);
-        // }
-
-        // dd($arreglo);
+        $query = DB::table('registros')->select('select r.fecha_inicio , r.fecha_fin,
+    case
+        when r.fecha_fin < ' . $this->fi . ' then 0
+        when r.fecha_inicio  > ' . $this->ff . ' then 0
+        when r.fecha_inicio < ' . $this->fi . '
+            and r.fecha_fin >= ' . $this->fi . '
+            and r.fecha_fin <= ' . $this->ff . ' then r.fecha_fin - ' . $this->fi . ' + 1
+        when r.fecha_fin > ' . $this->ff . '
+            and r.fecha_inicio >= ' . $this->fi . '
+            and r.fecha_inicio <= ' . $this->ff . ' then ' . $this->ff . ' - r.fecha_inicio + 1
+        when r.fecha_inicio >= ' . $this->fi . '
+            and r.fecha_fin <= ' . $this->ff . ' then r.fecha_fin - r.fecha_inicio + 1
+        when r.fecha_inicio < ' . $this->fi . '
+            and r.fecha_fin > ' . $this->ff . ' then cast(' . $this->ff . ' as date) - cast(' . $this->fi . ' as date) + 1
+            else 0 end as dias
+        from registros r
+        inner join conceptos c
+            on r.concepto_id = c.id
+        inner join dias_personals dp
+            on r.id = dp.id_registro
+        where r.estado = true
+        and r.tipo_permiso_id = 4')->get();
 
         return $query;
     }
