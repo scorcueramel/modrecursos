@@ -2,6 +2,7 @@
 
 namespace App\Exports;
 
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithCustomCsvSettings;
@@ -19,29 +20,27 @@ class AislamientosExport implements FromCollection, WithCustomCsvSettings
 
     public function collection()
     {
-
-        $query = DB::table('registros')->select('select r.fecha_inicio , r.fecha_fin,
-    case
-        when r.fecha_fin < ' . $this->fi . ' then 0
-        when r.fecha_inicio  > ' . $this->ff . ' then 0
-        when r.fecha_inicio < ' . $this->fi . '
-            and r.fecha_fin >= ' . $this->fi . '
-            and r.fecha_fin <= ' . $this->ff . ' then r.fecha_fin - ' . $this->fi . ' + 1
-        when r.fecha_fin > ' . $this->ff . '
-            and r.fecha_inicio >= ' . $this->fi . '
-            and r.fecha_inicio <= ' . $this->ff . ' then ' . $this->ff . ' - r.fecha_inicio + 1
-        when r.fecha_inicio >= ' . $this->fi . '
-            and r.fecha_fin <= ' . $this->ff . ' then r.fecha_fin - r.fecha_inicio + 1
-        when r.fecha_inicio < ' . $this->fi . '
-            and r.fecha_fin > ' . $this->ff . ' then cast(' . $this->ff . ' as date) - cast(' . $this->fi . ' as date) + 1
-            else 0 end as dias
+        $query = DB::table('registros')->selectRaw('registros.fecha_inicio , registros.fecha_fin,(CASE
+        when registros.fecha_fin < '.$this->fi.' then 0
+        when registros.fecha_inicio  > '.$this->ff.' then 0
+        when registros.fecha_inicio < '.$this->fi.'
+            and registros.fecha_fin >= '.$this->fi.'
+            and registros.fecha_fin <= '.$this->ff.' then registros.fecha_fin - '.$this->fi.' + 1
+        when registros.fecha_fin > '.$this->ff.'
+            and registros.fecha_inicio >= '.$this->fi.'
+            and registros.fecha_inicio <= '.$this->ff.' then '.$this->ff.' - registros.fecha_inicio + 1
+        when registros.fecha_inicio >= '.$this->fi.'
+            and registros.fecha_fin <= '.$this->ff.' then registros.fecha_fin - registros.fecha_inicio + 1
+        when registros.fecha_inicio < '.$this->fi.'
+            and registros.fecha_fin > '.$this->ff.' then cast('.$this->ff.' as date) - cast('.$this->fi.' as date) + 1
+        else 0 end as dias
         from registros r
         inner join conceptos c
-            on r.concepto_id = c.id
+            on registros.concepto_id = c.id
         inner join dias_personals dp
-            on r.id = dp.id_registro
-        where r.estado = true
-        and r.tipo_permiso_id = 4')->get();
+            on registros.id = dp.id_registro
+        where registros.estado = true
+        and registros.tipo_permiso_id = 4')->get();
 
         return $query;
     }
