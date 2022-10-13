@@ -2,7 +2,6 @@
 
 namespace App\Exports;
 
-use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithCustomCsvSettings;
@@ -20,29 +19,51 @@ class AislamientosExport implements FromCollection, WithCustomCsvSettings
 
     public function collection()
     {
-        $query = DB::table('registros')->selectRaw('registros.fecha_inicio , registros.fecha_fin,(CASE
-        when registros.fecha_fin < '.$this->fi.' then 0
-        when registros.fecha_inicio  > '.$this->ff.' then 0
-        when registros.fecha_inicio < '.$this->fi.'
-            and registros.fecha_fin >= '.$this->fi.'
-            and registros.fecha_fin <= '.$this->ff.' then registros.fecha_fin - '.$this->fi.' + 1
-        when registros.fecha_fin > '.$this->ff.'
-            and registros.fecha_inicio >= '.$this->fi.'
-            and registros.fecha_inicio <= '.$this->ff.' then '.$this->ff.' - registros.fecha_inicio + 1
-        when registros.fecha_inicio >= '.$this->fi.'
-            and registros.fecha_fin <= '.$this->ff.' then registros.fecha_fin - registros.fecha_inicio + 1
-        when registros.fecha_inicio < '.$this->fi.'
-            and registros.fecha_fin > '.$this->ff.' then cast('.$this->ff.' as date) - cast('.$this->fi.' as date) + 1
-        else 0 end as dias
-        from registros r
-        inner join conceptos c
-            on registros.concepto_id = c.id
-        inner join dias_personals dp
-            on registros.id = dp.id_registro
-        where registros.estado = true
-        and registros.tipo_permiso_id = 4')->get();
 
-        return $query;
+        $feinit = date('Y-m-d',strtotime($this->fi));
+        $fefin = date('Y-m-d',strtotime($this->ff));
+
+        $query = DB::select('select r.tipo_documento_persona, r.documento_persona, c.codigo_pdt,
+            (case
+                when r.fecha_fin < ?
+                then 0
+                when r.fecha_inicio  > ?
+                then 0
+                when r.fecha_inicio < ?
+                    and r.fecha_fin >= ?
+                    and r.fecha_fin <= ?
+                    then r.fecha_fin - ? + 1
+                when r.fecha_fin > ?
+                    and r.fecha_inicio >= ?
+                    and r.fecha_inicio <= ?
+                    then ? - r.fecha_inicio + 1
+                when r.fecha_inicio >= ?
+                    and r.fecha_fin <= ?
+                    then r.fecha_fin - r.fecha_inicio + 1
+                when r.fecha_inicio < ?
+                    and r.fecha_fin > ?
+                    then cast(? as date) - cast(? as date) + 1
+                    else 0 end)
+                from registros r
+                inner join conceptos c
+                    on r.concepto_id = c.id
+                inner join dias_personals dp
+                    on r.id = dp.id_registro
+                where r.estado = true
+                and r.tipo_permiso_id = 4',[$feinit, $fefin, $feinit, $feinit, $fefin, $feinit,
+                $fefin, $feinit, $fefin, $fefin, $feinit, $fefin, $feinit, $fefin, $fefin, $feinit]);
+
+        $result[] = array();
+
+        foreach($query as $key => $value)
+        {
+            if($query[$key]->case > 0)
+            {
+                array_push($result, $query[$key]);
+            }
+        }
+
+        return collect($result);
     }
 
     public function getCsvSettings(): array

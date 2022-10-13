@@ -70,8 +70,8 @@ class AislamientosController extends Controller
     public function export(Request $request)
     {
         //fechas para filtro
-        $min = Carbon::parse($request->min);
-        $max = Carbon::parse($request->max);
+        $min = date('Y-m-d',strtotime($request->min));
+        $max = date('Y-m-d',strtotime($request->max));
 
         return Excel::download(new AislamientosExport($min, $max), 'aislamientos.csv');
     }
