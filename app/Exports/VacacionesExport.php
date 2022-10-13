@@ -52,17 +52,7 @@ class VacacionesExport implements FromCollection, WithCustomCsvSettings
                 and r.tipo_permiso_id = 1',[$feinit, $fefin, $feinit, $feinit, $fefin, $feinit,
                 $fefin, $feinit, $fefin, $fefin, $feinit, $fefin, $feinit, $fefin, $fefin, $feinit]);
 
-        $result[] = array();
-
-        foreach($query as $key => $value)
-        {
-            if($query[$key]->case > 0)
-            {
-                array_push($result, $query[$key]);
-            }
-        }
-
-        return collect($result);
+        return collect($query);
     }
 
     public function getCsvSettings(): array
