@@ -153,9 +153,10 @@ Nuevo Registro |
                 }
             }
         });
-        function limpiarConceptos () {
+
+        function limpiarConceptos() {
             $('#concepto').empty();
-         }
+        }
         //cargar conceptos segun permiso
         $("#tpermiso").change(function() {
             var tipoconcepto_id = $(this).val();
@@ -196,7 +197,7 @@ Nuevo Registro |
             }
         });
 
-        //Calculo de días automatico
+        // Calculo de días automatico
         var f1, f2, r1, r2, t, tf, resp;
         const anio = 1000 * 60 * 60 * 24;
         $('#tpermiso').focus();
@@ -204,6 +205,15 @@ Nuevo Registro |
         $('#fecinicio').change(function() {
             f1 = new Date($('#fecinicio').val());
             r1 = f1.getTime();
+            t = r2 - r1;
+            tf = Math.floor(t / anio);
+            resp = tf + 1;
+            if(isNaN(resp))
+            {
+                $('#diaspersonal').val(0);
+            }else{
+                $('#diaspersonal').val(resp);
+            }
         });
 
         $('#fecfin').change(function() {
@@ -214,7 +224,8 @@ Nuevo Registro |
             resp = tf + 1;
             $('#diaspersonal').val(resp);
         });
-        // //Bloquear las fechas anteriores a la actual
+
+        //Bloquear las fechas anteriores a la actual
         // var fecha = new Date();
         // var anio = fecha.getFullYear();
         // var dia = fecha.getDate();
